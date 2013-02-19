@@ -3,5 +3,14 @@
 %p
   %b Name:
   = @dwelling.name
+%p
+  %b Owner:
+  = @dwelling.owner.name
+%p
+  %b Roomates:
+  %ul
+    - for user in @dwelling.users
+      %li= link_to user.name, user_path(user)
+
 
 = link_to 'Edit', edit_dwelling_path(@dwelling)

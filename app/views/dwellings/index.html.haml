@@ -3,6 +3,7 @@
 %table
   %tr
     %th Name
+    %th Owner
     %th
     %th
     %th
@@ -10,6 +11,7 @@
   - @dwellings.each do |dwelling|
     %tr
       %td= dwelling.name
+      %td= dwelling.owner.name
       %td= link_to 'Show', dwelling
       %td= link_to 'Edit', edit_dwelling_path(dwelling)
       %td= link_to 'Destroy', dwelling, method: :delete, data: { confirm: 'Are you sure?' }

@@ -40,13 +40,14 @@ class DwellingsController < ApplicationController
   # POST /dwellings
   # POST /dwellings.json
   def create
+    params[:dwelling][:owner] = current_user
     @dwelling = Dwelling.new(params[:dwelling])
     if @dwelling.save
-      current_user.join_dwelling @dwelling
+      current_user.dwelling = @dwelling
+      current_user.save
     end
-
     respond_to do |format|
-      if @dwelling.save
+      if @dwelling.valid?
         format.html { redirect_to root_path, notice: 'Dwelling was successfully created.' }
         format.json { render json: @dwelling, status: :created, location: @dwelling }
       else
