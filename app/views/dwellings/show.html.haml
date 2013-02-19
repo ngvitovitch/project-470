@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @dwelling.name
+
+= link_to 'Edit', edit_dwelling_path(@dwelling)
+\|
+= link_to 'Back', dwellings_path
