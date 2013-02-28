@@ -1,15 +1,19 @@
 Roomie::Application.routes.draw do
-  resources :dwellings
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
+
+  resources :dwellings do
+    get 'roomates' => 'dwellings#roomates', :as => 'roomates'
+    resources :invites
+  end
+  resources :users
 
   get 'logout' => 'sessions#destroy', :as => 'logout'
   get 'login' => 'sessions#new', :as => 'login'
   get 'signup' => 'users#new', :as => 'signup'
-  resources :users
   resources :sessions
 
-
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+  root :to => 'dashboard#index'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
@@ -55,9 +59,6 @@ Roomie::Application.routes.draw do
   #     resources :products
   #   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => 'dashboard#index'
 
   # See how all your routes lay out with "rake routes"
 

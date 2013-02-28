@@ -1,0 +1,10 @@
+%p
+  %b Roomates:
+  %ul.feildpills
+    - for user in @dwelling.users
+      %li= link_to user.name, user_path(user)
+%p
+  %b Invites:
+  %ul.feild
+    - for user in @dwelling.invites
+      %li= link_to user.email, user_path(user)

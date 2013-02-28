@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  token: MyString
+  email: MyString
+  dwelling: 
+
+two:
+  token: MyString
+  email: MyString
+  dwelling: 

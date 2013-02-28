@@ -4,7 +4,7 @@ class DwellingsController < ApplicationController
     @dwellings = Dwelling.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
     end
   end
 
@@ -13,7 +13,16 @@ class DwellingsController < ApplicationController
     @dwelling = Dwelling.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
+    end
+  end
+
+  #get /dwellings/1/roomates
+  def roomates
+    @dwelling = Dwelling.find(params[:dwelling_id])
+
+    respond_to do |format|
+      format.html #roomates.html.haml
     end
   end
 
@@ -22,7 +31,7 @@ class DwellingsController < ApplicationController
     @dwelling = Dwelling.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # new.html.haml
     end
   end
 
