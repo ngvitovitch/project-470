@@ -5,4 +5,11 @@ class Dwelling < ActiveRecord::Base
   has_many :invites
 
   validates_presence_of :name, :owner
+
+  after_save :ensure_owner_has_this_dwelling
+
+  def ensure_owner_has_this_dwelling
+    self.owner.dwelling = self
+    self.owner.save
+  end
 end

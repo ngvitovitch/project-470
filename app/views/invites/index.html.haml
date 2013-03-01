@@ -1,17 +1,3 @@
-%h1 Listing invites
-
-%table
-  %tr
-    %th Email
-    %th
-    %th
-    %th
-
-  - @invites.each do |invite|
-    %tr
-      %td= invite.email
-      %td= link_to 'Destroy', [invite.dwelling, invite], method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
+%h3 Pending Invites
+= render :partial => 'invites/table', :locals => {:@invites => @dwelling.invites}
 = link_to 'New Invite', new_dwelling_invite_path(@dwelling)

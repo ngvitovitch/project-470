@@ -2,19 +2,9 @@ class InvitesController < ApplicationController
   # GET /invites
   def index
     @dwelling = Dwelling.find(params[:dwelling_id])
-    @invites = @dwelling.invites
 
     respond_to do |format|
       format.html # index.html.erb
-    end
-  end
-
-  # GET /invites/1
-  def show
-    @invite = Invite.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
     end
   end
 
@@ -27,11 +17,6 @@ class InvitesController < ApplicationController
     end
   end
 
-  # GET /invites/1/edit
-  def edit
-    @invite = Invite.find(params[:id])
-  end
-
   # POST /invites
   def create
     params[:invite][:dwelling_id] = params[:dwelling_id]
@@ -39,22 +24,9 @@ class InvitesController < ApplicationController
 
     respond_to do |format|
       if @invite.save
-        format.html { redirect_to [@invite.dwelling, @invite], notice: 'Invite was successfully created.' }
+        format.html { redirect_to dwelling_roomates_path(@invite.dwelling_id), notice: 'Invite was successfully created.' }
       else
         format.html { render action: "new" }
-      end
-    end
-  end
-
-  # PUT /invites/1
-  def update
-    @invite = Invite.find(params[:id])
-
-    respond_to do |format|
-      if @invite.update_attributes(params[:invite])
-        format.html { redirect_to @invite, notice: 'Invite was successfully updated.' }
-      else
-        format.html { render action: "edit" }
       end
     end
   end
@@ -65,7 +37,7 @@ class InvitesController < ApplicationController
     @invite.destroy
 
     respond_to do |format|
-      format.html { redirect_to dwelling_invites_url @invite.dwelling_id}
+      format.html { redirect_to dwelling_roomates_path @invite.dwelling_id}
     end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130219201958) do
+ActiveRecord::Schema.define(:version => 20130224194221) do
 
   create_table "dwellings", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(:version => 20130219201958) do
     t.datetime "updated_at", :null => false
     t.integer  "owner_id"
   end
+
+  create_table "invites", :force => true do |t|
+    t.string   "token"
+    t.string   "email"
+    t.integer  "dwelling_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "invites", ["dwelling_id"], :name => "index_invites_on_dwelling_id"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

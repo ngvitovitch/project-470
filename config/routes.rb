@@ -2,6 +2,9 @@ Roomie::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+  # route to join a dwelling using an invite url
+  match 'join/:token' => 'invites#accept', :as => 'join_dwelling'
+
   resources :dwellings do
     get 'roomates' => 'dwellings#roomates', :as => 'roomates'
     resources :invites
@@ -12,6 +15,7 @@ Roomie::Application.routes.draw do
   get 'login' => 'sessions#new', :as => 'login'
   get 'signup' => 'users#new', :as => 'signup'
   resources :sessions
+
 
   root :to => 'dashboard#index'
 
