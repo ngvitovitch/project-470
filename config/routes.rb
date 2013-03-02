@@ -1,4 +1,6 @@
 Roomie::Application.routes.draw do
+  resources :invites
+
   resources :dwellings
 
   get 'logout' => 'sessions#destroy', :as => 'logout'

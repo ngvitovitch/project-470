@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  dwelling: 
+  invitee: 
+  invitee_email: MyString
+
+two:
+  dwelling: 
+  invitee: 
+  invitee_email: MyString
