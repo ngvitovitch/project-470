@@ -8,6 +8,8 @@ gem 'rails', '3.2.8'
 gem 'sqlite3'
 gem 'bcrypt-ruby'
 
+gem 'therubyracer'
+gem 'less-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -15,7 +17,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'haml-rails', '>= 0.3.4'
-  gem 'bootstrap-sass'
+  gem 'twitter-bootstrap-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
