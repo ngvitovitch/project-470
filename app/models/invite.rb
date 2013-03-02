@@ -16,5 +16,4 @@ class Invite < ActiveRecord::Base
   def send_email
     InviteMailer.invite_email(self)
   end
-
 end
