@@ -4,7 +4,7 @@ class InvitesController < ApplicationController
     @dwelling = Dwelling.find(params[:dwelling_id])
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
     end
   end
 
@@ -13,7 +13,36 @@ class InvitesController < ApplicationController
     @invite = Invite.new(dwelling_id: params[:dwelling_id])
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # new.html.haml
+    end
+  end
+
+  # GET /invites/show
+  def show
+    @invite = Invite.find_by_token(params[:token])
+    if @invite
+      @dwelling = @invite.dwelling
+    end
+
+    respond_to do |format|
+      format.html # show.html.haml
+    end
+  end
+
+  # GET /invites/:token/accept
+  def accept
+    @invite = Invite.find_by_token(params[:token])
+    if @invite
+      @dwelling = @invite.dwelling
+      current_user.dwelling = @dwelling
+    end
+    respond_to do |format|
+      format.html { redirect_to 404 } unless @invite
+      if current_user.save
+        format.html { redirect_to root_path }
+      else
+        format.html { render action: 'show' }
+      end
     end
   end
 
@@ -21,6 +50,9 @@ class InvitesController < ApplicationController
   def create
     params[:invite][:dwelling_id] = params[:dwelling_id]
     @invite = Invite.new(params[:invite])
+    if @invite.save
+      InviteMailer.invite(@invite, invites_url(@invite.token)).deliver
+    end
 
     respond_to do |format|
       if @invite.save

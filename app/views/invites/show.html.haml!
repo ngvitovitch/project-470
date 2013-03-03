@@ -1,0 +1,9 @@
+%h1 Accept Invitation
+
+%p
+  You have been invited to join #{@dwelling.name}. Do you know any of these people?
+  %ul
+  - for user in @dwelling.users
+    %li= link_to user.name, user_path(user)
+
+= link_to 'Join Dwelling', invites_accept_path(@invite)

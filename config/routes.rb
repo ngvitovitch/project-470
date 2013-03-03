@@ -3,7 +3,8 @@ Roomie::Application.routes.draw do
   # first created -> highest priority.
 
   # route to join a dwelling using an invite url
-  match 'join/:token' => 'invites#accept', :as => 'join_dwelling'
+  match 'invites/:token/accpet' => 'invites#accept', :as => 'invites_accept'
+  match 'invites/:token' => 'invites#show', :as => 'invites'
 
   resources :dwellings do
     get 'roomates' => 'dwellings#roomates', :as => 'roomates'

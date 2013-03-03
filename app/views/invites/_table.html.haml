@@ -6,5 +6,5 @@
   - for invite in @invites
     %tr
       %td= invite.email
-      %td= join_dwelling_url(invite.token)
+      %td= invites_url(invite.token)
       %td= link_to 'Destroy', [invite.dwelling, invite], method: :delete, data: { confirm: 'Are you sure?' }

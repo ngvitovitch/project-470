@@ -17,19 +17,7 @@ Roomie::Application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   # use Amazon SES for emailers
-  # config.action_mailer.delivery_method = :amazon_ses
-  config.action_mailer.delivery_method = :smtp
-  # Using railsCloudGroup IAM credentials
-  # on everett's aws account
-  
-  config.action_mailer.smtp_settings = {
-    :address => 'email-smtp.us-east-1.amazonaws.com',
-    :port => 25,
-    :user_name => 'AKIAJ73YOBCT2EZDDVJQ',
-    :password => 'AnQSFacaZMAsh28+ytvLKUsWxGD6d89nxBXOr2LB+cww',
-    :authentication => :login,
-    :tls => true
-  }
+  config.action_mailer.delivery_method = :amazon_ses
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
