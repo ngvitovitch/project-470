@@ -1,12 +1,6 @@
 class DwellingsController < ApplicationController
-  # GET /dwellings
-  def index
-    @dwellings = Dwelling.all
-
-    respond_to do |format|
-      format.html # index.html.haml
-    end
-  end
+  before_filter :dwelling_member?, :except => [:new]
+  before_filter :dwelling_owner?, :only => [:edit, :update, :destroy]
 
   # GET /dwellings/1
   def show
@@ -19,7 +13,7 @@ class DwellingsController < ApplicationController
 
   #get /dwellings/1/roomates
   def roomates
-    @dwelling = Dwelling.find(params[:dwelling_id])
+    @dwelling = Dwelling.find(params[:id])
 
     respond_to do |format|
       format.html #roomates.html.haml
@@ -79,4 +73,19 @@ class DwellingsController < ApplicationController
       format.html { redirect_to dwellings_url }
     end
   end
+
+  private
+
+    def dwelling_member?
+      unless current_user && current_user.dwelling_id == params[:id].to_i
+        not_found
+      end
+    end
+
+    def dwelling_owner?
+      unless ( current_user && current_user.owned_dwelling &&
+          current_user.owned_dwelling.id == params[:id].to_i )
+        not_found
+      end
+    end
 end

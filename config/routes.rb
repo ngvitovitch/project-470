@@ -6,16 +6,22 @@ Roomie::Application.routes.draw do
   match 'invites/:token/accpet' => 'invites#accept', :as => 'invites_accept'
   match 'invites/:token' => 'invites#show', :as => 'invites'
 
-  resources :dwellings do
-    get 'roomates' => 'dwellings#roomates', :as => 'roomates'
-    resources :invites
+  resources :dwellings, :except => :index  do
+    resources :invites, 
+      :controller => 'dwelling_invites',
+      :except => [:show]
+    member do
+      get 'roomates'
+    end
   end
-  resources :users
+
+  get 'signup' => 'users#new', :as => 'signup'
+  resources :users, :except => :index
 
   get 'logout' => 'sessions#destroy', :as => 'logout'
   get 'login' => 'sessions#new', :as => 'login'
-  get 'signup' => 'users#new', :as => 'signup'
-  resources :sessions
+  resources :sessions, :except => [:index, :edit]
+
 
 
   root :to => 'dashboard#index'

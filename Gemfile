@@ -9,6 +9,8 @@ gem 'sqlite3'
 gem 'bcrypt-ruby'
 gem 'aws-sdk'
 
+gem 'therubyracer'
+gem 'less-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -16,7 +18,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'haml-rails', '>= 0.3.4'
-  gem 'bootstrap-sass'
+  gem 'twitter-bootstrap-rails' 
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -25,8 +27,9 @@ group :assets do
 end
 
 group :development do
-  gem 'thin'
-  gem 'wirb'
+  gem 'thin'  # faster web server
+  gem 'wirb'  # autocomplete and coloring for rails c
+  gem 'faker' # library for generating fake data (used in the seed)
 end
 
 gem 'jquery-rails'

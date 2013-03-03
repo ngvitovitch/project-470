@@ -20,6 +20,16 @@ class ApplicationController < ActionController::Base
     @current_dwelling ||= current_user.dwelling if current_user
   end
 
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
+  def logged_in?
+    unless current_user
+      redirect_to login_path, notice: 'You must be logged in to do that.'
+    end
+  end
+
   helper_method :current_user
   helper_method :current_dwelling
 end
