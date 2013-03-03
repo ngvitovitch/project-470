@@ -1,13 +1,14 @@
 Roomie::Application.routes.draw do
   resources :invites
 
-  resources :dwellings
+  resources :dwellings, :except => :index
 
   get 'logout' => 'sessions#destroy', :as => 'logout'
   get 'login' => 'sessions#new', :as => 'login'
+  resources :sessions, :except => [:index, :edit]
+
   get 'signup' => 'users#new', :as => 'signup'
-  resources :users
-  resources :sessions
+  resources :users, :except => :index
 
 
   # The priority is based upon order of creation:

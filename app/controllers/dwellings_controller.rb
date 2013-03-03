@@ -1,12 +1,7 @@
 class DwellingsController < ApplicationController
-  # GET /dwellings
-  def index
-    @dwellings = Dwelling.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-    end
-  end
+  # before_filter :logged_in?
+  before_filter :dwelling_member?, :except => [:new]
+  before_filter :dwelling_owner?, :except => [:show, :new]
 
   # GET /dwellings/1
   def show
@@ -70,4 +65,19 @@ class DwellingsController < ApplicationController
       format.html { redirect_to dwellings_url }
     end
   end
+
+  private
+
+    def dwelling_member?
+      unless current_user && current_user.dwelling_id == params[:id].to_i
+        not_found
+      end
+    end
+
+    def dwelling_owner?
+      unless ( current_user && current_user.owned_dwelling &&
+          current_user.owned_dwelling.id == params[:id].to_i )
+        not_found
+      end
+    end
 end

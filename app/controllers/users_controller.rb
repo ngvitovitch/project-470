@@ -1,14 +1,7 @@
 class UsersController < ApplicationController
-  # GET /users
-  def index
-    @users = User.all
+  before_filter :is_self?, except: :new
 
-    respond_to do |format|
-      format.html # index.html.erb
-    end
-  end
-
-  # GET /users/1
+  # GET /users/:id
   def show
     @user = User.find(params[:id])
 
@@ -26,7 +19,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
+  # GET /users/:id/edit
   def edit
     @user = User.find(params[:id])
   end
@@ -47,7 +40,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
+  # PUT /users/:id
   def update
     @user = User.find(params[:id])
 
@@ -60,7 +53,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
+  # DELETE /users/:id
   def destroy
     @user = User.find(params[:id])
     @user.destroy
@@ -69,4 +62,11 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
     end
   end
+
+  private
+    def is_self?
+      unless current_user && current_user.id == params[:id].to_i
+        not_found
+      end
+    end
 end
