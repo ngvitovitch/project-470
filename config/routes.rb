@@ -1,17 +1,30 @@
 Roomie::Application.routes.draw do
-  resources :invites
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
 
-  resources :dwellings
+  # route to join a dwelling using an invite url
+  match 'invites/:token/accpet' => 'invites#accept', :as => 'invites_accept'
+  match 'invites/:token' => 'invites#show', :as => 'invites'
+
+  resources :dwellings, :except => :index  do
+    resources :invites, 
+      :controller => 'dwelling_invites',
+      :except => [:show]
+    member do
+      get 'roomates'
+    end
+  end
+
+  get 'signup' => 'users#new', :as => 'signup'
+  resources :users, :except => :index
 
   get 'logout' => 'sessions#destroy', :as => 'logout'
   get 'login' => 'sessions#new', :as => 'login'
-  get 'signup' => 'users#new', :as => 'signup'
-  resources :users
-  resources :sessions
+  resources :sessions, :except => [:index, :edit]
 
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+
+  root :to => 'dashboard#index'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
@@ -57,9 +70,6 @@ Roomie::Application.routes.draw do
   #     resources :products
   #   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => 'dashboard#index'
 
   # See how all your routes lay out with "rake routes"
 

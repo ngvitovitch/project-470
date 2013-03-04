@@ -1,0 +1,10 @@
+%table.table
+  %thead
+    %td Email Adress
+    %td Invite Url
+
+  - for invite in @invites
+    %tr
+      %td= invite.email
+      %td= invites_url(invite.token)
+      %td= link_to 'Destroy', [invite.dwelling, invite], method: :delete, data: { confirm: 'Are you sure?' }

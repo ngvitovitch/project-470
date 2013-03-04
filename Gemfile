@@ -7,6 +7,7 @@ gem 'rails', '3.2.8'
 
 gem 'sqlite3'
 gem 'bcrypt-ruby'
+gem 'aws-sdk'
 
 gem 'therubyracer'
 gem 'less-rails'
@@ -17,12 +18,18 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'haml-rails', '>= 0.3.4'
-  gem 'twitter-bootstrap-rails'
+  gem 'twitter-bootstrap-rails' 
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+end
+
+group :development do
+  gem 'thin'  # faster web server
+  gem 'wirb'  # autocomplete and coloring for rails c
+  gem 'faker' # library for generating fake data (used in the seed)
 end
 
 gem 'jquery-rails'

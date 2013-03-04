@@ -1,83 +1,32 @@
 class InvitesController < ApplicationController
-  # GET /invites
-  # GET /invites.json
-  def index
-    @invites = Invite.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @invites }
-    end
-  end
-
-  # GET /invites/1
-  # GET /invites/1.json
+  before_filter :logged_in?, :except => :show
+  # GET /invites/show
   def show
-    @invite = Invite.find(params[:id])
+    @invite = Invite.find_by_token(params[:token])
+    if @invite
+      @dwelling = @invite.dwelling
+    end
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @invite }
+      format.html # show.html.haml
     end
   end
 
-  # GET /invites/new
-  # GET /invites/new.json
-  def new
-    @invite = Invite.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @invite }
+  # GET /invites/:token/accept
+  def accept
+    @invite = Invite.find_by_token(params[:token])
+    if @invite
+      current_user.dwelling = @invite.dwelling
+      current_user.save
     end
-  end
-
-  # GET /invites/1/edit
-  def edit
-    @invite = Invite.find(params[:id])
-  end
-
-  # POST /invites
-  # POST /invites.json
-  def create
-    @invite = Invite.new(params[:invite])
-
-    respond_to do |format|
-      if @invite.save
-        format.html { redirect_to @invite, notice: 'Invite was successfully created.' }
-        format.json { render json: @invite, status: :created, location: @invite }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @invite.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /invites/1
-  # PUT /invites/1.json
-  def update
-    @invite = Invite.find(params[:id])
-
-    respond_to do |format|
-      if @invite.update_attributes(params[:invite])
-        format.html { redirect_to @invite, notice: 'Invite was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @invite.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /invites/1
-  # DELETE /invites/1.json
-  def destroy
-    @invite = Invite.find(params[:id])
     @invite.destroy
-
     respond_to do |format|
-      format.html { redirect_to invites_url }
-      format.json { head :no_content }
+      format.html { redirect_to 404 } unless @invite
+      if current_user.save
+        format.html { redirect_to root_path }
+      else
+        format.html { render action: 'show' }
+      end
     end
   end
 end

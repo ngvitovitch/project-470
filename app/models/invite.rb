@@ -1,5 +1,15 @@
 class Invite < ActiveRecord::Base
-  attr_accessible :invitee_email, :dwelling_id, :invitee_id
   belongs_to :dwelling
-  belongs_to :invitee, :class_name => 'User', :foreign_key => 'invitee_id'
+
+  validates_presence_of :dwelling, :email
+  validates_uniqueness_of :email, :scope => :dwelling_id,
+    :message => 'An invite has already been seent to this email'
+
+  before_create :generate_token
+
+  attr_accessible :email, :token, :dwelling_id
+
+  def generate_token
+    self.token = Digest::SHA1.hexdigest([Time.now, rand].join)
+  end
 end

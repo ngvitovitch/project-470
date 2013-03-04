@@ -6,4 +6,4 @@
   - for user in @dwelling.users
     %li= link_to user.name, user_path(user)
 
-= link_to 'Join Dwelling', invites_accept_path(@invite.token)
+= link_to 'Join Dwelling', invites_accept_path(@invite)

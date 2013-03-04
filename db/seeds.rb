@@ -5,3 +5,28 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+10.times do |i|
+  owner = User.create(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: "owner_#{i}@example.com",
+    password: 'test'
+  )
+  dwelling = Dwelling.create(name: Faker::Address.street_address, owner: owner)
+  owner.dwelling = dwelling
+  owner.save
+  4.times do |j|
+    user = User.create(
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: "user_#{i}_#{j}@example.com",
+      password: 'test'
+    )
+    user.dwelling = dwelling
+    user.save
+  end
+end
+
+puts "Created #{User.count} users"
+puts "Created #{Dwelling.count} Dwellings"
