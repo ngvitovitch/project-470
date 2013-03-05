@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  # Only a user can see their stuff
   before_filter :is_self?, except: [:new, :create]
 
   # GET /users/:id
