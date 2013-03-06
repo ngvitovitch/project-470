@@ -1,16 +1,14 @@
-%p#notice= notice
-
 %p
-  %b Name:
-  = @dwelling.name
-%p
-  %b Owner:
-  = @dwelling.owner.name
-%p
-  %b Roomates:
-  %ul
+  %h4 Owner:
+  %table.table
+    %tr
+      %td= link_to @dwelling.owner.name, user_path(@dwelling.owner)
+  %h4 Roomates:
+  %table.table
     - for user in @dwelling.users
-      %li= link_to user.name, user_path(user)
-
-
-= link_to 'Edit', edit_dwelling_path(@dwelling)
+      %tr
+        %td= link_to user.name, user_path(user)
+%p
+  %h4 Pending Invites:
+  = render :partial => 'dwelling_invites/table', :locals => {:@invites => @dwelling.invites}
+  = link_to 'New Invite', new_dwelling_invite_path(@dwelling)

@@ -1,6 +1,12 @@
+# Administration controller for dwelling owner
 class DwellingsController < ApplicationController
-  before_filter :dwelling_member?, :except => [:new]
-  before_filter :dwelling_owner?, :only => [:edit, :update, :destroy]
+  before_filter :logged_in?
+  before_filter :except => [:new] do |c|
+    c.dwelling_member?(params[:id].to_i)
+  end
+  before_filter :only => [:edit, :update, :destroy] do |c|
+    c.dwelling_owner?(params[:id].to_i)
+  end
 
   # GET /dwellings/1
   def show
@@ -8,15 +14,6 @@ class DwellingsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.haml
-    end
-  end
-
-  #get /dwellings/1/roomates
-  def roomates
-    @dwelling = Dwelling.find(params[:id])
-
-    respond_to do |format|
-      format.html #roomates.html.haml
     end
   end
 
@@ -34,6 +31,8 @@ class DwellingsController < ApplicationController
     @dwelling = Dwelling.find(params[:id])
   end
 
+  # Create a new dwelling, set the creating user
+  # as the dwelling owner, and a roomate of the dwelling.
   # POST /dwellings
   def create
     params[:dwelling][:owner] = current_user
@@ -44,7 +43,8 @@ class DwellingsController < ApplicationController
     end
     respond_to do |format|
       if @dwelling.valid?
-        format.html { redirect_to root_path, notice: 'Dwelling was successfully created.' }
+        format.html { redirect_to root_path,
+          notice: 'Dwelling was successfully created.' }
       else
         format.html { render action: "new" }
       end
@@ -57,7 +57,8 @@ class DwellingsController < ApplicationController
 
     respond_to do |format|
       if @dwelling.update_attributes(params[:dwelling])
-        format.html { redirect_to @dwelling, notice: 'Dwelling was successfully updated.' }
+        format.html { redirect_to @dwelling,
+          notice: 'Dwelling was successfully updated.' }
       else
         format.html { render action: "edit" }
       end
@@ -74,18 +75,4 @@ class DwellingsController < ApplicationController
     end
   end
 
-  private
-
-    def dwelling_member?
-      unless current_user && current_user.dwelling_id == params[:id].to_i
-        not_found
-      end
-    end
-
-    def dwelling_owner?
-      unless ( current_user && current_user.owned_dwelling &&
-          current_user.owned_dwelling.id == params[:id].to_i )
-        not_found
-      end
-    end
 end
