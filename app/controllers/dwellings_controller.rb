@@ -1,7 +1,7 @@
 # Administration controller for dwelling owner
 class DwellingsController < ApplicationController
   before_filter :logged_in?
-  before_filter :except => [:new] do |c|
+  before_filter :except => [:new, :create] do |c|
     c.dwelling_member?(params[:id].to_i)
   end
   before_filter :only => [:edit, :update, :destroy] do |c|
