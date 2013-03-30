@@ -26,7 +26,22 @@
     user.dwelling = dwelling
     user.save
   end
+  ['Rent','Food'].each do |k|
+    puts "Creating " + k + " for " + dwelling.name
+    bill = Bill.create(
+      name: k,
+      # Faker::Company.name introduced some weird behaviour (generated < 20 bills)!  Just going to use people names.
+      #owed_to: Faker::Company.name, 
+      owed_to: Faker::Name.first_name,
+      amount: 800.55 + rand(500),
+      date_due: Date.today.next_month,
+      status: 'unpaid'
+    )
+    bill.dwelling = dwelling
+    bill.save
+  end                  
 end
 
-puts "Created #{User.count} users"
+puts "Created #{User.count} Users"
 puts "Created #{Dwelling.count} Dwellings"
+puts "Created #{Bill.count} Bills"

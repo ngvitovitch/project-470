@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @bill.name
+%p
+  %b Owed to:
+  = @bill.owed_to
+%p
+  %b Amount:
+  = @bill.amount
+%p
+  %b Date due:
+  = @bill.date_due
+%p
+  %b Status:
+  = @bill.status
+
+= link_to 'Edit', edit_bill_path(@bill)
+\|
+= link_to 'Back', bills_path

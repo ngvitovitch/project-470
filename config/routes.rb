@@ -19,7 +19,7 @@ Roomie::Application.routes.draw do
   get 'login' => 'sessions#new', :as => 'login'
   resources :sessions, :except => [:index, :edit]
 
-
+  resources :bills
 
   root :to => 'dashboard#index'
 
