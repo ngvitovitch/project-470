@@ -7,6 +7,7 @@ class Bill < ActiveRecord::Base
   validates :date_due, :presence => true
   validates :name, :length => {:minimum => 1, :maximum => 20}
   validates :owed_to, :length => {:minimum => 1, :maximum => 20}
+  validates :dwelling_id, :presence => true
 
   after_initialize :init
 

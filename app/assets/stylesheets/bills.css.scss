@@ -1,3 +1,21 @@
 // Place all the styles related to the Bills controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul#bill-list { width: 80%; margin: 0 auto; 
+	       list-style-type: none;
+	       padding: 0; }
+ul#bill-list > li { background: #eee;
+	            border-radius: 8px; 
+		    padding: 0 5px; }
+ul#bill-list > li > table { width: 100%;
+	                    text-align: center; }
+ul#bill-list > li > table tr * { width: 50%; font-size: 1.7em; }
+ul#bill-list > li > table tr *:first-child { width: 25%; text-align: left; }
+ul#bill-list > li > table tr *:last-child { width: 25%; text-align: right; }
+
+ul#bill-list .muted { font-size: 16px;
+	              font-weight: normal; }
+
+.unpaid { color: red; }
+.paid { color: green; }

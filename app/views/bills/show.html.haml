@@ -16,6 +16,8 @@
   %b Status:
   = @bill.status
 
-= link_to 'Edit', edit_bill_path(@bill)
+= link_to 'Edit', edit_dwelling_bill_path(:dwelling_id => @bill.dwelling_id, :id => @bill.id)
 \|
-= link_to 'Back', bills_path
+= link_to 'Back', dwelling_bills_path(:dwelling_id => @bill.dwelling_id)
+
+

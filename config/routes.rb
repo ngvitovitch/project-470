@@ -10,6 +10,7 @@ Roomie::Application.routes.draw do
     resources :invites, 
       :controller => 'dwelling_invites',
       :except => [:show]
+    resources :bills
   end
 
   get 'signup' => 'users#new', :as => 'signup'
@@ -18,8 +19,6 @@ Roomie::Application.routes.draw do
   get 'logout' => 'sessions#destroy', :as => 'logout'
   get 'login' => 'sessions#new', :as => 'login'
   resources :sessions, :except => [:index, :edit]
-
-  resources :bills
 
   root :to => 'dashboard#index'
 

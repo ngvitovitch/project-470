@@ -2,7 +2,11 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.json
   def index
-    @bills = Bill.all
+    if params[:dwelling_id]
+      @bills = Bill.where(:dwelling_id => params[:dwelling_id])
+    else
+      @bills = Bill.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +29,7 @@ class BillsController < ApplicationController
   # GET /bills/new.json
   def new
     @bill = Bill.new
+    @bill.dwelling_id = params[:dwelling_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +46,7 @@ class BillsController < ApplicationController
   # POST /bills.json
   def create
     @bill = Bill.new(params[:bill])
-
+    
     respond_to do |format|
       if @bill.save
         format.html { redirect_to @bill, notice: 'Bill was successfully created.' }
@@ -76,7 +81,7 @@ class BillsController < ApplicationController
     @bill.destroy
 
     respond_to do |format|
-      format.html { redirect_to bills_url }
+      format.html { redirect_to dwelling_bills_url(params[:dwelling_id]) }
       format.json { head :no_content }
     end
   end
