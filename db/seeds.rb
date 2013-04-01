@@ -27,7 +27,6 @@
     user.save
   end
   ['Rent','Food'].each do |k|
-    puts "Creating " + k + " for " + dwelling.name
     bill = Bill.create(
       name: k,
       # Faker::Company.name introduced some weird behaviour (generated < 20 bills)!  Just going to use people names.
