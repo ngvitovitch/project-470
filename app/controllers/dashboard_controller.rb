@@ -20,6 +20,7 @@ class DashboardController < ApplicationController
     else
       # The user is not logged in, tell them about the 
       # application, and ask them to signup, or login
+      @user = User.new
       render :signup
     end
   end
