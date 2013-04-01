@@ -46,6 +46,7 @@ class BillsController < ApplicationController
   # POST /bills.json
   def create
     @bill = Bill.new(params[:bill])
+    @bill.dwelling = current_dwelling
     
     respond_to do |format|
       if @bill.save
