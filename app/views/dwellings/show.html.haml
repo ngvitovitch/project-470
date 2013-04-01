@@ -1,8 +1,8 @@
 %p
-  %h4 Owner:
-  %table.table
-    %tr
-      %td= link_to @dwelling.owner.name, user_path(@dwelling.owner)
+  %dt Owner:
+  %dd= link_to @dwelling.owner.name, user_path(@dwelling.owner)
+  %dt Time Zone:
+  %dd= @dwelling.time_zone
   %h4 Roomates:
   %table.table
     - for user in @dwelling.users

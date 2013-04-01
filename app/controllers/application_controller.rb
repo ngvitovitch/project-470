@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  # convert times from utc to the odwelling's timezone
+  before_filter :get_dwelling_time_zone 
 
   private
+
+  def get_dwelling_time_zone
+    Time.zone = current_dwelling.time_zone if current_dwelling
+  end
 
   # Creates a session for a users
   def login user
