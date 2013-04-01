@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  owed_to: MyString
+  amount: 1.5
+  date_due: 2013-03-30
+  status: MyString
+
+two:
+  name: MyString
+  owed_to: MyString
+  amount: 1.5
+  date_due: 2013-03-30
+  status: MyString

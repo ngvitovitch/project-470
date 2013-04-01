@@ -3,6 +3,7 @@ class Dwelling < ActiveRecord::Base
   belongs_to :owner, :class_name => 'User'
   has_many :users
   has_many :invites
+  has_many :bills
 
   validates_presence_of :name, :owner
 
