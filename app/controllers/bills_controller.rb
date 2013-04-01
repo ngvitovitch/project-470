@@ -29,7 +29,7 @@ class BillsController < ApplicationController
   # GET /bills/new.json
   def new
     @bill = Bill.new
-    @bill.dwelling_id = params[:dwelling_id]
+    @bill.dwelling = current_dwelling
 
     respond_to do |format|
       format.html # new.html.erb
