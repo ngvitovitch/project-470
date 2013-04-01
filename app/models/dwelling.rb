@@ -1,5 +1,5 @@
 class Dwelling < ActiveRecord::Base
-  attr_accessible :name, :owner
+  attr_accessible :name, :owner, :time_zone
   belongs_to :owner, :class_name => 'User'
   has_many :users
   has_many :invites

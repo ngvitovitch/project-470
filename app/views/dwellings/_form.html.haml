@@ -9,5 +9,8 @@
   .field
     = f.label :name
     = f.text_field :name
+  .field
+    = f.label :time_zone
+    = f.collection_select :time_zone, ActiveSupport::TimeZone.all, :name, :to_s
   .actions
     = f.submit 'Save'
