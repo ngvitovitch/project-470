@@ -1,4 +1,4 @@
-= form_for dwelling_bills_path(@bill.dwelling) do |f|
+= form_for [:dwelling, @bill] do |f|
   - if @bill.errors.any?
     #error_explanation
       %h2= "#{pluralize(@bill.errors.count, "error")} prohibited this bill from being saved:"

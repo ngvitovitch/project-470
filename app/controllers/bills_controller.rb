@@ -53,7 +53,7 @@ class BillsController < ApplicationController
         format.html { redirect_to @bill, notice: 'Bill was successfully created.' }
         format.json { render json: @bill, status: :created, location: @bill }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to [@bill.dwelling, @bill], notice: 'Bill was successfully created.' }
         format.json { render json: @bill.errors, status: :unprocessable_entity }
       end
     end
