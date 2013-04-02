@@ -6,7 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# Create 10 dwellings with owners
 10.times do |i|
+
+  # Create the dwelling owner
   owner = User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -16,6 +19,8 @@
   dwelling = Dwelling.create(name: Faker::Address.street_address, owner: owner)
   owner.dwelling = dwelling
   owner.save
+
+  # Create 4 roomates
   4.times do |j|
     user = User.create(
       first_name: Faker::Name.first_name,
@@ -26,6 +31,8 @@
     user.dwelling = dwelling
     user.save
   end
+
+  # Create 2 bills
   ['Rent','Food'].each do |k|
     bill = Bill.create(
       name: k,
@@ -39,8 +46,21 @@
     bill.dwelling = dwelling
     bill.save
   end                  
+
+  # Create 5 events, created by random users, and at random times within the next week
+  5.times do 
+    event = Event.create(
+      title: Faker::Lorem.sentence,
+      description: Faker::Lorem.sentences(3).join,
+      date: Time.now + Random.rand(1.week)
+    )
+    event.user = dwelling.users.all[Random.rand(dwelling.users.size)]
+    event.dwelling = dwelling
+    event.save
+  end
 end
 
 puts "Created #{User.count} Users"
 puts "Created #{Dwelling.count} Dwellings"
 puts "Created #{Bill.count} Bills"
+puts "Created #{Event.count} Events"

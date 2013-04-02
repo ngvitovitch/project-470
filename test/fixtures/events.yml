@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  dwelling: 
+  user: 
+  title: MyString
+  description: MyText
+  date: 2013-04-01 17:58:20
+
+two:
+  dwelling: 
+  user: 
+  title: MyString
+  description: MyText
+  date: 2013-04-01 17:58:20

@@ -1,0 +1,7 @@
+%h1 Editing event
+
+= render 'form'
+
+= link_to 'Show', dwelling_events_path(@event.dwelling, @event)
+\|
+= link_to 'Back', dwelling_events_path(@event.dwelling)

@@ -1,0 +1,20 @@
+= form_for [@event.dwelling, @event] do |f|
+  - if @event.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
+      %ul
+        - @event.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.text_field :title, class: 'span8', placeholder: 'Title'
+  .field
+    = f.text_area :description, class: 'span8', rows: 5
+  .field
+    = f.label :when
+    = f.date_select :date, {}, class: 'input-small'
+  .field
+    = f.time_select :date, { ignore_date: true, minute_step: 15 }, class: 'input-mini'
+  .field
+  .actions
+    = f.submit 'Save'

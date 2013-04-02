@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   # Redirect a user to 404 if they are not a member of the dwelling they 
   # are accessing
   def dwelling_member?(dwelling_id)
-    unless current_user.dwelling_id == dwelling_id
+    unless current_user.dwelling_id == dwelling_id.to_i
       not_found
     end
   end
@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
   # are accessing
   def dwelling_owner?(dwelling_id)
     unless ( current_user.owned_dwelling &&
-            current_user.owned_dwelling.id == dwelling_id )
+            current_user.owned_dwelling.id == dwelling_id.to_i )
       not_found
     end
   end
