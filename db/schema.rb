@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130330211010) do
+ActiveRecord::Schema.define(:version => 20130401215820) do
 
   create_table "bills", :force => true do |t|
     t.string   "name"
@@ -26,10 +26,24 @@ ActiveRecord::Schema.define(:version => 20130330211010) do
 
   create_table "dwellings", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "owner_id"
+    t.string   "time_zone",  :default => "UTC"
   end
+
+  create_table "events", :force => true do |t|
+    t.integer  "dwelling_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "date"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "events", ["dwelling_id"], :name => "index_events_on_dwelling_id"
+  add_index "events", ["user_id"], :name => "index_events_on_user_id"
 
   create_table "invites", :force => true do |t|
     t.string   "token"

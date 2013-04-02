@@ -1,4 +1,6 @@
 Roomie::Application.routes.draw do
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -11,6 +13,7 @@ Roomie::Application.routes.draw do
       :controller => 'dwelling_invites',
       :except => [:show]
     resources :bills
+    resources :events
   end
 
   get 'signup' => 'users#new', :as => 'signup'
