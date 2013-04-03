@@ -15,6 +15,13 @@ class BillsController < ApplicationController
   # GET /bills/1
   # GET /bills/1.json
   def show
+    # calculate bill payment information
+    @payment_sum = 0
+    @bill.bill_payments.each do |payment|
+      @payment_sum += payment.amount
+    end
+    @percentage = (@payment_sum/@bill.amount)*100.to_int
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @bill }

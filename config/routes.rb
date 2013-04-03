@@ -18,6 +18,8 @@ Roomie::Application.routes.draw do
     resources :bill_payments
   end
 
+  get 'payments' => 'bill_payments#history', :as => 'history'
+
   get 'signup' => 'users#new', :as => 'signup'
   resources :users, :except => :index
 
