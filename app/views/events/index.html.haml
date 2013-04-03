@@ -8,10 +8,10 @@
 
   - @events.each do |event|
     %tr
-      %td= link_to event.title, dwelling_event_path(event.dwelling, event)
+      %td= link_to event.title, event_path(event)
       %td= distance_of_time_in_words_to_now event.date
       %td= event.user.name
 
 %br
 
-= link_to 'New Event', new_dwelling_event_path(current_dwelling)
+= link_to 'New Event', new_event_path

@@ -13,8 +13,8 @@ Roomie::Application.routes.draw do
       :controller => 'dwelling_invites',
       :except => [:show]
     resources :bills
-    resources :events
   end
+  resources :events
 
   get 'signup' => 'users#new', :as => 'signup'
   resources :users, :except => :index
