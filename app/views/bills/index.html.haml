@@ -1,31 +1,42 @@
-%h1 Upcoming Bills
-%ul#bill-list
+.body-container
+  %h1
+    Upcoming Bills
   - @bills.each do |bill|
-    %li
-      %h3
+    .bill-container
+      %h4
         = bill.name
-        %span.muted.small= ' - '+bill.owed_to
-      %table
-        %tr
-          %th.muted Amount Due
-          %th.muted Date Due
-          %th.muted Status
-        %tr
-          %td= '$'+bill.amount.to_s
-          %td
-            = bill.date_due
-            - date_diff = (bill.date_due - Date.today).to_i
-            - if date_diff == 0
-              %span.muted= (Today)
-            - elsif date_diff < 0
-              %span.muted= "(Overdue "+(-date_diff).to_s+" days)"
+        %small
+          = ' - ' + bill.owed_to
+      .bill-details
+        %span.amount-due
+          %p
+            Amount Due
+          %h3
+            = number_to_currency(bill.amount, :unit => "$")
+        %span.date-due
+          %p
+            Date Due
+          %h3
+            = bill.date_due.month.to_s + '/' + bill.date_due.month.to_s + '/' + bill.date_due.year.to_s
+            - date_rem = (bill.date_due - Date.today).to_i
+            - if date_rem == 0
+              %small= (Today)
+            - elsif date_rem < 0
+              %small= "(Overdue " + (-date_rem).to_s + " days)"
             - else
-              %span.muted= "("+date_diff.to_s + " days)"
-          %td{:class => bill.status}= bill.status
-      = link_to 'Show', dwelling_bill_path(:dwelling_id => bill.dwelling_id, :id => bill.id)
-      = link_to 'Edit', edit_dwelling_bill_path(:dwelling_id => bill.dwelling_id, :id => bill.id )
-      = link_to 'Destroy', dwelling_bill_path(:dwelling_id => bill.dwelling_id, :id => bill.id), :method => :delete, :data => { :confirm => 'Are you sure?' }
+              %small= "("+date_rem.to_s + " days)"
+        %span.status
+          %p 
+            Status
+          %h3{:class => bill.status}
+            = bill.status
+        .show-bill-options
+          .contents
+            = link_to 'Show', dwelling_bill_path(:dwelling_id => bill.dwelling_id, :id => bill.id), class: 'btn btn-success btn-small'
+            = link_to 'Edit', edit_dwelling_bill_path(:dwelling_id => bill.dwelling_id, :id => bill.id ), class: 'btn btn-warning btn-small'
+            = link_to 'Destroy', dwelling_bill_path(:dwelling_id => bill.dwelling_id, :id => bill.id), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-small'
+    %br
+  .new-bill
+    = link_to 'New Bill', new_dwelling_bill_path(params[:dwelling_id]), class: 'btn btn-inverse btn-block'
 
-%br
- 
-= link_to 'New Bill', new_dwelling_bill_path(params[:dwelling_id])
+
