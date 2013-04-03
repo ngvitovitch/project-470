@@ -1,21 +1,148 @@
 // Place all the styles related to the Bills controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+html, body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: "helvetica Neue";
+	position: relative;
+	z-index: 1;
+	text-align: center;
+}
 
-ul#bill-list { width: 80%; margin: 0 auto; 
-	       list-style-type: none;
-	       padding: 0; }
-ul#bill-list > li { background: #eee;
-	            border-radius: 8px; 
-		    padding: 0 5px; }
-ul#bill-list > li > table { width: 100%;
-	                    text-align: center; }
-ul#bill-list > li > table tr * { width: 50%; font-size: 1.7em; }
-ul#bill-list > li > table tr *:first-child { width: 25%; text-align: left; }
-ul#bill-list > li > table tr *:last-child { width: 25%; text-align: right; }
+.bill-list { 
+	width: 100%; 
+	margin: 0 auto; 
+	list-style-type: none;
+	padding: 0; 
+	text-align: center;
+}
 
-ul#bill-list .muted { font-size: 16px;
-	              font-weight: normal; }
+.body-container{
+	width: 600px;
+	display: inline-block;
 
-.unpaid { color: red; }
-.paid { color: green; }
+	h1{
+		text-align: left;
+	}
+}
+
+.bill-container {
+	margin-bottom: 40px;	
+	min-height: 100px;
+	min-width: 500px;
+	max-width: 500px;
+	background-color: #F9F9F9;
+	border-radius: 5px;
+	display: inline-block;
+	position: relative;
+	box-shadow: inset 0 0 15px rgba(120,120,120,0.5);
+	transition: box-shadow .5s, height .5s, bottom	.5s;
+  -webkit-transition: box-shadow .5s, height .5s, bottom .5s;
+
+  h4{
+		color: #333333;
+		padding: 10px; 
+		text-align: left;
+		margin: 0px;
+		font-size: 20px;
+
+		small {
+			color: #999999;
+			font-size: 15px;
+		}
+  }
+
+  .bill-details{
+  	width: inherit;
+		text-align: center;
+
+		p, h3 {
+			padding: 0;
+			margin: 0;
+		}
+
+		h3{
+			font-size: 20px;
+			line-height: 25px;
+
+			small{
+				color: #999999;
+				font-size: 0.8em;
+			}
+		}	
+
+		p{
+			color: #999999;
+			font-size: 0.9em;
+		}
+
+	  .amount-due {
+			display: inline-block;		
+			width: 20%;
+			text-align: left;
+		}
+
+		.date-due {
+			display: inline-block;		
+			margin: 0 auto;
+			text-align: center;
+			width: 50%;
+		}
+
+		.status {
+			display: inline-block;		
+			width: 20%;
+			text-align: right;
+
+			.unpaid { 
+				color: red; 
+			}
+
+			.paid { 
+				color: green; 
+			}
+		}
+  }
+	.show-bill-options{
+		overflow: hidden;
+	  position: absolute;
+	  text-align: left;
+	  margin-left: 5%;
+	  width: 90%;
+	  background: #C8C8C8;
+	  border-radius: 0 0 10px 10px;
+	  z-index: 10;
+	  opacity: 1;
+	  bottom: 0;
+	  height: 0px;
+	  text-align: center;
+	  transition: box-shadow .5s, height .5s, bottom	.5s;
+	  -webkit-transition: box-shadow .5s, height .5s, bottom .5s;
+
+	  .contents{
+	  	line-height: 35px;
+	  	display: inline-block;
+	  }
+
+	  .btn{
+	  	padding-left: 20px;
+	  	padding-right: 20px;
+	  	margin: 0px 5px;
+	  }
+	}
+}
+
+.bill-container:hover .show-bill-options{
+	height: 35px;
+  bottom: -35px;
+  box-shadow: inset 0 0 15px rgba(120,120,120,0.5);
+}
+
+.new-bill{
+	text-align: center;
+	width: 500px;
+	display: inline-block;
+	margin-bottom: 5px;
+}
