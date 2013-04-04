@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :first_name, :last_name, :password, :password_confirmation, :dwelling_id
 
   has_one :owned_dwelling, :class_name => 'Dwelling', :foreign_key => 'owner_id'
+  has_many :bill_payments
   belongs_to :dwelling
 
   validates :first_name, :presence => true

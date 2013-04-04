@@ -14,7 +14,11 @@ Roomie::Application.routes.draw do
       :except => [:show]
   end
   resources :events
-  resources :bills
+  resources :bills do
+    resources :bill_payments
+  end
+
+  get 'payments' => 'bill_payments#history', :as => 'history'
 
   get 'signup' => 'users#new', :as => 'signup'
   resources :users, :except => :index

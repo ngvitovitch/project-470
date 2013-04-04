@@ -2,6 +2,10 @@
   %h1
     Upcoming Bills
   - @bills.each do |bill|
+    - payment_sum = 0
+    - bill.bill_payments.each do |payment|
+      - payment_sum += payment.amount
+    - percentage = (payment_sum/bill.amount)*100.to_int
     .bill-container
       %h4
         = bill.name
@@ -28,8 +32,8 @@
         %span.status
           %p 
             Status
-          %h3{:class => bill.status}
-            = bill.status
+          %h3{:class => (payment_sum < bill.amount ? 'unpaid' : 'paid')}
+            = (payment_sum < bill.amount ? 'unpaid' : 'paid')
         .show-bill-options
           .contents
             = link_to 'Show', bill_path(bill), class: 'btn btn-success btn-small'
