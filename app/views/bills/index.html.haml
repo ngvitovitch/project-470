@@ -2,44 +2,7 @@
   %h1
     Upcoming Bills
   - @bills.each do |bill|
-    - payment_sum = 0
-    - bill.bill_payments.each do |payment|
-      - payment_sum += payment.amount
-    - percentage = (payment_sum/bill.amount)*100.to_int
-    .bill-container
-      %h4
-        = bill.name
-        %small
-          = ' - ' + bill.owed_to
-      .bill-details
-        %span.amount-due
-          %p
-            Amount Due
-          %h3
-            = number_to_currency(bill.amount, :unit => "$")
-        %span.date-due
-          %p
-            Date Due
-          %h3
-            = bill.date_due.month.to_s + '/' + bill.date_due.month.to_s + '/' + bill.date_due.year.to_s
-            - date_rem = (bill.date_due - Date.today).to_i
-            - if date_rem == 0
-              %small= (Today)
-            - elsif date_rem < 0
-              %small= "(Overdue " + (-date_rem).to_s + " days)"
-            - else
-              %small= "("+date_rem.to_s + " days)"
-        %span.status
-          %p 
-            Status
-          %h3{:class => (payment_sum < bill.amount ? 'unpaid' : 'paid')}
-            = (payment_sum < bill.amount ? 'unpaid' : 'paid')
-        .show-bill-options
-          .contents
-            = link_to 'Show', bill_path(bill), class: 'btn btn-success btn-small'
-            = link_to 'Edit', edit_bill_path(bill), class: 'btn btn-warning btn-small'
-            = link_to 'Destroy', bill_path(bill), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-small'
-    %br
+    = render 'bills/details', bill: bill
   .new-bill
     = link_to 'New Bill', new_bill_path, class: 'btn btn-inverse btn-block'
 
