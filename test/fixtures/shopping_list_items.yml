@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  quantity: 1
+  obligate_id: 1
+  obligates: 1
+  status: false
+  shopping_list_id: 1
+
+two:
+  name: MyString
+  quantity: 1
+  obligate_id: 1
+  obligates: 1
+  status: false
+  shopping_list_id: 1

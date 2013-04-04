@@ -1,0 +1,28 @@
+= form_for @shopping_list_item do |f|
+  - if @shopping_list_item.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@shopping_list_item.errors.count, "error")} prohibited this shopping_list_item from being saved:"
+      %ul
+        - @shopping_list_item.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :quantity
+    = f.number_field :quantity
+  .field
+    = f.label :obligate_id
+    = f.number_field :obligate_id
+  .field
+    = f.label :obligates
+    = f.number_field :obligates
+  .field
+    = f.label :status
+    = f.check_box :status
+  .field
+    = f.label :shopping_list_id
+    = f.number_field :shopping_list_id
+  .actions
+    = f.submit 'Save'

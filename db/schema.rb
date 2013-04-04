@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403062443) do
+ActiveRecord::Schema.define(:version => 20130404040704) do
 
   create_table "bill_payments", :force => true do |t|
     t.integer  "user_id"
@@ -66,6 +66,24 @@ ActiveRecord::Schema.define(:version => 20130403062443) do
   end
 
   add_index "invites", ["dwelling_id"], :name => "index_invites_on_dwelling_id"
+
+  create_table "shopping_list_items", :force => true do |t|
+    t.string   "name"
+    t.integer  "quantity"
+    t.integer  "obligate_id"
+    t.integer  "obligates"
+    t.boolean  "status"
+    t.integer  "shopping_list_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "shopping_lists", :force => true do |t|
+    t.string   "title"
+    t.integer  "dwelling_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
