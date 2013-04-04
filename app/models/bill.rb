@@ -8,7 +8,7 @@ class Bill < ActiveRecord::Base
   validates :amount, :numericality => {:greater_than_or_equal_to => 0}
   validates :date_due, :presence => true
   validates :name, :presence => true
-  validates :owed_to, :length => true
+  validates :owed_to, :presence => true
   validates :dwelling_id, :presence => true
 
   after_initialize :init
