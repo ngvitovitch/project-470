@@ -13,7 +13,7 @@
       %p
         Date Due
       %h3
-        = bill.date_due.month.to_s + '/' + bill.date_due.month.to_s + '/' + bill.date_due.year.to_s
+        = bill.date_due.month.to_s + '/' + bill.date_due.day.to_s + '/' + bill.date_due.year.to_s
         - date_rem = (bill.date_due - Date.today).to_i
         - if date_rem == 0
           %small= (Today)
