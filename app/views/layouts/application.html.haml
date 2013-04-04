@@ -27,11 +27,11 @@
             %span.icon-bar
           %a.brand(href=root_path)= current_dwelling ? current_dwelling.name : "Roomie"
           .container.nav-collapse
-            - if current_user
+            - if current_dwelling
               %ul.nav
-                %li= link_to "Bills", "#"
-                %li= link_to "Chores", "#"
-                %li= link_to "Lists", "#"
+                %li= link_to "Bills", bills_path
+                %li= link_to "Events", events_path
+                %li= link_to "Lists", shopping_lists_path
             %ul.nav.pull-right
               - if current_user
                 %li= link_to "Log out", logout_path
