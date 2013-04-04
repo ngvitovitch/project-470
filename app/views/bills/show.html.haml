@@ -1,42 +1,4 @@
-.bill-container
-  %h4
-    = @bill.name
-    %small
-      = ' - ' + @bill.owed_to
-  .bill-details
-    %span.amount-due
-      %p
-        Amount Due
-      %h3
-        = number_to_currency(@bill.amount, :unit => "$")
-    %span.date-due
-      %p
-        Date Due
-      %h3
-        = @bill.date_due.month.to_s + '/' + @bill.date_due.month.to_s + '/' + @bill.date_due.year.to_s
-        - date_rem = (@bill.date_due - Date.today).to_i
-        - if date_rem == 0
-          %small= (Today)
-        - elsif date_rem < 0
-          %small= "(Overdue " + (-date_rem).to_s + " days)"
-        - else
-          %small= "("+date_rem.to_s + " days)"
-    %span.status
-      %p
-        Status
-      %h3{:class => (@bill.amount > @payment_sum ? 'unpaid' : 'paid')} 
-        = (@bill.amount > @payment_sum ? 'unpaid' : 'paid')
-
-    %br
-
-    .progress
-      .bar{:style => "width: "+@percentage.to_s+"%;"}
-
-    .show-bill-options
-      .contents
-        = link_to 'Make a Payment', new_bill_bill_payment_path(@bill), class: 'btn btn-info btn-small'
-        = link_to 'Edit', edit_bill_path(@bill), class: 'btn btn-warning btn-small'
-        = link_to 'Destroy', bill_path(@bill), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-small'
+= render 'bills/details', bill: @bill
 
 %hr
 = link_to 'Back', bills_path

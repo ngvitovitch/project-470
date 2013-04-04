@@ -16,4 +16,20 @@ class Bill < ActiveRecord::Base
   def init
     self.status ||= :unpaid
   end
+
+  def payment_sum
+    payment_sum = 0
+    self.bill_payments.each do |payment|
+      payment_sum += payment.amount
+    end
+    return payment_sum
+  end
+
+  def payment_sum_inject
+    self.bill_payments.inject(:+)
+  end
+
+  def payment_percentage
+    return (self.payment_sum/self.amount)*100.to_int
+  end
 end
