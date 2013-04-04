@@ -36,9 +36,7 @@
   ['Rent','Food'].each do |k|
     bill = Bill.create(
       name: k,
-      # Faker::Company.name introduced some weird behaviour (generated < 20 bills)!  Just going to use people names.
-      #owed_to: Faker::Company.name, 
-      owed_to: Faker::Name.first_name,
+      owed_to: Faker::Company.name, 
       amount: 800.55 + rand(500),
       date_due: Date.today.next_month,
       status: 'unpaid'
