@@ -29,6 +29,7 @@
         = (payment_sum < bill.amount ? 'unpaid' : 'paid')
     .show-bill-options
       .contents
+        = link_to 'Pay', new_bill_bill_payment_path(bill), class: 'btn btn-info btn-small'
         = link_to 'Show', bill_path(bill), class: 'btn btn-success btn-small'
         = link_to 'Edit', edit_bill_path(bill), class: 'btn btn-warning btn-small'
         = link_to 'Destroy', bill_path(bill), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-small'

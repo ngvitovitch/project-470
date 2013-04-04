@@ -52,7 +52,7 @@ class BillPaymentsController < ApplicationController
     
     respond_to do |format|
       if @bill_payment.save
-        format.html { redirect_to bill_path(@bill), notice: 'Payment transaction was successfull.' }
+        format.html { redirect_to bills_path, notice: 'Payment transaction was successfull.' }
         format.json { render json: @bill_payment, status: :created, location: @bill_payment }
       else
         format.html { render action: "new" }
@@ -66,7 +66,7 @@ class BillPaymentsController < ApplicationController
   def update
     respond_to do |format|
       if @bill_payment.update_attributes(params[:bill_payment])
-        format.html { redirect_to bill_path(@bill), notice: 'Bill Payment was successfully updated.' }
+        format.html { redirect_to bills_path, notice: 'Bill Payment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
