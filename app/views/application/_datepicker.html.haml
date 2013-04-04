@@ -2,4 +2,4 @@
   { data_behaviour: 'datepicker',
     value: f.object.method(method).call().strftime('%m/%d/%Y'),
     name: ''}.merge(html_options)
-= f.date_select method, {}
+= f.date_select method, {}, class: :hidden
