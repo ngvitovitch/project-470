@@ -2,6 +2,6 @@
 
 = render 'form'
 
-= link_to 'Show', dwelling_bill_path(:dwelling_id => @bill.dwelling_id, :id => @bill.id)
+= link_to 'Show', bill_path(@bill)
 \|
-= link_to 'Back', dwelling_bills_path(:dwelling_id => @bill.dwelling_id)
+= link_to 'Back', bills_path

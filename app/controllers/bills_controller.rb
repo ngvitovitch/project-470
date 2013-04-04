@@ -1,12 +1,10 @@
 class BillsController < ApplicationController
+  before_filter :get_dwelling_and_bill
+
   # GET /bills
   # GET /bills.json
   def index
-    if params[:dwelling_id]
-      @bills = Bill.where(:dwelling_id => params[:dwelling_id])
-    else
-      @bills = Bill.all
-    end
+    @bills = current_dwelling.bills
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,8 +15,6 @@ class BillsController < ApplicationController
   # GET /bills/1
   # GET /bills/1.json
   def show
-    @bill = Bill.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @bill }
@@ -39,7 +35,6 @@ class BillsController < ApplicationController
 
   # GET /bills/1/edit
   def edit
-    @bill = Bill.find(params[:id])
   end
 
   # POST /bills
@@ -50,7 +45,7 @@ class BillsController < ApplicationController
     
     respond_to do |format|
       if @bill.save
-        format.html { redirect_to [@bill.dwelling, @bill], notice: 'Bill was successfully created.' }
+        format.html { redirect_to bill_path(@bill), notice: 'Bill was successfully created.' }
         format.json { render json: @bill, status: :created, location: @bill }
       else
         format.html { render action: "new" }
@@ -62,11 +57,9 @@ class BillsController < ApplicationController
   # PUT /bills/1
   # PUT /bills/1.json
   def update
-    @bill = Bill.find(params[:id])
-
     respond_to do |format|
       if @bill.update_attributes(params[:bill])
-        format.html { redirect_to [@bill.dwelling, @bill], notice: 'Bill was successfully updated.' }
+        format.html { redirect_to bill_path(@bill), notice: 'Bill was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -78,12 +71,18 @@ class BillsController < ApplicationController
   # DELETE /bills/1
   # DELETE /bills/1.json
   def destroy
-    @bill = Bill.find(params[:id])
     @bill.destroy
 
     respond_to do |format|
-      format.html { redirect_to dwelling_bills_url(params[:dwelling_id]) }
+      format.html { redirect_to bills_path }
       format.json { head :no_content }
+    end
+  end
+
+  def get_dwelling_and_bill
+    @dwelling = current_dwelling
+    if params[:id]
+      @bill = @dwelling.bills.find(params[:id])
     end
   end
 end
