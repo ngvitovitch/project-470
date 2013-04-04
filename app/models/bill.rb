@@ -25,10 +25,6 @@ class Bill < ActiveRecord::Base
     return payment_sum
   end
 
-  def payment_sum_inject
-    self.bill_payments.inject(:+)
-  end
-
   def payment_percentage
     return (self.payment_sum/self.amount)*100.to_int
   end
