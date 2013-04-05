@@ -1,17 +1,2 @@
-%h1= @event.title
-
-%pre= find_and_preserve @event.description
-
-%p
-  %b Posted by:
-  = @event.user.name
-%p
-  %b When:
-  =  @event.date.strftime('%A %B %e %l:%M %P')
-
-- if current_user == @event.user
-  = link_to 'Edit', edit_event_path(@event)
-  \|
-  = link_to 'Destroy', event_path(@event), :method => :delete, :data => { :confirm => 'Are you sure?' }
-  \|
-= link_to 'Back', events_path
+.body-container
+  = render 'events/details', event: @event

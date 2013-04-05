@@ -16,7 +16,7 @@
     email: "owner_#{i}@example.com",
     password: 'test'
   )
-  dwelling = Dwelling.create(name: Faker::Address.street_address, owner: owner)
+  dwelling = Dwelling.create(name: Faker::Address.street_address, owner: owner, time_zone: 'Eastern Time (US & Canada)')
   owner.dwelling = dwelling
   owner.save
 
@@ -45,12 +45,18 @@
     bill.save
   end                  
 
-  # Create 5 events, created by random users, and at random times within the next week
-  5.times do 
+  # Create events by random users, 3 at random times within the next week
+	# 2 last week
+  5.times do |i|
+		if i > 2
+			time = Time.now - 1.day - Random.rand(1.week)
+		else
+			time = Time.now + Random.rand(1.week)
+		end
     event = Event.create(
       title: Faker::Lorem.sentence,
       description: Faker::Lorem.sentences(3).join,
-      date: Time.now + Random.rand(1.week)
+      date: time
     )
     event.user = dwelling.users.all[Random.rand(dwelling.users.size)]
     event.dwelling = dwelling

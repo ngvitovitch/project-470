@@ -6,15 +6,14 @@
         - @event.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.text_field :title, class: 'span8', placeholder: 'Title'
-  .field
-    = f.text_area :description, class: 'span8', rows: 5
-  .field
+  .controls
+    = f.text_field :title, placeholder: 'Title', class: 'input-block-level'
+  .controls
+    = f.text_area :description, rows: 5, class: 'input-block-level'
+  .controls
     = f.label :when
-    = calendar_datepicker(:date, f, class: 'input-small')
-  .field
-    = f.time_select :date, { ignore_date: true, minute_step: 15 }, class: 'input-mini'
-  .field
-  .actions
+    = calendar_datepicker :date, f, class: 'input-small'
+  .controls
+    = f.time_select :date, { ignore_date: true, ampm: true, minute_step: 15 }, class: 'input-small'
+  .controls
     = f.submit 'Save'

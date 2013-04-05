@@ -5,7 +5,11 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = @dwelling.events.order(:date)
+		if params[:past]
+			@events = @dwelling.events.order('date DESC').where(['date < ?', Date.today()])
+		else
+			@events = @dwelling.events.order(:date).where(['date >= ?', Date.today()])
+		end
 
     respond_to do |format|
       format.html # index.html.erb
