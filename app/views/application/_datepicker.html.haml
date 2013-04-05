@@ -1,5 +1,5 @@
-= f.text_field method,
+= builder.text_field method,
   { data_behaviour: 'datepicker',
-    value: f.object.method(method).call().strftime('%m/%d/%Y'),
+    value: default_date.strftime('%m/%d/%Y'),
     name: ''}.merge(html_options)
-= f.date_select method, {}, class: :hidden
+= builder.date_select method, {}, class: :hidden
