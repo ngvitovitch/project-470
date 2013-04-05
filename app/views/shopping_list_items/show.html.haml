@@ -21,4 +21,4 @@
 
 = link_to 'Edit', edit_shopping_list_item_path(@shopping_list_item)
 \|
-= link_to 'Back', shopping_list_items_path
+= link_to 'Back', shopping_list_path(id: @shopping_list_item.shopping_list_id)

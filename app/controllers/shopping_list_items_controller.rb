@@ -25,7 +25,6 @@ class ShoppingListItemsController < ApplicationController
   # GET /shopping_list_items/new.json
   def new
     @shopping_list_item = ShoppingListItem.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @shopping_list_item }
@@ -44,7 +43,7 @@ class ShoppingListItemsController < ApplicationController
 
     respond_to do |format|
       if @shopping_list_item.save
-        format.html { redirect_to @shopping_list_item, notice: 'Shopping list item was successfully created.' }
+        format.html { redirect_to shopping_list_path(@shopping_list_item.shopping_list_id), notice: 'Shopping list item was successfully created.' }
         format.json { render json: @shopping_list_item, status: :created, location: @shopping_list_item }
       else
         format.html { render action: "new" }
@@ -57,10 +56,9 @@ class ShoppingListItemsController < ApplicationController
   # PUT /shopping_list_items/1.json
   def update
     @shopping_list_item = ShoppingListItem.find(params[:id])
-
     respond_to do |format|
       if @shopping_list_item.update_attributes(params[:shopping_list_item])
-        format.html { redirect_to @shopping_list_item, notice: 'Shopping list item was successfully updated.' }
+        format.html { redirect_to shopping_list_path(@shopping_list_item.shopping_list_id), notice: 'Shopping list item was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -73,10 +71,11 @@ class ShoppingListItemsController < ApplicationController
   # DELETE /shopping_list_items/1.json
   def destroy
     @shopping_list_item = ShoppingListItem.find(params[:id])
+    id = @shopping_list_item.shopping_list_id
     @shopping_list_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to shopping_list_items_url }
+      format.html { redirect_to shopping_list_path(id)}
       format.json { head :no_content }
     end
   end
