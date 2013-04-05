@@ -1,17 +1,12 @@
-%h1 Listing events
-
-%table.table.table-hover.table-condensed
-  %tr
-    %th Title
-    %th Date
-    %th User
-
+.body-container
+  %h1 Listing events
+  %ul.nav.nav-pills
+    %li{class: !params[:past] ? :active : nil}
+      = link_to :upcoming, events_path
+    %li{class: params[:past] ? :active : nil}
+      = link_to :past, events_path(past: false)
   - @events.each do |event|
-    %tr
-      %td= link_to event.title, event_path(event)
-      %td= distance_of_time_in_words_to_now event.date
-      %td= event.user.name
+    = render 'events/details', event: event
 
-%br
-
-= link_to 'New Event', new_event_path
+  .new-event
+    = link_to 'New Event', new_event_path
