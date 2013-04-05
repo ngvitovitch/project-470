@@ -36,7 +36,10 @@ class ApplicationController < ActionController::Base
 
   # Redirect to 404 page
   def permission_denied
-    raise ActionController::RoutingError.new('Not Found')
+		respond_to do |format|
+			format.html { render 'application/permission_denied' }
+			format.json { render json: 'Permission Denied' }
+		end
   end
 
 
