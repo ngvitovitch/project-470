@@ -27,6 +27,8 @@ group :assets do
 end
 
 group :development do
+	gem 'capistrano'
+	gem 'rvm-capistrano'
   gem 'thin'  # faster web server
   gem 'wirb'  # autocomplete and coloring for rails c
   gem 'faker' # library for generating fake data (used in the seed)
@@ -38,14 +40,14 @@ gem 'bootstrap-datepicker-rails' # javascript datepicker
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
+gem 'passenger', :git => 'git@github.com:FooBarWidget/passenger.git'
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
