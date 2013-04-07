@@ -178,6 +178,7 @@ DEPENDENCIES
   capistrano
   coffee-rails (~> 3.2.1)
   faker
+  haml
   haml-rails (>= 0.3.4)
   jquery-rails
   less-rails
