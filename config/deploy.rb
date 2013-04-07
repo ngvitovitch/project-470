@@ -31,16 +31,19 @@ after "deploy:restart", "deploy:cleanup"
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
-set :rails_env, production
+set :rails_env, 'production'
 set :passenger_port, 3000
 set :startcmd, lambda { "cd #{current_path} && bundle exec passenger start -d -p #{passenger_port} -e #{rails_env}  --pid-file=#{current_path}/tmp/pids/passenger.#{passenger_port}.pid  #{current_path}" }
+set :stopcmd, lambda { "cd #{current_path} && bundle exec passenger stop -p #{passenger_port}" }
 
 # If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
   task :start do
 		run("#{startcmd}")
 	end
-  task :stop do ; end
+  task :stop do 
+		run("#{stopcmd}")
+ 	end
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
