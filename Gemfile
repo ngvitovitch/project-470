@@ -9,6 +9,9 @@ gem 'sqlite3'
 gem 'aws-sdk'
 
 
+gem 'twitter-bootstrap-rails' 
+gem 'haml'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -17,8 +20,6 @@ group :assets do
   gem 'less-rails'
   gem 'haml-rails', '>= 0.3.4'
   gem 'coffee-rails', '~> 3.2.1'
-
-  gem 'twitter-bootstrap-rails' 
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
