@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+	scope :upcoming, order(:date).where(['date >= ?', Date.today]).limit(4)
   belongs_to :dwelling
   belongs_to :user
   attr_accessible :date, :description, :title

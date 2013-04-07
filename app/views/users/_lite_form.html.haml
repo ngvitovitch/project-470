@@ -8,12 +8,12 @@
 
   .field
     = f.label :email
-    = f.text_field :email, :class => 'span8', :placeholder => 'Enter your email.'
+    = f.text_field :email, :placeholder => 'Enter your email.'
   .field
     = f.label :password
-    = f.password_field :password, :class => 'span8', :placeholder => 'Choose a password.'
+    = f.password_field :password, :placeholder => 'Choose a password.'
   .field
     = f.label :password_confirmation
-    = f.password_field :password_confirmation, :class => 'span8', :placeholder => 'Confirm it.'
+    = f.password_field :password_confirmation, :placeholder => 'Confirm it.'
   .actions
-    = f.submit 'Save', :class => 'btn-success btn-large span8'
+    = f.submit 'Save', :class => 'btn-success btn-large'
