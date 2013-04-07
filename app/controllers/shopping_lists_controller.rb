@@ -80,4 +80,12 @@ class ShoppingListsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    def get_dwelling_shopping_list
+    @dwelling = current_dwelling
+    if params[:id]
+      @shopping_list = @dwelling.shopping_lists.find(params[:id])
+    end
+  end
 end
