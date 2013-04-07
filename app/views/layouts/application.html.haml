@@ -40,8 +40,9 @@
                 %li= link_to "Sign In", login_path
 
     .container
-      = bootstrap_flash
-      = yield
+      .row
+        = bootstrap_flash
+        = yield
       /%footer
       /  %p &copy; Company 2013
     /
