@@ -1,6 +1,9 @@
 Roomie::Application.routes.draw do
 
 
+  resources :messages
+
+
   resources :shopping_list_items
 
 
