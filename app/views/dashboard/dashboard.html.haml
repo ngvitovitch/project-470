@@ -2,7 +2,7 @@
   %h1 Here be the dwelling homepage 
   Messages go here
 
-.span4{style: 'text-align: left'}
+.span4
   .well
     %h3= link_to "Roomates", dwelling_path(current_dwelling)
     %ul.nav.nav-pills.nav-stacked
@@ -34,9 +34,10 @@
               - else
                 #{distance_of_time_in_words_to_now event.date} from now
 
-  %h3= link_to 'Shopping Lists', shopping_lists_path
-  Shopping lists go here
-  /- @shopping_lists.each do |shopping_list|
-  /  %p
-  /    = link_to shopping_list.title, shopping_list_path(shopping_list)
-  /%hr
+  .well
+    %h3= link_to 'Shopping Lists', shopping_lists_path
+    Shopping lists go here
+    /- @shopping_lists.each do |shopping_list|
+    /  %p
+    /    = link_to shopping_list.title, shopping_list_path(shopping_list)
+    /%hr
