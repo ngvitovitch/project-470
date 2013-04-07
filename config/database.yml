@@ -19,7 +19,12 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  database: roomiesql
+  username: roomie
+  password: project-470
+  host: roomiesql.cwzfkib0d03o.us-east-1.rds.amazonaws.com
+  port: 3306
   pool: 5
   timeout: 5000
