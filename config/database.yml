@@ -26,5 +26,3 @@ production:
   password: project-470
   host: roomie.cwzfkib0d03o.us-east-1.rds.amazonaws.com
   port: 3306
-  pool: 5
-  timeout: 5000
