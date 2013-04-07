@@ -3,6 +3,9 @@ Roomie::Application.configure do
 
   # Code is not reloaded between requests
   config.cache_classes = true
+	#
+  # use Amazon SES for emailers
+  config.action_mailer.delivery_method = :amazon_ses
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
