@@ -10,19 +10,6 @@
     = f.label :name
     = f.text_field :name
   .field
-    = f.label :quantity
-    = f.number_field :quantity
-  .field
-    = f.label :obligate_id
-    = f.number_field :obligate_id
-  .field
-    = f.label :obligates
-    = f.number_field :obligates
-  .field
-    = f.label :status
-    = f.check_box :status
-  .field
-    = f.label :shopping_list_id
-    = f.number_field :shopping_list_id
+    = f.hidden_field :shopping_list_id, value: params[:shopping_list_id]
   .actions
     = f.submit 'Save'

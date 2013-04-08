@@ -1,5 +1,43 @@
-%h1 Here be the dwelling homepage 
+.span8
+  %h1 Here be the dwelling homepage 
+  Messages go here
 
-= link_to 'Roomates', dwelling_path(current_dwelling)
-= link_to 'Bills', bills_path
-= link_to 'Events', events_path
+.span4
+  .well
+    %h3= link_to "Roomates", dwelling_path(current_dwelling)
+    %ul.nav.nav-pills.nav-stacked
+      - @roommates.each do |roomate|
+        %li
+          = link_to roomate.name, user_path(roomate)
+    
+  .well
+    %h3= link_to 'Upcoming Bills', bills_path
+    %ul.nav.nav-pills.nav-stacked
+      - @upcoming_bills.each do |bill|
+        %li
+          %a{href: bill_path(bill)}
+            #{bill.name} 
+            %span.muted.pull-right
+              #{distance_of_time_in_words_to_now bill.date_due} from now
+
+  .well
+    %h3
+      = link_to 'Upcoming Events', events_path
+    %ul.nav.nav-pills.nav-stacked
+      - @upcoming_events.each do |event|
+        %li
+          %a{href: event_path(event)}
+            #{event.title} 
+            %span.muted.pull-right
+              - if event.date < Time.now
+                #{distance_of_time_in_words_to_now event.date} ago
+              - else
+                #{distance_of_time_in_words_to_now event.date} from now
+
+  .well
+    %h3= link_to 'Shopping Lists', shopping_lists_path
+    Shopping lists go here
+    /- @shopping_lists.each do |shopping_list|
+    /  %p
+    /    = link_to shopping_list.title, shopping_list_path(shopping_list)
+    /%hr

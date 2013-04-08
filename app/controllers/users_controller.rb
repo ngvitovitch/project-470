@@ -67,7 +67,7 @@ class UsersController < ApplicationController
   private
     def is_self?
       unless current_user && current_user.id == params[:id].to_i
-        not_found
+        permission_denied
       end
     end
 end

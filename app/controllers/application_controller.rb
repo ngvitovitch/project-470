@@ -35,8 +35,11 @@ class ApplicationController < ActionController::Base
 
 
   # Redirect to 404 page
-  def not_found
-    raise ActionController::RoutingError.new('Not Found')
+  def permission_denied
+		respond_to do |format|
+			format.html { render 'application/permission_denied' }
+			format.json { render json: 'Permission Denied' }
+		end
   end
 
 
@@ -55,7 +58,7 @@ class ApplicationController < ActionController::Base
   # are accessing
   def dwelling_member?(dwelling_id)
     unless current_user.dwelling_id == dwelling_id.to_i
-      not_found
+      permission_denied
     end
   end
 
@@ -64,7 +67,7 @@ class ApplicationController < ActionController::Base
   def dwelling_owner?(dwelling_id)
     unless ( current_user.owned_dwelling &&
             current_user.owned_dwelling.id == dwelling_id.to_i )
-      not_found
+      permission_denied
     end
   end
 

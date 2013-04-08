@@ -1,4 +1,6 @@
 class Bill < ActiveRecord::Base
+	scope :upcoming, order(:date_due).where(['date_due >= ?', Date.today]).limit(4)
+
   attr_accessible :amount, :date_due, :name, :owed_to, :status, :dwelling_id
 
   belongs_to :dwelling
@@ -7,13 +9,25 @@ class Bill < ActiveRecord::Base
 
   validates :amount, :numericality => {:greater_than_or_equal_to => 0}
   validates :date_due, :presence => true
-  validates :name, :length => {:minimum => 1, :maximum => 20}
-  validates :owed_to, :length => {:minimum => 1, :maximum => 20}
+  validates :name, :presence => true
+  validates :owed_to, :presence => true
   validates :dwelling_id, :presence => true
 
   after_initialize :init
 
   def init
     self.status ||= :unpaid
+  end
+
+  def payment_sum
+    payment_sum = 0
+    self.bill_payments.each do |payment|
+      payment_sum += payment.amount
+    end
+    return payment_sum
+  end
+
+  def payment_percentage
+    return (self.payment_sum/self.amount)*100.to_int
   end
 end
