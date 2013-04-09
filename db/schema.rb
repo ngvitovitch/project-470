@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404040704) do
+ActiveRecord::Schema.define(:version => 20130408224959) do
 
   create_table "bill_payments", :force => true do |t|
     t.integer  "user_id"
@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(:version => 20130404040704) do
     t.datetime "updated_at",  :null => false
   end
 
+  add_index "bills", ["date_due"], :name => "index_bills_on_date_due"
+  add_index "bills", ["dwelling_id"], :name => "index_bills_on_dwelling_id"
+
   create_table "dwellings", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",                    :null => false
@@ -43,6 +46,8 @@ ActiveRecord::Schema.define(:version => 20130404040704) do
     t.integer  "owner_id"
     t.string   "time_zone",  :default => "UTC"
   end
+
+  add_index "dwellings", ["owner_id"], :name => "index_dwellings_on_owner_id"
 
   create_table "events", :force => true do |t|
     t.integer  "dwelling_id"
@@ -54,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20130404040704) do
     t.datetime "updated_at",  :null => false
   end
 
+  add_index "events", ["date"], :name => "index_events_on_date"
   add_index "events", ["dwelling_id"], :name => "index_events_on_dwelling_id"
   add_index "events", ["user_id"], :name => "index_events_on_user_id"
 
@@ -66,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20130404040704) do
   end
 
   add_index "invites", ["dwelling_id"], :name => "index_invites_on_dwelling_id"
+  add_index "invites", ["token"], :name => "index_invites_on_token"
 
   create_table "shopping_list_items", :force => true do |t|
     t.string   "name"
@@ -94,5 +101,8 @@ ActiveRecord::Schema.define(:version => 20130404040704) do
     t.datetime "updated_at",      :null => false
     t.integer  "dwelling_id"
   end
+
+  add_index "users", ["dwelling_id"], :name => "index_users_on_dwelling_id"
+  add_index "users", ["email"], :name => "index_users_on_email"
 
 end
