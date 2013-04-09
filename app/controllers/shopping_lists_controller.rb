@@ -1,4 +1,7 @@
 class ShoppingListsController < ApplicationController
+  before_filter :get_dwelling_shopping_list
+
+
   # GET /shopping_lists
   # GET /shopping_lists.json
   def index
@@ -25,6 +28,7 @@ class ShoppingListsController < ApplicationController
   # GET /shopping_lists/new.json
   def new
     @shopping_list = ShoppingList.new
+    @shopping_list.dwelling = current_dwelling
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +45,8 @@ class ShoppingListsController < ApplicationController
   # POST /shopping_lists.json
   def create
     @shopping_list = ShoppingList.new(params[:shopping_list])
+    @shopping_list.dwelling = current_dwelling
+    @shopping_list.user = current_user
 
     respond_to do |format|
       if @shopping_list.save

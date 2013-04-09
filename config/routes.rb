@@ -1,12 +1,6 @@
 Roomie::Application.routes.draw do
 
 
-  resources :shopping_list_items
-
-
-  resources :shopping_lists
-
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -22,6 +16,9 @@ Roomie::Application.routes.draw do
   resources :events
   resources :bills do
     resources :bill_payments
+  end
+  resources :shopping_lists do
+    resources :shopping_list_items
   end
 
   get 'payments' => 'bill_payments#history', :as => 'history'
