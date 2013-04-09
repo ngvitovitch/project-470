@@ -1,0 +1,9 @@
+= form_tag sessions_path, class: "form-signin" do
+  %h2{:style => "text-align: left; font-weight: normal;", :class => "form-signin-heading"}
+    Enter your stuff...
+  .field
+    = text_field_tag :email, params[:email], :placeholder => 'Email', class: "input-block-level"
+  .field
+    = password_field_tag :password, nil, :placeholder => 'Password', class: "input-block-level"
+  .actions
+    = submit_tag 'Log in', class: "btn btn-block btn-large btn-success"
