@@ -6,22 +6,6 @@ body {
   text-align: center;
 }
 
-
-a {
-	color: black;	
-	text-decoration: none;
-}
-
-a:visited {
-	text-decoration: none;	
-}
-
-a:hover {
-	text-decoration: none;
-	color: rgb(120,82,42)
-}  
-
-
 .shopping-list{
   list-style: none;
   display: inline-block;
@@ -34,6 +18,20 @@ a:hover {
   -moz-box-shadow: 0 0 5px #999;
   -webkit-box-shadow: 0 0 5px#999;
   box-shadow: 0 0 10px #999;
+
+  a {
+		color: black;	
+		text-decoration: none;
+	}
+
+	a:visited {
+		text-decoration: none;	
+	}
+
+	a:hover {
+		text-decoration: none;
+		color: rgb(120,82,42)
+	}  
 
   .modified-date-container{
 	  position: relative;
