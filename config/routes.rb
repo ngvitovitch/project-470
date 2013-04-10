@@ -8,24 +8,36 @@ Roomie::Application.routes.draw do
   match 'invites/:token/accpet' => 'invites#accept', :as => 'invites_accept'
   match 'invites/:token' => 'invites#show', :as => 'invites'
 
+	# Dwellings
   resources :dwellings do
-    resources :invites, 
-      :controller => 'dwelling_invites',
-      :except => [:show]
+    resources :invites, :controller => 'dwelling_invites', :except => [:show]
   end
+
+	# Chores
+  resources :chores
+
+	# Events
   resources :events
+
+	# Bills
+  get 'payments' => 'bill_payments#history', :as => 'history'
+
   resources :bills do
     resources :bill_payments
   end
+
+	# Shopping Lists
   resources :shopping_lists do
     resources :shopping_list_items
   end
 
-  get 'payments' => 'bill_payments#history', :as => 'history'
 
+	# Users and signup
   get 'signup' => 'users#new', :as => 'signup'
   resources :users, :except => :index
 
+
+	# Login / Logout
   get 'logout' => 'sessions#destroy', :as => 'logout'
   get 'login' => 'sessions#new', :as => 'login'
   resources :sessions, :except => [:index, :edit]
