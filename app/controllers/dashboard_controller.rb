@@ -15,7 +15,8 @@ class DashboardController < ApplicationController
 				@upcoming_bills = current_dwelling.bills.upcoming
 				@upcoming_events = current_dwelling.events.upcoming
         @messages = current_dwelling.messages
-				#@shopping_lists = current_dwelling.shopping_lists
+				@shopping_lists = current_dwelling.shopping_lists
+				@upcoming_chores = current_dwelling.chores
         render :dashboard 
       else
         # The user is logged in, but not a member of a 

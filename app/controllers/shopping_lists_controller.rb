@@ -1,8 +1,11 @@
 class ShoppingListsController < ApplicationController
+  before_filter :get_dwelling_shopping_list
+
+
   # GET /shopping_lists
   # GET /shopping_lists.json
   def index
-    @shopping_lists = ShoppingList.all
+    @shopping_lists = @dwelling.shopping_lists
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +16,7 @@ class ShoppingListsController < ApplicationController
   # GET /shopping_lists/1
   # GET /shopping_lists/1.json
   def show
-    @shopping_list = ShoppingList.find(params[:id])
+    #@shopping_list = ShoppingList.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +28,7 @@ class ShoppingListsController < ApplicationController
   # GET /shopping_lists/new.json
   def new
     @shopping_list = ShoppingList.new
+    @shopping_list.dwelling = current_dwelling
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +38,15 @@ class ShoppingListsController < ApplicationController
 
   # GET /shopping_lists/1/edit
   def edit
-    @shopping_list = ShoppingList.find(params[:id])
+    #@shopping_list = ShoppingList.find(params[:id])
   end
 
   # POST /shopping_lists
   # POST /shopping_lists.json
   def create
     @shopping_list = ShoppingList.new(params[:shopping_list])
+    @shopping_list.dwelling = current_dwelling
+    @shopping_list.user = current_user
 
     respond_to do |format|
       if @shopping_list.save
@@ -56,7 +62,7 @@ class ShoppingListsController < ApplicationController
   # PUT /shopping_lists/1
   # PUT /shopping_lists/1.json
   def update
-    @shopping_list = ShoppingList.find(params[:id])
+    #@shopping_list = ShoppingList.find(params[:id])
 
     respond_to do |format|
       if @shopping_list.update_attributes(params[:shopping_list])
@@ -78,6 +84,14 @@ class ShoppingListsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to shopping_lists_url }
       format.json { head :no_content }
+    end
+  end
+
+  private
+    def get_dwelling_shopping_list
+    @dwelling = current_dwelling
+    if params[:id]
+      @shopping_list = @dwelling.shopping_lists.find(params[:id])
     end
   end
 end

@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(:version => 20130406224335) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "chores", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "assigned_user_id"
+    t.integer  "dwelling_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "dwellings", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",                    :null => false

@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_one :owned_dwelling, :class_name => 'Dwelling', :foreign_key => 'owner_id'
   has_many :bill_payments
   has_many :messages
+  has_many :chores
+  has_many :shopping_lists
   belongs_to :dwelling
 
   validates :first_name, :presence => true

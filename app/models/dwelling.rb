@@ -6,6 +6,8 @@ class Dwelling < ActiveRecord::Base
   has_many :bills
   has_many :events
   has_many :messages
+  has_many :chores
+  has_many :shopping_lists
 
   validates_presence_of :name, :owner
 
