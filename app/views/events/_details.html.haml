@@ -4,7 +4,7 @@
     %small - #{event.date.strftime('%D')}
   .event-details
     %span.description
-      %pre= find_and_preserve event.description
+      %pre= event.description
     %span.poster
       %p= event.user.name
     .show-event-options

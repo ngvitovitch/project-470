@@ -1,3 +1,199 @@
 // Place all the styles related to the dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.form-signup input[type="text"],
+.form-signup input[type="password"] {
+  font-size: 16px;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+	width: 93%;
+  max-width: 100%;
+  display: block;
+  float: left;
+}	
+
+.form-signin {
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 0px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+          box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+}
+
+.feed-container{
+  margin-top: 20px;
+  border: 1px solid #E3E3E3;
+  height: 100%;
+  border-radius: 5px;
+  width: inherit;
+  background-color: #F5F5F5;
+  padding-bottom: 10px;
+
+  .inner-body{
+    padding: 15px;
+  }
+}
+
+.speech-box {
+  background:#FFFFFF;
+  border: 1px solid #E3E3E3;
+  border-radius: 15px;
+  color: #333333;
+  padding: 15px;
+  padding-right: 0;
+  position: relative;
+  text-align: left;
+
+  .submit-comment-button{
+    position: absolute;
+    display: inline;
+    border-radius: 10px;
+    bottom: 10px;
+    right: 10px;
+    top: 10px;
+  }
+
+  textarea{
+    resize: none;
+    box-shadow: none;
+    border: none;
+    position: relative;
+    width: 80%;
+    padding: 0;
+    font-size: 20px;
+    margin: 0;
+    display: inline;
+    overflow: hidden;
+  }
+}
+
+.speech-box:after {
+  border-color: #fff transparent;
+  border-style: solid;
+  border-width: 40px 0 0 40px;
+  bottom: -39px;
+  content: "";
+  display: block;
+  left: 41px;
+  position: absolute;
+  z-index: 10;
+  width: 0;
+}
+
+.nav-header-container{
+  background-color: white;
+  border: 1px solid #E3E3E3;
+  height: 100% !important;
+  margin: 10px 0;
+  border-radius: 4px;
+  padding: 5px;
+  text-align: left;
+
+  .list-object{
+    padding-left: 10px;
+  }
+  a{
+    color: #4F4F4F;
+  }
+}
+
+.nav-header-container:last-child{
+  margin-bottom: 0;
+}
+
+.speech-box:before {
+  border-color: #E3E3E3 transparent;
+  border-style: solid;
+  border-width: 44px 0 0 44px;
+  bottom: -44px;
+  content: "";
+  display: block;
+  left: 39px;
+  z-index: 10;
+  position: absolute;
+  width: 0;
+
+}
+
+.left-rail-container{
+  margin-top: 20px;
+  border: 1px solid #E3E3E3;
+  height: 100%;
+  border-radius: 5px;
+  width: inherit;
+  background-color: #F5F5F5;
+  ul{
+    padding: 0 10px;
+    padding-bottom: 10px;
+  }
+
+  .user-info{
+    width: 100%; 
+    display: inline-block; 
+    word-wrap: break-word;
+    vertical-align: middle;
+    h5{
+      padding:0;
+      margin:0;
+    }
+  }
+}
+
+.feed-info-container{
+  display: inline-block;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid #E3E3E3;
+  height: 100%;
+  margin-top: 10px;
+  width: 100%;
+  position: relative;
+}
+
+.feed-container h3{
+  padding: 0;
+  line-height: 40px;
+  width: 95%;
+  color: #4F4F4F;
+  display: inline-block;
+  border-bottom: 1px solid #E3E3E3  ;
+  margin: 0;
+}
+
+.feed-post{
+  text-align: left;
+  display: inline-block;
+  border-bottom: 1px solid #E3E3E3;
+  width: 95%;
+  margin: 10px 0 0 0;
+
+  .video-post{
+    width:100%; 
+    padding-top:10px;
+  }
+}
+.feed-post:first-child{
+  margin-top: 0px;
+}
+
+.feed-post:last-child{
+ border-bottom: none;
+}
