@@ -4,8 +4,8 @@
     %small
       = message.date
   .message-details
-    %p
-      = message.body
+    %span.body
+      %pre= message.body
   .show-message-options
     = link_to 'Show', message_path(message), class: 'btn btn-success btn-small'
     = link_to 'Edit', edit_message_path(message), class: 'btn btn-warning btn-small'

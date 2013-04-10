@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = current_dwelling.messages
+    @messages = current_dwelling.messages.order('date DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -48,7 +48,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Message was successfully created.' }
         format.json { render json: @message, status: :created, location: @message }
       else
         format.html { render action: "new" }

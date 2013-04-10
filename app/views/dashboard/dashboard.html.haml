@@ -1,53 +1,86 @@
-.span8
-  %h1 Here be the dwelling homepage
-  %h3= link_to 'Messages', messages_path
-  /<br></br>
-  %ul.nav.nav-pills.nav-stacked
-    - @messages.each do |message|
-      /= link_to message.body
-      %li
-        %a{href: message_path(message)}
-          #{message.user.name}
-          %span.muted.pull-right
-            #{distance_of_time_in_words_to_now message.date} ago
-          %li
-            #{message.body}
+.span2
+.span3
+  .left-rail-container
+    %ul.nav.nav-list
+      .nav-header-container{style: 'text-align: center;'}
+        %img(data-src="holder.js/80x80" style="position: relative; padding: 5px 0; display: inline-block")
+        .user-info  
+          %h5
+            Some kind of user profile display
+  .left-rail-container
+    %ul.nav.nav-list
+      .nav-header-container
+        %li.nav-header
+          %h4{style: "padding:0; margin:0;"}
+            = link_to "Roomies", dwelling_path(current_dwelling)
+        %li.divider{style: "padding:0; margin:0;"}
+        - @roommates.each do |roomate|
+          %li.list-object
+            = link_to roomate.name, user_path(roomate)
+      .nav-header-container
+        %li.nav-header
+          %h4{style: "padding:0; margin:0;"}
+            = link_to 'Bills', bills_path
 
-.span4
-  .well
-    %h3= link_to "Roomates", dwelling_path(current_dwelling)
-    %ul.nav.nav-pills.nav-stacked
-      - @roommates.each do |roomate|
-        %li
-          = link_to roomate.name, user_path(roomate)
-    
-  .well
-    %h3= link_to 'Upcoming Bills', bills_path
-    %ul.nav.nav-pills.nav-stacked
-      - @upcoming_bills.each do |bill|
-        %li
-          %a{href: bill_path(bill)}
-            #{bill.name} 
-            %span.muted.pull-right
-              #{distance_of_time_in_words_to_now bill.date_due} from now
+        %li.divider{style: "padding:0; margin:0;"}
+        - @upcoming_bills.each do |bill|
+          %li.list-object
+            %a{href: bill_path(bill), style: "width: 100%;"}
+              %span=bill.name
+              %span.muted.pull-right
+                #{distance_of_time_in_words_to_now bill.date_due} from now
+            %div{style: "clear:both"}
 
-  .well
-    %h3
-      = link_to 'Upcoming Events', events_path
-    %ul.nav.nav-pills.nav-stacked
-      - @upcoming_events.each do |event|
-        %li
-          %a{href: event_path(event)}
-            #{event.title} 
-            %span.muted.pull-right
-              - if event.date < Time.now
-                #{distance_of_time_in_words_to_now event.date} ago
-              - else
-                #{distance_of_time_in_words_to_now event.date} from now
+      .nav-header-container
+        %li.nav-header
+          %h4{style: "padding:0; margin:0;"}
+            = link_to 'Events', events_path
 
-  .well
-    %h3= link_to 'Shopping Lists', shopping_lists_path
-    Shopping lists go here
+        %li.divider{style: "padding:0; margin:0;"}
+        - @upcoming_events.each do |event|
+          %li.list-object
+            %a{href: event_path(event)}
+              %span=event.title 
+              %span.muted.pull-right
+                - if event.date < Time.now
+                  #{distance_of_time_in_words_to_now event.date} ago
+                - else
+                  #{distance_of_time_in_words_to_now event.date} from now
+              %div{style: "clear:both"}
+      .nav-header-container
+        %li.nav-header
+          %h4{style: "padding:0; margin:0;"}
+            =link_to 'Lists', shopping_lists_path
+        %li.divider{style: "padding:0; margin:0;"}
+
+.span6
+
+  %h1{style: 'text-align:left; color: #4F4F4F;'}
+    =current_dwelling.name
+  .feed-container
+    .inner-body
+      .speech-box
+        = form_for Message.new do |message|
+          = message.text_area :body, :class => 'text-bubble', :placeholder => "What do you wanna tell your roomies?", rows: 2;
+          = message.submit "Post", :class => "submit-comment-button btn btn-large btn-inverse"
+      .feed-info-container  
+        %h3
+          Dwelling Feed
+        - @messages.reverse.each do |message|
+          .feed-post
+            %ul.media-list
+              %li.media
+                %a.pull-left(href="#")
+                  %img.media-object(data-src="holder.js/64x64")
+                .media-body
+                  %h4.media-heading
+                    #{message.user.name}
+                    %small
+                      posted a text
+                    %small(style="float:right; margin-right:5px;")
+                      #{distance_of_time_in_words_to_now message.date} ago
+                  =message.body
+     
     /- @shopping_lists.each do |shopping_list|
     /  %p
     /    = link_to shopping_list.title, shopping_list_path(shopping_list)
