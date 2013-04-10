@@ -14,6 +14,7 @@ class DashboardController < ApplicationController
 				@roommates = current_dwelling.users
 				@upcoming_bills = current_dwelling.bills.upcoming
 				@upcoming_events = current_dwelling.events.upcoming
+        @messages = current_dwelling.messages
 				#@shopping_lists = current_dwelling.shopping_lists
         render :dashboard 
       else

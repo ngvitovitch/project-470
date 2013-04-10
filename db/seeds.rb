@@ -62,6 +62,17 @@
     event.dwelling = dwelling
     event.save
   end
+
+  #Create 2 messages by random users
+  2.times do |i|
+    time = Time.now - Random.rand(1.week)
+    message = Message.create(
+      body: Faker::Lorem.sentences(3).join,
+      date: time
+    )
+    message.user = dwelling.users.all[Random.rand(dwelling.users.size)]
+    message.dwelling = dwelling
+    message.save
 end
 
 puts "Created #{User.count} Users"

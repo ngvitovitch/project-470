@@ -1,6 +1,17 @@
 .span8
-  %h1 Here be the dwelling homepage 
-  Messages go here
+  %h1 Here be the dwelling homepage
+  %h3= link_to 'Messages', messages_path
+  /<br></br>
+  %ul.nav.nav-pills.nav-stacked
+    - @messages.each do |message|
+      /= link_to message.body
+      %li
+        %a{href: message_path(message)}
+          #{message.user.name}
+          %span.muted.pull-right
+            #{distance_of_time_in_words_to_now message.date} ago
+          %li
+            #{message.body}
 
 .span4
   .well

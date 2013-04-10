@@ -1,9 +1,7 @@
-%p#notice= notice
+%h1 Viewing Message
 
-%p
-  %b Body:
-  = @message.body
+= render 'messages/details', message: @message
 
-= link_to 'Edit', edit_message_path(@message)
+= link_to 'Edit', @message
 \|
 = link_to 'Back', messages_path

@@ -1,20 +1,7 @@
-%h1 Listing messages
-
-%table
-  %tr
-    %th Body
-    %th 
-    %th
-    %th
-    %th
-
+.body-container
+  %h1
+    Messages
   - @messages.each do |message|
-    %tr
-      %td= message.body
-      %td= link_to 'Show', messages_path(message)
-      %td= link_to 'Edit', edit_message_path(message)
-      %td= link_to 'Destroy', message, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Message', new_message_path
+    = render 'messages/details', message: message
+  .new-message
+    = link_to 'New Message', new_message_path

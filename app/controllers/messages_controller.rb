@@ -25,7 +25,6 @@ class MessagesController < ApplicationController
   # GET /messages/new.json
   def new
     @message = Message.new
-    @message.dwelling = current_dwelling
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,6 +42,9 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(params[:message])
     @message.dwelling = current_dwelling
+    @message.user = current_user
+    @message.date = Time.now
+
 
     respond_to do |format|
       if @message.save
