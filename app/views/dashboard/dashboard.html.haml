@@ -1,13 +1,122 @@
-%h1 Here be the dwelling homepage 
+.span2
+.span3
+  .left-rail-container
+    %ul.nav.nav-list
+      .nav-header-container{style: 'text-align: center;'}
+        %img(data-src="holder.js/80x80" style="position: relative; padding: 5px 0; display: inline-block")
+        .user-info  
+          %h5
+            Some kind of user profile display
+  .left-rail-container
+    %ul.nav.nav-list
+      .nav-header-container
+        %li.nav-header
+          %h4{style: "padding:0; margin:0;"}
+            = link_to "Roomies", dwelling_path(current_dwelling)
+        %li.divider{style: "padding:0; margin:0;"}
+        - @roommates.each do |roomate|
+          %li.list-object
+            = link_to roomate.name, user_path(roomate)
+      .nav-header-container
+        %li.nav-header
+          %h4{style: "padding:0; margin:0;"}
+            = link_to 'Bills', bills_path
 
-%hr
-%h3= link_to 'Roomates', dwelling_path(current_dwelling)
-%hr
-%h3= link_to 'Bills', bills_path
-%hr
-%h3= link_to 'Events', events_path
-%hr
-%h3= link_to 'Lists', shopping_lists_path
-%hr
-%h3= link_to 'Chores', chores_path
-%hr
+        %li.divider{style: "padding:0; margin:0;"}
+        - @upcoming_bills.each do |bill|
+          %li.list-object
+            %a{href: bill_path(bill), style: "width: 100%;"}
+              %span=bill.name
+              %span.muted.pull-right
+                #{distance_of_time_in_words_to_now bill.date_due} from now
+            %div{style: "clear:both"}
+
+      .nav-header-container
+        %li.nav-header
+          %h4{style: "padding:0; margin:0;"}
+            = link_to 'Events', events_path
+
+        %li.divider{style: "padding:0; margin:0;"}
+        - @upcoming_events.each do |event|
+          %li.list-object
+            %a{href: event_path(event)}
+              %span=event.title 
+              %span.muted.pull-right
+                - if event.date < Time.now
+                  #{distance_of_time_in_words_to_now event.date} ago
+                - else
+                  #{distance_of_time_in_words_to_now event.date} from now
+              %div{style: "clear:both"}
+      .nav-header-container
+        %li.nav-header
+          %h4{style: "padding:0; margin:0;"}
+            =link_to 'Lists', shopping_lists_path
+        %li.divider{style: "padding:0; margin:0;"}
+
+.span6
+
+  %h1{style: 'text-align:left; color: #4F4F4F;'}
+    =current_dwelling.name
+  .feed-container
+    .inner-body
+      .speech-box
+        %textarea#comment-input.text-bubble(placeholder="What do you wanna tell your roomies?")
+        .submit-comment-button.btn.btn-large.btn-inverse
+          Post
+      .feed-info-container  
+        %h3
+          Dwelling Feed
+
+        / Dwelling feed post format!
+        .feed-post
+          %ul.media-list
+            %li.media
+              %a.pull-left(href="#")
+                %img.media-object(data-src="holder.js/64x64")
+              .media-body
+                %h4.media-heading
+                  Cris Kedmenec
+                  %small
+                    posted a text
+                  %small(style="float:right; margin-right:5px;")
+                    March 2
+                This be the sample text post!
+        .feed-post
+          %ul.media-list
+            %li.media
+              %a.pull-left(href="#")
+                %img.media-object(data-src="holder.js/64x64")
+              .media-body
+                %h4.media-heading
+                  Cris Kedmenec
+                  %small
+                    posted a text
+                  %small(style="float:right; margin-right:5px;")
+                    March 1
+                This be the sample text post! (the second one!)
+        .feed-post
+          %ul.media-list
+            %li.media
+              %a.pull-left(href="#")
+                %img.media-object(data-src="holder.js/64x64")
+              .media-body
+                %h4.media-heading
+                  Cris Kedmenec
+                  %small
+                    posted a video
+                  %small(style="float:right; margin-right:5px;")
+                    March 1
+                YO. Check out this awesome video..
+              %iframe{class: "video-post", width: "640", height: "360", src: "https://www.youtube.com/embed/ZAhrMa0bJVg?feature=player_detailpage", frameborder: "0"}
+
+
+
+
+
+
+
+
+    /- @shopping_lists.each do |shopping_list|
+    /  %p
+    /    = link_to shopping_list.title, shopping_list_path(shopping_list)
+    /%hr

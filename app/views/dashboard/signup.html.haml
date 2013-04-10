@@ -1,8 +1,16 @@
 .hero-unit
-  .row
-    .span5.offset3
-      %h1 Live your life, we'll handle the details.
-      %p Living space, bill handling, and other solutions to optimize your rooming experience across the board.
-    .span4
-      = render :partial => "users/lite_form"
+  .span10{:style => "float:none; margin:0px auto; text-align:left" }
+    .row
+      .span6
+        %h1{:style => "font-weight:normal;"}
+          Live your life, we'll handle the details.
+        %p{:style => "color:#888888;"}
+          Living space, bill handling, and other solutions to optimize your rooming experience across the board.
+      .span4
+        = render :partial => "users/lite_form"
+        
+#myModal.modal.hide.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+  .modal-body
+    = render :partial => "sessions/login"
 
+  
