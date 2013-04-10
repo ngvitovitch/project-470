@@ -52,6 +52,15 @@
           %h4{style: "padding:0; margin:0;"}
             =link_to 'Lists', shopping_lists_path
         %li.divider{style: "padding:0; margin:0;"}
+      .nav-header-container
+        %li.nav-header
+          %h4{style: "padding:0; margin:0;"}
+            =link_to 'Chores', chores_path
+        %li.divider{style: "padding:0; margin:0;"}
+        - @upcoming_chores.each do |chore|
+          %li.list-object
+            %a{href: chore_path(chore)}
+              %span=chore.name
 
 .span6
 
