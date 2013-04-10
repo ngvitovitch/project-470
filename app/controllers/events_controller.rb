@@ -1,4 +1,4 @@
-class EventsController < ApplicationController
+  class EventsController < ApplicationController
   before_filter :get_dwelling_and_event
 
 
