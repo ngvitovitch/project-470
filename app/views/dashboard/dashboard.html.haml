@@ -52,6 +52,11 @@
           %h4{style: "padding:0; margin:0;"}
             =link_to 'Lists', shopping_lists_path
         %li.divider{style: "padding:0; margin:0;"}
+        - @shopping_lists.each do |list|
+          %li.list-object
+            %a{href: shopping_list_path(list)}
+              %span=list.title 
+
 
 .span6
 
