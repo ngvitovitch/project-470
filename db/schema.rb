@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(:version => 20130408224959) do
   add_index "bills", ["date_due"], :name => "index_bills_on_date_due"
   add_index "bills", ["dwelling_id"], :name => "index_bills_on_dwelling_id"
 
+  create_table "chores", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "assigned_user_id"
+    t.integer  "dwelling_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "dwellings", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",                    :null => false

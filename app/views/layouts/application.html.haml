@@ -30,6 +30,7 @@
             - if current_dwelling
               %ul.nav
                 %li= link_to "Bills", bills_path
+                %li= link_to "Chores", chores_path
                 %li= link_to "Events", events_path
                 %li= link_to "Lists", shopping_lists_path
             %ul.nav.pull-right
@@ -37,11 +38,16 @@
                 %li= link_to "Log out", logout_path
                 %li= link_to current_user.name, user_path(current_user)
               - else
-                %li= link_to "Sign In", login_path
-
+                %li
+                  %a(href="#myModal" data-toggle="modal")
+                    Sign In
     .container
       .row
         = bootstrap_flash
+        - unless current_user
+          #myModal.modal.hide.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+            .modal-body
+              = render :partial => "sessions/login"
         = yield
       /%footer
       /  %p &copy; Company 2013
