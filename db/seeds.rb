@@ -20,25 +20,42 @@ def create_dwelling_and_owner(dwelling_num)
 end
 
 def create_user(user_num, dwelling_num, dwelling)
-	user = User.create(
+	user = dwelling.users.create(
 		first_name: Faker::Name.first_name,
 		last_name: Faker::Name.last_name,
 		email: "user_#{user_num}_#{dwelling_num}@example.com",
 		password: 'test'
 	)
-	user.dwelling = dwelling
-	user.save
+	return user
 end
+
 def create_bill(name, dwelling)
-    bill = Bill.create(
+    bill = dwelling.bills.create(
       name: name,
       owed_to: Faker::Company.name, 
       amount: 800.55 + rand(500),
       date_due: Date.today.next_month,
       status: 'unpaid'
     )
-    bill.dwelling = dwelling
-    bill.save
+		return bill
+end
+
+def create_shopping_list(name, items, dwelling)
+	shopping_list = dwelling.shopping_lists.create(title: name)
+	items.each do |item_name|
+		shopping_list.shopping_list_items.create(name: item_name)
+	end
+	return shopping_list
+end
+
+def create_chore(name, dwelling)
+	chore = dwelling.chores.build(
+		name: name,
+		description: Faker::Lorem.sentences(3).join
+	)
+	chore.assigned_user = dwelling.users.all[Random.rand(dwelling.users.size)]
+	chore.save
+	return chore
 end
 
 def create_event(title, past, dwelling)
@@ -56,6 +73,7 @@ def create_event(title, past, dwelling)
 	event.user = dwelling.users.all[Random.rand(dwelling.users.size)]
 	event.dwelling = dwelling
 	event.save
+	return event
 end
 
 # Create 10 dwellings with owners
@@ -90,13 +108,11 @@ end
   end
   
 	# Create a shopping list 
-	
-	shopping_list = ShoppingList.new(
-		title: 'Groceries')
-	shopping_list.dwelling = dwelling
-	shopping_list.save
-	['Eggs', 'Bread', 'Milk'].each do |item_name|
-		shopping_list.shopping_list_items.create(name: item_name)
+	create_shopping_list('Groceries', ['Eggs', 'Bread', 'Milk'], dwelling)
+
+	# Create 3 chores
+	['Take out the Trash', 'Do the Dishes', 'Clean the Bathroom'].each do |chore_name|
+		create_chore(chore_name, dwelling)
 	end
 end
 
@@ -105,3 +121,4 @@ puts "Created #{Dwelling.count} Dwellings"
 puts "Created #{Bill.count} Bills"
 puts "Created #{Event.count} Events"
 puts "Created #{ShoppingList.count} Shopping Lists"
+puts "Created #{Chore.count} Chores"
