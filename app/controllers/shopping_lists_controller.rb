@@ -5,7 +5,7 @@ class ShoppingListsController < ApplicationController
   # GET /shopping_lists
   # GET /shopping_lists.json
   def index
-    @shopping_lists = ShoppingList.all
+    @shopping_lists = @dwelling.shopping_lists
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class ShoppingListsController < ApplicationController
   # GET /shopping_lists/1
   # GET /shopping_lists/1.json
   def show
-    @shopping_list = ShoppingList.find(params[:id])
+    #@shopping_list = ShoppingList.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,7 +38,7 @@ class ShoppingListsController < ApplicationController
 
   # GET /shopping_lists/1/edit
   def edit
-    @shopping_list = ShoppingList.find(params[:id])
+    #@shopping_list = ShoppingList.find(params[:id])
   end
 
   # POST /shopping_lists
@@ -62,7 +62,7 @@ class ShoppingListsController < ApplicationController
   # PUT /shopping_lists/1
   # PUT /shopping_lists/1.json
   def update
-    @shopping_list = ShoppingList.find(params[:id])
+    #@shopping_list = ShoppingList.find(params[:id])
 
     respond_to do |format|
       if @shopping_list.update_attributes(params[:shopping_list])

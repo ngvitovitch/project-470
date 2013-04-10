@@ -15,7 +15,7 @@
       = @shopping_list.updated_at.strftime('%l:%M%p')	
   - @shopping_list.shopping_list_items.each do |item|
     %li 
-      = link_to item.name, edit_shopping_list_item_path(item, :shopping_list_id => @shopping_list.id)
+      = link_to item.name, edit_shopping_list_shopping_list_item_path(item, :shopping_list_id => @shopping_list.id)
       %small
       - if item.quantity
         =' - '
