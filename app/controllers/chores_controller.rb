@@ -1,8 +1,10 @@
 class ChoresController < ApplicationController
+  before_filter :get_dwelling_and_chore
+
   # GET /chores
   # GET /chores.json
   def index
-    @chores = Chore.all
+    @chores = @dwelling.chores
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +15,6 @@ class ChoresController < ApplicationController
   # GET /chores/1
   # GET /chores/1.json
   def show
-    @chore = Chore.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @chore }
@@ -25,7 +25,6 @@ class ChoresController < ApplicationController
   # GET /chores/new.json
   def new
     @chore = Chore.new
-    @dwelling = current_dwelling
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,15 +34,13 @@ class ChoresController < ApplicationController
 
   # GET /chores/1/edit
   def edit
-    @chore = Chore.find(params[:id])
   end
 
   # POST /chores
   # POST /chores.json
   def create
     @chore = Chore.new(params[:chore])
-    @dwelling = current_dwelling
-    @chore.dwelling = current_dwelling
+    @chore.dwelling = @dwelling
 
     respond_to do |format|
       if @chore.save
@@ -59,8 +56,6 @@ class ChoresController < ApplicationController
   # PUT /chores/1
   # PUT /chores/1.json
   def update
-    @chore = Chore.find(params[:id])
-
     respond_to do |format|
       if @chore.update_attributes(params[:chore])
         format.html { redirect_to @chore, notice: 'Chore was successfully updated.' }
@@ -75,12 +70,20 @@ class ChoresController < ApplicationController
   # DELETE /chores/1
   # DELETE /chores/1.json
   def destroy
-    @chore = Chore.find(params[:id])
     @chore.destroy
 
     respond_to do |format|
       format.html { redirect_to chores_url }
       format.json { head :no_content }
+    end
+  end
+
+	private
+
+  def get_dwelling_and_chore
+    @dwelling = current_dwelling
+    if params[:id]
+      @chore = @dwelling.chores.find(params[:id])
     end
   end
 end
