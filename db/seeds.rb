@@ -73,6 +73,7 @@
     message.user = dwelling.users.all[Random.rand(dwelling.users.size)]
     message.dwelling = dwelling
     message.save
+  end
 end
 
 puts "Created #{User.count} Users"
