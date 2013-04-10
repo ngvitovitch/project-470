@@ -1,6 +1,6 @@
 class ShoppingListItemsController < ApplicationController
-  # GET /shopping_list_items
-  # GET /shopping_list_items.json
+  before_filter :get_shopping_list_of_item
+
   def index
     @shopping_list_items = ShoppingListItem.all
 
@@ -24,7 +24,8 @@ class ShoppingListItemsController < ApplicationController
   # GET /shopping_list_items/new
   # GET /shopping_list_items/new.json
   def new
-    @shopping_list_item = ShoppingListItem.new
+    @shopping_list_item = @shopping_list.shopping_list_items.new
+    #@shopping_list_item.shopping_list = current_shopping_list
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @shopping_list_item }
@@ -33,13 +34,14 @@ class ShoppingListItemsController < ApplicationController
 
   # GET /shopping_list_items/1/edit
   def edit
-    @shopping_list_item = ShoppingListItem.find(params[:id])
+    #@shopping_list_item = ShoppingListItem.find(params[:id])
   end
 
   # POST /shopping_list_items
   # POST /shopping_list_items.json
   def create
-    @shopping_list_item = ShoppingListItem.new(params[:shopping_list_item])
+    @shopping_list_item = @shopping_list.shopping_list_items.new(params[:shopping_list_item])
+    #@shopping_list_item.shopping_list = current_shopping_list
 
     respond_to do |format|
       if @shopping_list_item.save
@@ -55,7 +57,7 @@ class ShoppingListItemsController < ApplicationController
   # PUT /shopping_list_items/1
   # PUT /shopping_list_items/1.json
   def update
-    @shopping_list_item = ShoppingListItem.find(params[:id])
+    #@shopping_list_item = ShoppingListItem.find(params[:id])
     respond_to do |format|
       if @shopping_list_item.update_attributes(params[:shopping_list_item])
         format.html { redirect_to shopping_list_path(@shopping_list_item.shopping_list_id), notice: 'Shopping list item was successfully updated.' }
@@ -70,13 +72,18 @@ class ShoppingListItemsController < ApplicationController
   # DELETE /shopping_list_items/1
   # DELETE /shopping_list_items/1.json
   def destroy
-    @shopping_list_item = ShoppingListItem.find(params[:id])
-    id = @shopping_list_item.shopping_list_id
+    #@shopping_list_item = ShoppingListItem.find(params[:id])
+    #id = @shopping_list_item.shopping_list_id
     @shopping_list_item.destroy
 
     respond_to do |format|
       format.html { redirect_to shopping_list_path(id)}
       format.json { head :no_content }
     end
+  end
+
+  private 
+  def get_shopping_list_of_item
+  @shopping_list = ShoppingList.find(params[:shopping_list_id])
   end
 end
