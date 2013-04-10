@@ -77,6 +77,18 @@ end
 		create_event(title, i < 2, dwelling)
   end
 
+  #Create 2 messages by random users
+  2.times do |i|
+    time = Time.now - Random.rand(1.week)
+    message = Message.create(
+      body: Faker::Lorem.sentences(3).join,
+      date: time
+    )
+    message.user = dwelling.users.all[Random.rand(dwelling.users.size)]
+    message.dwelling = dwelling
+    message.save
+  end
+  
 	# Create a shopping list 
 	
 	shopping_list = ShoppingList.new(
@@ -86,7 +98,6 @@ end
 	['Eggs', 'Bread', 'Milk'].each do |item_name|
 		shopping_list.shopping_list_items.create(name: item_name)
 	end
-
 end
 
 puts "Created #{User.count} Users"

@@ -74,62 +74,27 @@
   .feed-container
     .inner-body
       .speech-box
-        %textarea#comment-input.text-bubble(placeholder="What do you wanna tell your roomies?")
-        .submit-comment-button.btn.btn-large.btn-inverse
-          Post
+        = form_for Message.new do |message|
+          = message.text_area :body, :class => 'text-bubble', :placeholder => "What do you wanna tell your roomies?", rows: 2;
+          = message.submit "Post", :class => "submit-comment-button btn btn-large btn-inverse"
       .feed-info-container  
         %h3
           Dwelling Feed
-
-        / Dwelling feed post format!
-        .feed-post
-          %ul.media-list
-            %li.media
-              %a.pull-left(href="#")
-                %img.media-object(data-src="holder.js/64x64")
-              .media-body
-                %h4.media-heading
-                  Cris Kedmenec
-                  %small
-                    posted a text
-                  %small(style="float:right; margin-right:5px;")
-                    March 2
-                This be the sample text post!
-        .feed-post
-          %ul.media-list
-            %li.media
-              %a.pull-left(href="#")
-                %img.media-object(data-src="holder.js/64x64")
-              .media-body
-                %h4.media-heading
-                  Cris Kedmenec
-                  %small
-                    posted a text
-                  %small(style="float:right; margin-right:5px;")
-                    March 1
-                This be the sample text post! (the second one!)
-        .feed-post
-          %ul.media-list
-            %li.media
-              %a.pull-left(href="#")
-                %img.media-object(data-src="holder.js/64x64")
-              .media-body
-                %h4.media-heading
-                  Cris Kedmenec
-                  %small
-                    posted a video
-                  %small(style="float:right; margin-right:5px;")
-                    March 1
-                YO. Check out this awesome video..
-              %iframe{class: "video-post", width: "640", height: "360", src: "https://www.youtube.com/embed/ZAhrMa0bJVg?feature=player_detailpage", frameborder: "0"}
-
-
-
-
-
-
-
-
+        - @messages.reverse.each do |message|
+          .feed-post
+            %ul.media-list
+              %li.media
+                %a.pull-left(href="#")
+                  %img.media-object(data-src="holder.js/64x64")
+                .media-body
+                  %h4.media-heading
+                    #{message.user.name}
+                    %small
+                      posted a text
+                    %small(style="float:right; margin-right:5px;")
+                      #{distance_of_time_in_words_to_now message.date} ago
+                  =message.body
+     
     /- @shopping_lists.each do |shopping_list|
     /  %p
     /    = link_to shopping_list.title, shopping_list_path(shopping_list)
