@@ -5,6 +5,7 @@ class Dwelling < ActiveRecord::Base
   has_many :invites
   has_many :bills
   has_many :events
+  has_many :chores
 
   validates_presence_of :name, :owner
 

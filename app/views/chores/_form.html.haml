@@ -14,7 +14,7 @@
     = f.text_area :description
   .field
     = f.label :assigned_user_id
-    = f.number_field :assigned_user_id
+    = f.collection_select :assigned_user_id, @dwelling.users, :id, :name
   / .field
   /   = f.label :dwelling_id
   /   = f.number_field :dwelling_id

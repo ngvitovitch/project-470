@@ -25,7 +25,7 @@ class ChoresController < ApplicationController
   # GET /chores/new.json
   def new
     @chore = Chore.new
-    @chore.dwelling_id = current_dwelling
+    @dwelling = current_dwelling
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,6 +42,7 @@ class ChoresController < ApplicationController
   # POST /chores.json
   def create
     @chore = Chore.new(params[:chore])
+    @dwelling = current_dwelling
     @chore.dwelling = current_dwelling
 
     respond_to do |format|
