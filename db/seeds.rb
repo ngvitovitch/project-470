@@ -47,8 +47,8 @@
 
   # Create events by random users, 3 at random times within the next week
 	# 2 last week
-  5.times do |i|
-		if i > 2
+  5.times do |l|
+		if l > 2
 			time = Time.now - 1.day - Random.rand(1.week)
 		else
 			time = Time.now + Random.rand(1.week)
