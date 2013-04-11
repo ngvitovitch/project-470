@@ -11,12 +11,15 @@ class DashboardController < ApplicationController
     if current_user
       if current_dwelling
         # Show the users dashboard
+        @messages = current_dwelling.messages.newest
+
 				@roommates = current_dwelling.users
+				@shopping_lists = current_dwelling.shopping_lists
+
 				@upcoming_bills = current_dwelling.bills.upcoming
 				@upcoming_events = current_dwelling.events.upcoming
-        @messages = current_dwelling.messages
-				@shopping_lists = current_dwelling.shopping_lists
 				@upcoming_chores = current_dwelling.chores
+
         render :dashboard 
       else
         # The user is logged in, but not a member of a 

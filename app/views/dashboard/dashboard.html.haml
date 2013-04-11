@@ -8,63 +8,37 @@
             Some kind of user profile display
   .left-rail-container
     %ul.nav.nav-list
-      .nav-header-container
-        %li.nav-header
-          %h4{style: "padding:0; margin:0;"}
-            = link_to "Roomies", dwelling_path(current_dwelling)
-        %li.divider{style: "padding:0; margin:0;"}
-        - @roommates.each do |roomate|
-          %li.list-object
-            = link_to roomate.name, user_path(roomate)
-      .nav-header-container
-        %li.nav-header
-          %h4{style: "padding:0; margin:0;"}
-            = link_to 'Bills', bills_path
+      = render 'dashboard/rail_container',
+        header: "Roomies",
+        header_link: current_dwelling,
+        collection: @roommates,
+        row_title: :name
 
-        %li.divider{style: "padding:0; margin:0;"}
-        - @upcoming_bills.each do |bill|
-          %li.list-object
-            %a{href: bill_path(bill), style: "width: 100%;"}
-              %span=bill.name
-              %span.muted.pull-right
-                #{distance_of_time_in_words_to_now bill.date_due} from now
-            %div{style: "clear:both"}
+      = render 'dashboard/rail_container',
+        header: "Bills",
+        header_link: bills_path,
+        collection: @upcoming_bills,
+        row_title: :name,
+        date_method: :date_due
 
-      .nav-header-container
-        %li.nav-header
-          %h4{style: "padding:0; margin:0;"}
-            = link_to 'Events', events_path
+      = render 'dashboard/rail_container',
+        header: "Events",
+        header_link: events_path,
+        collection: @upcoming_events,
+        row_title: :title,
+        date_method: :date
 
-        %li.divider{style: "padding:0; margin:0;"}
-        - @upcoming_events.each do |event|
-          %li.list-object
-            %a{href: event_path(event)}
-              %span=event.title 
-              %span.muted.pull-right
-                - if event.date < Time.now
-                  #{distance_of_time_in_words_to_now event.date} ago
-                - else
-                  #{distance_of_time_in_words_to_now event.date} from now
-              %div{style: "clear:both"}
-      .nav-header-container
-        %li.nav-header
-          %h4{style: "padding:0; margin:0;"}
-            =link_to 'Lists', shopping_lists_path
-        %li.divider{style: "padding:0; margin:0;"}
-        - @shopping_lists.each do |list|
-          %li.list-object
-            %a{href: shopping_list_path(list)}
-              %span=list.title 
+      = render 'dashboard/rail_container',
+        header: "Lists",
+        header_link: shopping_lists_path,
+        collection: @shopping_lists,
+        row_title: :title
 
-      .nav-header-container
-        %li.nav-header
-          %h4{style: "padding:0; margin:0;"}
-            =link_to 'Chores', chores_path
-        %li.divider{style: "padding:0; margin:0;"}
-        - @upcoming_chores.each do |chore|
-          %li.list-object
-            %a{href: chore_path(chore)}
-              %span=chore.name
+      = render 'dashboard/rail_container',
+        header: "Chores",
+        header_link: chores_path,
+        collection: @upcoming_chores,
+        row_title: :name
 
 .span8
 
@@ -79,22 +53,5 @@
       .feed-info-container  
         %h3
           Dwelling Feed
-        - @messages.reverse.each do |message|
-          .feed-post
-            %ul.media-list
-              %li.media
-                %a.pull-left(href="#")
-                  %img.media-object(data-src="holder.js/64x64")
-                .media-body
-                  %h4.media-heading
-                    #{message.user.name}
-                    %small
-                      posted a text
-                    %small(style="float:right; margin-right:5px;")
-                      #{distance_of_time_in_words_to_now message.date} ago
-                  =message.body
-     
-    /- @shopping_lists.each do |shopping_list|
-    /  %p
-    /    = link_to shopping_list.title, shopping_list_path(shopping_list)
-    /%hr
+        - @messages.each do |message|
+          = render 'dashboard/message', message: message
