@@ -33,8 +33,9 @@ group :development do
 	gem 'rvm-capistrano'
   gem 'thin'  # faster web server
   gem 'wirb'  # autocomplete and coloring for rails c
-  gem 'faker' # library for generating fake data (used in the seed)
 end
+
+gem 'faker' # library for generating fake data (used in the seed)
 
 gem 'jquery-rails'
 gem 'bootstrap-datepicker-rails' # javascript datepicker
