@@ -12,7 +12,7 @@ ssh_options[:keys] = [File.join('~/.ssh/amazon_ec2_project_2.pem')] # Key for Ev
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 set :scm, :git
-set :repository, 'git@github.com:everett1992/project-470'
+set :repository, 'git@github.com:railsCloudGroup/project-470'
 set :deploy_via, :remote_cache
 
 ssh_options[:forward_agent] = true
