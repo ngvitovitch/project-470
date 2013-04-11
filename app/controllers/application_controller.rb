@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  # convert times from utc to the odwelling's timezone
+  before_filter :get_dwelling_time_zone 
 
   private
+
+  def get_dwelling_time_zone
+    Time.zone = current_dwelling.time_zone if current_dwelling
+  end
 
   # Creates a session for a users
   def login user
@@ -29,8 +35,11 @@ class ApplicationController < ActionController::Base
 
 
   # Redirect to 404 page
-  def not_found
-    raise ActionController::RoutingError.new('Not Found')
+  def permission_denied
+		respond_to do |format|
+			format.html { render 'application/permission_denied' }
+			format.json { render json: 'Permission Denied' }
+		end
   end
 
 
@@ -48,8 +57,8 @@ class ApplicationController < ActionController::Base
   # Redirect a user to 404 if they are not a member of the dwelling they 
   # are accessing
   def dwelling_member?(dwelling_id)
-    unless current_user.dwelling_id == dwelling_id
-      not_found
+    unless current_user.dwelling_id == dwelling_id.to_i
+      permission_denied
     end
   end
 
@@ -57,8 +66,8 @@ class ApplicationController < ActionController::Base
   # are accessing
   def dwelling_owner?(dwelling_id)
     unless ( current_user.owned_dwelling &&
-            current_user.owned_dwelling.id == dwelling_id )
-      not_found
+            current_user.owned_dwelling.id == dwelling_id.to_i )
+      permission_denied
     end
   end
 

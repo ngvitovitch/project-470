@@ -1,0 +1,29 @@
+%h1 Listing shopping_list_items
+
+%table
+  %tr
+    %th Name
+    %th Quantity
+    %th Obligate
+    %th Obligates
+    %th Status
+    %th Shopping list
+    %th
+    %th
+    %th
+
+  - @shopping_list_items.each do |shopping_list_item|
+    %tr
+      %td= shopping_list_item.name
+      %td= shopping_list_item.quantity
+      %td= shopping_list_item.obligate_id
+      %td= shopping_list_item.obligates
+      %td= shopping_list_item.status
+      %td= shopping_list_item.shopping_list_id
+      %td= link_to 'Show', shopping_list_item
+      %td= link_to 'Edit', edit_shopping_list_item_path(shopping_list_item)
+      %td= link_to 'Destroy', shopping_list_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Shopping list item', new_shopping_list_item_path

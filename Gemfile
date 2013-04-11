@@ -6,8 +6,12 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'mysql2', group: :production
 gem 'aws-sdk'
 
+
+gem 'twitter-bootstrap-rails' 
+gem 'haml'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -18,8 +22,6 @@ group :assets do
   gem 'haml-rails', '>= 0.3.4'
   gem 'coffee-rails', '~> 3.2.1'
 
-  gem 'twitter-bootstrap-rails' 
-
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
 
@@ -27,15 +29,21 @@ group :assets do
 end
 
 group :development do
+	gem 'capistrano'
+	gem 'rvm-capistrano'
   gem 'thin'  # faster web server
   gem 'wirb'  # autocomplete and coloring for rails c
-  gem 'faker' # library for generating fake data (used in the seed)
 end
 
+gem 'faker' # library for generating fake data (used in the seed)
+
 gem 'jquery-rails'
+gem 'bootstrap-datepicker-rails' # javascript datepicker
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
+
+gem 'passenger', :git => 'git@github.com:FooBarWidget/passenger.git'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
@@ -43,8 +51,6 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'

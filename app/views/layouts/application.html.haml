@@ -18,29 +18,38 @@
 
 
   %body
-    .navbar.navbar-fluid-top.navbar-inverse
+    .navbar.navbar-fixed-top.navbar-inverse
       .navbar-inner
-        .container-fluid
+        .container
           %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
           %a.brand(href=root_path)= current_dwelling ? current_dwelling.name : "Roomie"
           .container.nav-collapse
+            - if current_dwelling
+              %ul.nav
+                %li= link_to "Bills", bills_path
+                %li= link_to "Chores", chores_path
+                %li= link_to "Events", events_path
+                %li= link_to "Lists", shopping_lists_path
+                %li= link_to "Messages", messages_path
             %ul.nav.pull-right
               - if current_user
                 %li= link_to "Log out", logout_path
                 %li= link_to current_user.name, user_path(current_user)
               - else
-                %li= link_to "Sign In", login_path
-                %li= link_to "Sign Up", signup_path
-
-    .container-fluid
-
-      .row-fluid
-        .span12
-          = bootstrap_flash
-          = yield
+                %li
+                  %a(href="#myModal" data-toggle="modal")
+                    Sign In
+    .container
+      .row
+        = bootstrap_flash
+        - unless current_user
+          #myModal.modal.hide.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+            .modal-body
+              = render :partial => "sessions/login"
+        = yield
       /%footer
       /  %p &copy; Company 2013
     /

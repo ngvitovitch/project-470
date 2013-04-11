@@ -1,0 +1,19 @@
+= form_for @event do |f|
+  - if @event.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
+      %ul
+        - @event.errors.full_messages.each do |msg|
+          %li= msg
+
+  .controls
+    = f.text_field :title, placeholder: 'Title', class: 'input-block-level'
+  .controls
+    = f.text_area :description, rows: 5, class: 'input-block-level'
+  .controls
+    = f.label :when
+    = calendar_datepicker :date, f, class: 'input-small'
+  .controls
+    = f.time_select :date, { ignore_date: true, ampm: true, minute_step: 15 }, class: 'input-small'
+  .controls
+    = f.submit 'Save'

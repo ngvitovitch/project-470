@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @shopping_list_item.name
+%p
+  %b Quantity:
+  = @shopping_list_item.quantity
+%p
+  %b Obligate:
+  = @shopping_list_item.obligate_id
+%p
+  %b Obligates:
+  = @shopping_list_item.obligates
+%p
+  %b Status:
+  = @shopping_list_item.status
+%p
+  %b Shopping list:
+  = @shopping_list_item.shopping_list_id
+
+= link_to 'Edit', edit_shopping_list_item_path(@shopping_list_item)
+\|
+= link_to 'Back', shopping_list_path(id: @shopping_list_item.shopping_list_id)

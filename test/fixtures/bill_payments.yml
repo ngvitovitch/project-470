@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  bill: 
+  amount: 1.5
+  method: MyString
+
+two:
+  user: 
+  bill: 
+  amount: 1.5
+  method: MyString

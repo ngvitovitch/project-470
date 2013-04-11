@@ -1,0 +1,14 @@
+%h1 Here's everything paid to this bill
+
+%table
+  %tr
+    %th Date
+    %th Amount
+    %th Method
+    %th Bill
+  - @bill_payments.each do |payment|
+    %tr
+      %td= payment.created_at.to_s
+      %td= number_to_currency(payment.amount)
+      %td= payment.method
+      %td= payment.bill.name
