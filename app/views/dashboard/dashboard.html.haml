@@ -1,43 +1,57 @@
-.span8
-  %h1 Here be the dwelling homepage 
-  Messages go here
-
 .span4
-  .well
-    %h3= link_to "Roomates", dwelling_path(current_dwelling)
-    %ul.nav.nav-pills.nav-stacked
-      - @roommates.each do |roomate|
-        %li
-          = link_to roomate.name, user_path(roomate)
-    
-  .well
-    %h3= link_to 'Upcoming Bills', bills_path
-    %ul.nav.nav-pills.nav-stacked
-      - @upcoming_bills.each do |bill|
-        %li
-          %a{href: bill_path(bill)}
-            #{bill.name} 
-            %span.muted.pull-right
-              #{distance_of_time_in_words_to_now bill.date_due} from now
+  .left-rail-container
+    %ul.nav.nav-list
+      .nav-header-container{style: 'text-align: center;'}
+        %img(data-src="holder.js/80x80" style="position: relative; padding: 5px 0; display: inline-block")
+        .user-info  
+          %h5
+            Some kind of user profile display
+  .left-rail-container
+    %ul.nav.nav-list
+      = render 'dashboard/rail_container',
+        header: "Roomies",
+        header_link: current_dwelling,
+        collection: @roommates,
+        row_title: :name
 
-  .well
-    %h3
-      = link_to 'Upcoming Events', events_path
-    %ul.nav.nav-pills.nav-stacked
-      - @upcoming_events.each do |event|
-        %li
-          %a{href: event_path(event)}
-            #{event.title} 
-            %span.muted.pull-right
-              - if event.date < Time.now
-                #{distance_of_time_in_words_to_now event.date} ago
-              - else
-                #{distance_of_time_in_words_to_now event.date} from now
+      = render 'dashboard/rail_container',
+        header: "Bills",
+        header_link: bills_path,
+        collection: @upcoming_bills,
+        row_title: :name,
+        date_method: :date_due
 
-  .well
-    %h3= link_to 'Shopping Lists', shopping_lists_path
-    Shopping lists go here
-    /- @shopping_lists.each do |shopping_list|
-    /  %p
-    /    = link_to shopping_list.title, shopping_list_path(shopping_list)
-    /%hr
+      = render 'dashboard/rail_container',
+        header: "Events",
+        header_link: events_path,
+        collection: @upcoming_events,
+        row_title: :title,
+        date_method: :date
+
+      = render 'dashboard/rail_container',
+        header: "Lists",
+        header_link: shopping_lists_path,
+        collection: @shopping_lists,
+        row_title: :title
+
+      = render 'dashboard/rail_container',
+        header: "Chores",
+        header_link: chores_path,
+        collection: @upcoming_chores,
+        row_title: :name
+
+.span8
+
+  %h1{style: 'text-align:left; color: #4F4F4F;'}
+    =current_dwelling.name
+  .feed-container
+    .inner-body
+      .speech-box
+        = form_for Message.new do |message|
+          = message.text_area :body, :class => 'text-bubble', :placeholder => "What do you wanna tell your roomies?", rows: 2;
+          = message.submit "Post", :class => "submit-comment-button btn btn-large btn-inverse"
+      .feed-info-container  
+        %h3
+          Dwelling Feed
+        - @messages.each do |message|
+          = render 'dashboard/message', message: message
