@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(:version => 20130408224959) do
   add_index "invites", ["dwelling_id"], :name => "index_invites_on_dwelling_id"
   add_index "invites", ["token"], :name => "index_invites_on_token"
 
+  create_table "messages", :force => true do |t|
+    t.string   "body"
+    t.date     "date"
+    t.integer  "dwelling_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "shopping_list_items", :force => true do |t|
     t.string   "name"
     t.integer  "quantity"

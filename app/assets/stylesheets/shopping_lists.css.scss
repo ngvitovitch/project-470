@@ -10,7 +10,7 @@ body {
   list-style: none;
   display: inline-block;
   width: 300px;
-  background-color: #FBF8A9;
+  background-color: #F5F5F5;
   position: relative;
   z-index: 0;
   text-align: left;
@@ -20,7 +20,7 @@ body {
   box-shadow: 0 0 10px #999;
 
   a {
-		color: black;	
+		color: #222222;	
 		text-decoration: none;
 	}
 
@@ -30,14 +30,14 @@ body {
 
 	a:hover {
 		text-decoration: none;
-		color: rgb(120,82,42)
+		color: #5F5F5F;
 	}  
 
   .modified-date-container{
 	  position: relative;
 	  width: 100%;
 	  top: 0;
-	  color: #A75039;
+	  color: #5F5F5F;
 	}
 
 	.modified-date-container > span{
@@ -66,7 +66,7 @@ body {
 	}
 
 	.shopping-list-header{
-	  background: linear-gradient(#6E4E42, #392722);
+	  background: linear-gradient(#5F5F5F,#222222);
 	  line-height: 20px;
 	  color: white;
 	  display: inline-block;
@@ -86,7 +86,7 @@ body {
 	}
 
 	li {
-	  border-bottom: 1px solid #B4BCB4;
+	  border-bottom: 1px solid #E3E3E3;
 	  padding: 8px 10px 2px 35px;
 	  text-decoration: none;
 	  word-wrap: break-word;
@@ -102,8 +102,8 @@ body {
 	  position: absolute;
 	  left: 25px;
 	  top: 0px;
-	  border-left: 1px solid #B99369;
-	  border-right: 1px solid #B99369;
+	  border-left: 1px solid red;
+	  border-right: 1px solid red;
 	  width: 1px;
 	  height: 100%;
 	}
@@ -123,20 +123,20 @@ body {
 	position: absolute;
 	right: 8px;
 	display: inline-block;
-	border-radius: 20px;
+	border-radius: 3px;
 	font-size: 25px;
 	vertical-align: middle;
 	line-height: 15px;
 	padding: 0 3px 4px 3px;
-	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-	background-color: #FBF8A9;
+	border-color: #E3E3E3;
+	background-color: #F5F5F5;
   border: 1px solid;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
   color: #533B32;
 }
 .add-item-btn:hover{
-	background-color: #BFBC6B;
-  color: #533B32;
+	background-color: #EFEFEF;
+  color: black;
   text-decoration: none;
 }
 
