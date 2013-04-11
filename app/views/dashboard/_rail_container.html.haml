@@ -1,0 +1,16 @@
+.nav-header-container
+  %li.nav-header
+    %h4{style: "padding:0; margin:0;"}
+      = link_to header, header_link
+  %li.divider{style: "padding:0; margin:0;"}
+  - collection.each do |item|
+    %li.list-object
+      %a{href: url_for(item), style: "width: 100%;"}
+        %span=item.method(row_title).call
+        - if date_method ||= nil
+          %span.muted.pull-right
+            - if item.method(date_method).call.to_time < Time.now
+              #{distance_of_time_in_words_to_now item.method(date_method).call} ago
+            - else
+              #{distance_of_time_in_words_to_now item.method(date_method).call} from now
+      %div{style: "clear:both"}
