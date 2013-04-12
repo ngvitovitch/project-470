@@ -1,13 +1,18 @@
-.message-container
-  %h4
-    = message.user.name
-    %small
-      = message.created_at
-  .message-details
-    %span.body
-      %pre= message.body
-  .show-message-options
-    = link_to 'Show', message_path(message), class: 'btn btn-success btn-small'
-    = link_to 'Edit', edit_message_path(message), class: 'btn btn-warning btn-small'
-    = link_to 'Destroy', message_path(message), :method => :delete , :data => {:confirm => 'Are you sure?'}, class: 'btn btn-danger btn-small'
-%br
+.feed-post
+  %ul.media-list
+    %li.media
+      %a.pull-left(href="#")
+        %img.media-object(data-src="holder.js/64x64")
+      .media-body
+        %h4.media-heading
+          #{message.user.name}
+          %small
+            posted a text
+          %small(style="float:right; margin-right:5px;")
+            #{distance_of_time_in_words_to_now message.created_at} ago
+            - if current_user == message.user
+              = link_to edit_message_path(message) do
+                %i.icon-edit
+              = link_to(message, method: :delete) do
+                %i.icon-remove
+        =message.body
