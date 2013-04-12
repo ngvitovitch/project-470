@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = current_dwelling.messages.order('date DESC')
+    @messages = current_dwelling.messages.order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,7 +43,6 @@ class MessagesController < ApplicationController
     @message = Message.new(params[:message])
     @message.dwelling = current_dwelling
     @message.user = current_user
-    @message.date = Time.now
 
 
     respond_to do |format|

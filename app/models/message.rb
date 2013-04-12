@@ -1,7 +1,7 @@
 class Message < ActiveRecord::Base
 	scope :newest, order('created_at DESC')
 
-  attr_accessible :body, :date
+  attr_accessible :body
   belongs_to :dwelling
   belongs_to :user
 
@@ -9,6 +9,5 @@ class Message < ActiveRecord::Base
   validates :dwelling, :presence => true
 
   validates :body, :presence => true
-  validates :date, :presence => true
 
 end

@@ -85,11 +85,11 @@ ActiveRecord::Schema.define(:version => 20130408224959) do
 
   create_table "messages", :force => true do |t|
     t.string   "body"
-    t.date     "date"
     t.integer  "dwelling_id"
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.date     "date"
   end
 
   create_table "shopping_list_items", :force => true do |t|
