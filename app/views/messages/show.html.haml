@@ -1,7 +1,10 @@
-%h1 Viewing Message
+.body-container
+  .feed-container
+    .inner-body
+      .feed-info-container  
+        %br
+        = render 'messages/details', message: @message
 
-= render 'messages/details', message: @message
-
-= link_to 'Edit', @message
-\|
-= link_to 'Back', messages_path
+  = link_to 'Edit', @message
+  \|
+  = link_to 'Back', messages_path

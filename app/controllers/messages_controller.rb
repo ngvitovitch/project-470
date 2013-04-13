@@ -1,8 +1,11 @@
 class MessagesController < ApplicationController
+	before_filter :get_dwelling_and_message
+	before_filter :ensure_message_belongs_to_current_user, only: [:edit, :update, :destroy]
+
   # GET /messages
   # GET /messages.json
   def index
-    @messages = current_dwelling.messages.order('date DESC')
+    @messages = @dwelling.messages.order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +16,6 @@ class MessagesController < ApplicationController
   # GET /messages/1
   # GET /messages/1.json
   def show
-    @message = Message.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @message }
@@ -34,7 +35,6 @@ class MessagesController < ApplicationController
 
   # GET /messages/1/edit
   def edit
-    @message = Message.find(params[:id])
   end
 
   # POST /messages
@@ -43,7 +43,6 @@ class MessagesController < ApplicationController
     @message = Message.new(params[:message])
     @message.dwelling = current_dwelling
     @message.user = current_user
-    @message.date = Time.now
 
 
     respond_to do |format|
@@ -60,8 +59,6 @@ class MessagesController < ApplicationController
   # PUT /messages/1
   # PUT /messages/1.json
   def update
-    @message = Message.find(params[:id])
-
     respond_to do |format|
       if @message.update_attributes(params[:message])
         format.html { redirect_to @message, notice: 'Message was successfully updated.' }
@@ -76,12 +73,24 @@ class MessagesController < ApplicationController
   # DELETE /messages/1
   # DELETE /messages/1.json
   def destroy
-    @message = Message.find(params[:id])
     @message.destroy
 
     respond_to do |format|
-      format.html { redirect_to messages_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def get_dwelling_and_message
+    @dwelling = current_dwelling
+    if params[:id]
+      @message = @dwelling.messages.find(params[:id])
+    end
+  end
+
+	def ensure_message_belongs_to_current_user
+		permission_denied unless current_user == @message.user
+	end
 end
