@@ -4,7 +4,7 @@
 
 .shopping-list
   .shopping-list-header
-    = @shopping_list.title
+    = @shopping_list.name
     = link_to '+', new_shopping_list_shopping_list_item_path(shopping_list_id: @shopping_list.id), class: 'add-item-btn'
   .modified-date-container
     %span.modified-at-days-ago 
@@ -26,6 +26,6 @@
 %br
 %br
 
-= link_to 'Change title', edit_shopping_list_path(@shopping_list)
+= link_to 'Change Name', edit_shopping_list_path(@shopping_list)
 \|
 = link_to 'Back to lists', shopping_lists_path
