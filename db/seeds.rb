@@ -41,7 +41,7 @@ def create_bill(name, dwelling)
 end
 
 def create_shopping_list(name, items, dwelling)
-	shopping_list = dwelling.shopping_lists.create(title: name)
+	shopping_list = dwelling.shopping_lists.create(name: name)
 	items.each do |item_name|
 		shopping_list.shopping_list_items.create(name: item_name)
 	end
@@ -58,7 +58,7 @@ def create_chore(name, dwelling)
 	return chore
 end
 
-def create_event(title, past, dwelling)
+def create_event(name, past, dwelling)
 	if past
 		time = Time.now - 1.day - Random.rand(1.week)
 	else
@@ -66,7 +66,7 @@ def create_event(title, past, dwelling)
 	end
 
 	event = Event.create(
-		title: title,
+		name: name,
 		description: Faker::Lorem.sentences(3).join,
 		date: time
 	)
@@ -74,6 +74,13 @@ def create_event(title, past, dwelling)
 	event.dwelling = dwelling
 	event.save
 	return event
+end
+
+def create_message(dwelling)
+	message = dwelling.messages.new(body: Faker::Lorem.sentences(3).join)
+	message.created_at = Time.now - Random.rand(1.week)
+	message.user = dwelling.users.all[Random.rand(dwelling.users.size)]
+	message.save
 end
 
 # Create 10 dwellings with owners
@@ -91,20 +98,13 @@ end
 
   # Create events by random users, 3 at random times within the next week
 	# 2 last week
-  ['Game Night', 'Tacos!', 'Poker Night', 'Game of Thrones', 'Hack-a-thon'].each_with_index do |title, i|
-		create_event(title, i < 2, dwelling)
+  ['Game Night', 'Tacos!', 'Poker Night', 'Game of Thrones', 'Hack-a-thon'].each_with_index do |name, i|
+		create_event(name, i < 2, dwelling)
   end
 
   #Create 2 messages by random users
   2.times do |i|
-    time = Time.now - Random.rand(1.week)
-    message = Message.create(
-      body: Faker::Lorem.sentences(3).join,
-      date: time
-    )
-    message.user = dwelling.users.all[Random.rand(dwelling.users.size)]
-    message.dwelling = dwelling
-    message.save
+		create_message(dwelling)
   end
   
 	# Create a shopping list 
