@@ -39,8 +39,8 @@ class ChoresController < ApplicationController
   # POST /chores
   # POST /chores.json
   def create
-    @chore = Chore.new(params[:chore])
-    @chore.dwelling = @dwelling
+    @chore = @dwelling.chores.build(params[:chore])
+    @chore.owner = current_user
 
     respond_to do |format|
       if @chore.save

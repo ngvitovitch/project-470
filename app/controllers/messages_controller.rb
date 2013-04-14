@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(params[:message])
     @message.dwelling = current_dwelling
-    @message.user = current_user
+    @message.owner = current_user
 
 
     respond_to do |format|
@@ -91,6 +91,6 @@ class MessagesController < ApplicationController
   end
 
 	def ensure_message_belongs_to_current_user
-		permission_denied unless current_user == @message.user
+		permission_denied unless current_user == @message.owner
 	end
 end

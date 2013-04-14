@@ -46,7 +46,7 @@
   # POST /events.json
   def create
     @event = @dwelling.events.build(params[:event])
-    @event.user = current_user
+    @event.owner = current_user
 
     respond_to do |format|
       if @event.save

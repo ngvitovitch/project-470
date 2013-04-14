@@ -1,13 +1,11 @@
-class Message < ActiveRecord::Base
-	scope :newest, order('created_at DESC')
-
+class Message < DwellingItem
+	# Accessible Attributes
   attr_accessible :body
-  belongs_to :dwelling
-  belongs_to :user
 
-  validates :user, :presence => true
-  validates :dwelling, :presence => true
-
+	# Validations
   validates :body, :presence => true
+
+	# Scopes
+	scope :newest, order('created_at DESC')
 
 end
