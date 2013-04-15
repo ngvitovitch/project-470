@@ -5,6 +5,9 @@ class Message < DwellingItem
 	# Validations
   validates :body, :presence => true
 
+	# Callbacks
+	skip_callback :create, :after, :notify
+
 	# Scopes
 	scope :newest, order('created_at DESC')
 

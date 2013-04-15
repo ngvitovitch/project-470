@@ -25,7 +25,7 @@ class MessagesController < ApplicationController
   # GET /messages/new
   # GET /messages/new.json
   def new
-    @message = Message.new
+    @message = @dwelling.posts.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,8 +40,7 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(params[:message])
-    @message.dwelling = current_dwelling
+    @message = @dwelling.posts.new(params[:message])
     @message.owner = current_user
 
 

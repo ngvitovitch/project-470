@@ -85,7 +85,13 @@ def create_event(name, past, dwelling)
 end
 
 def create_message(dwelling)
-	message = dwelling.messages.build(body: Faker::Lorem.sentences(3).join)
+	#message = Post.new(body: Faker::Lorem.sentences(3).join)
+	#message.created_at = Time.now - Random.rand(1.week)
+	#message.owner = dwelling.users.all[Random.rand(dwelling.users.size)]
+	#message.dwelling = dwelling
+	#message.save
+
+	message = dwelling.posts.build(body: Faker::Lorem.sentences(3).join)
 	message.created_at = Time.now - Random.rand(1.week)
 	message.owner = dwelling.users.all[Random.rand(dwelling.users.size)]
 	message.save

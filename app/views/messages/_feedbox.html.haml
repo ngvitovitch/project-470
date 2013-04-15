@@ -8,4 +8,13 @@
       %h3
         Dwelling Feed
       - messages.each do |message|
-        = render 'messages/details', message: message
+        - if message.is_a? Post
+          = render 'messages/details', message: message
+        - else
+          .feed-post
+            %ul.media-list
+              %li.media
+                .media-body
+                  %small(style="float:right; margin-right:5px;")
+                    #{distance_of_time_in_words_to_now message.created_at} ago
+                  =message.body

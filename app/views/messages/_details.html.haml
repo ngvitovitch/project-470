@@ -13,6 +13,6 @@
             - if current_user == message.owner
               = link_to edit_message_path(message) do
                 %i.icon-edit
-              = link_to(message, method: :delete) do
+              = link_to(message_path(message), method: :delete) do
                 %i.icon-remove
         =message.body
