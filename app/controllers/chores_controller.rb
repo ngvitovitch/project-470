@@ -1,5 +1,6 @@
 class ChoresController < ApplicationController
   before_filter :get_dwelling_and_chore
+	before_filter :ensure_chore_belongs_to_current_user, only: [:edit, :update, :destroy]
 
   # GET /chores
   # GET /chores.json
@@ -86,4 +87,8 @@ class ChoresController < ApplicationController
       @chore = @dwelling.chores.find(params[:id])
     end
   end
+
+	def ensure_chore_belongs_to_current_user
+		permission_denied unless current_user == @chore.owner
+	end
 end

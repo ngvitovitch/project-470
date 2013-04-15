@@ -1,5 +1,6 @@
 class ShoppingListsController < ApplicationController
   before_filter :get_dwelling_shopping_list
+	before_filter :ensure_shopping_list_belongs_to_current_user, only: [:edit, :update, :destroy]
 
 
   # GET /shopping_lists
@@ -79,12 +80,16 @@ class ShoppingListsController < ApplicationController
     end
   end
 
-  private
+	private
 
-    def get_dwelling_shopping_list
-    @dwelling = current_dwelling
-    if params[:id]
-      @shopping_list = @dwelling.shopping_lists.find(params[:id])
-    end
-  end
+	def get_dwelling_shopping_list
+		@dwelling = current_dwelling
+		if params[:id]
+			@shopping_list = @dwelling.shopping_lists.find(params[:id])
+		end
+	end
+
+	def ensure_shopping_list_belongs_to_current_user
+		permission_denied unless current_user == @shopping_list.owner
+	end
 end

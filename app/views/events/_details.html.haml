@@ -2,6 +2,8 @@
   %h4
     = event.name
     %small - #{event.date.strftime('%D')}
+    %small.pull-right
+      = event.owner.name
   .event-details
     %span.description
       %pre= event.description
@@ -10,6 +12,7 @@
     .show-event-options
       .contents
         = link_to 'Show', event_path(event), class: 'btn btn-success btn-small'
-        = link_to 'Edit', edit_event_path(event), class: 'btn btn-warning btn-small'
-        = link_to 'Destroy', event_path(event), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-small'
+        - if current_user == event.owner
+          = link_to 'Edit', edit_event_path(event), class: 'btn btn-warning btn-small'
+          = link_to 'Destroy', event_path(event), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-small'
 %br

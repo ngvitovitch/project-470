@@ -1,5 +1,6 @@
 class BillsController < ApplicationController
   before_filter :get_dwelling_and_bill
+	before_filter :ensure_bill_belongs_to_current_user, only: [:edit, :update, :destroy]
 
   # GET /bills
   # GET /bills.json
@@ -85,10 +86,16 @@ class BillsController < ApplicationController
     end
   end
 
+	private
+
   def get_dwelling_and_bill
     @dwelling = current_dwelling
     if params[:id]
       @bill = @dwelling.bills.find(params[:id])
     end
   end
+
+	def ensure_bill_belongs_to_current_user
+		permission_denied unless current_user == @bill.owner
+	end
 end

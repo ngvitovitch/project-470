@@ -1,5 +1,6 @@
   class EventsController < ApplicationController
   before_filter :get_dwelling_and_event
+	before_filter :ensure_event_belongs_to_current_user, only: [:edit, :update, :destroy]
 
 
   # GET /events
@@ -92,4 +93,8 @@
       @event = @dwelling.events.find(params[:id])
     end
   end
+
+	def ensure_event_belongs_to_current_user
+		permission_denied unless current_user == @event.owner
+	end
 end
