@@ -4,6 +4,7 @@
       .feed-info-container  
         %br
         = render 'posts/details', post: @post
+        = render 'comments/form', dwelling_item: @post, comment: @post.comments.build
 
   = link_to 'Edit', @post
   \|
