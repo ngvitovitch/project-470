@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :events, :foreign_key => 'owner_id'
   has_many :chores, :foreign_key => 'owner_id'
   has_many :shopping_lists, :foreign_key => 'owner_id'
+  has_many :comments, :foreign_key => 'owner_id'
 
 	# message has the subtype post and notification
 	# there might be a way to simplify these lines

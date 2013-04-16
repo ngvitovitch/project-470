@@ -10,6 +10,7 @@ class Dwelling < ActiveRecord::Base
   has_many :events
   has_many :chores
   has_many :shopping_lists
+  has_many :comments
 	
 	# message has the subtype post and notification
 	# there might be a way to simplify these lines

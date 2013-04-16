@@ -6,6 +6,8 @@ class DwellingItem < ActiveRecord::Base
   belongs_to :dwelling
   belongs_to :owner, :class_name => 'User'
 
+	has_many :comments, :as => :dwelling_item
+
 	# Validations
   validates :dwelling, :presence => true
   validates :owner, :presence => true
