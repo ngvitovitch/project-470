@@ -13,6 +13,13 @@
   %b Assigned user:
   = @chore.assigned_user.name
 
-= link_to 'Edit', edit_chore_path(@chore)
-\|
-= link_to 'Back', chores_path
+.body-container
+  .feed-container
+    .inner-body
+      .feed-info-container  
+        %br
+        = render 'comments/all', dwelling_item: @chore 
+
+  = link_to 'Edit', edit_chore_path(@chore)
+  \|
+  = link_to 'Back', chores_path

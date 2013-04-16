@@ -10,5 +10,5 @@
       - messages.each do |message|
         - if message.is_a? Post
           = render 'posts/details', post: message
-        - else
+        - elsif message.is_a? Notification
           = render 'notifications/details', notification: message

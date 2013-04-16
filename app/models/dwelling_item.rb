@@ -16,10 +16,11 @@ class DwellingItem < ActiveRecord::Base
 	after_create :notify
 
 	def notify
-		message = self.dwelling.notifications.build(
-			body: "#{self.owner.name} created a new #{self.class}"
+		notification = self.dwelling.notifications.build(
+			body: "created a new"
 		)
-		message.owner = self.owner
-		message.save
+		notification.dwelling_item = self
+		notification.owner = self.owner
+		notification.save
 	end
 end

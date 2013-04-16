@@ -7,9 +7,9 @@
       /= link_to 'Back to [dwelling item]', @comment.dwelling_item.class
       .feed-info-container  
         %br
-        = render 'details', comment: @comment
+        = render 'comments/details', comment: @comment
 
       .feed-info-container  
         %br
-        = render 'all', dwelling_item: @comment
+        = render 'comments/all', dwelling_item: @comment
 
