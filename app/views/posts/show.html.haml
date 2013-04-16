@@ -3,9 +3,8 @@
     .inner-body
       .feed-info-container  
         %br
-        = render 'posts/details', post: @post
-        = render 'comments/form', dwelling_item: @post, comment: @post.comments.build
+        = render 'details', post: @post
 
-  = link_to 'Edit', @post
-  \|
-  = link_to 'Back', posts_path
+      .feed-info-container  
+        %br
+        = render 'comments/all', dwelling_item: @post

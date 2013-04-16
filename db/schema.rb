@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20130415224724) do
     t.integer  "dwelling_id"
     t.integer  "owner_id"
     t.integer  "dwelling_item_id"
-    t.integer  "dwelling_item_type"
+    t.string   "dwelling_item_type"
     t.text     "body"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false

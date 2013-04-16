@@ -1,2 +1,15 @@
-= render 'comments/details', comment: @comment
-= render 'comments/form', dwelling_item: @comment, comment: @comment.comments.build
+.body-container
+  .feed-container
+    .inner-body
+      = link_to 'View Parent', @comment.dwelling_item
+
+      / link back to resource index. 
+      /= link_to 'Back to [dwelling item]', @comment.dwelling_item.class
+      .feed-info-container  
+        %br
+        = render 'details', comment: @comment
+
+      .feed-info-container  
+        %br
+        = render 'all', dwelling_item: @comment
+
