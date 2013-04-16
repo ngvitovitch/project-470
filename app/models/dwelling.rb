@@ -2,7 +2,7 @@ class Dwelling < ActiveRecord::Base
 	# Accessible Attributes
   attr_accessible :name, :owner, :time_zone
 
-	# Accessible Attributes
+	# Relations
   belongs_to :owner, :class_name => 'User'
   has_many :users
   has_many :invites
