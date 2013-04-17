@@ -25,14 +25,14 @@
         header: "Events",
         header_link: events_path,
         collection: @upcoming_events,
-        row_title: :title,
+        row_title: :name,
         date_method: :date
 
       = render 'dashboard/rail_container',
         header: "Lists",
         header_link: shopping_lists_path,
         collection: @shopping_lists,
-        row_title: :title
+        row_title: :name
 
       = render 'dashboard/rail_container',
         header: "Chores",
