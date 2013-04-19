@@ -23,6 +23,29 @@ class Dwelling < ActiveRecord::Base
 
 	# Callbacks
   after_save :ensure_owner_has_this_dwelling
+	after_create :create_sns_topic
+	after_destroy :delete_sns_topic
+
+	def topic
+		sns = AWS::SNS.new
+		return sns.topics[topic_name]
+	end
+	private
+
+	def topic_name
+		return "#{id}_#{name.gsub(/ /, '_')}"
+	end
+
+	def create_sns_topic
+		sns = AWS::SNS.new
+		puts topic_name
+		sns.topics.create(topic_name)
+	end
+
+	def destroy_sns_topic
+		sns = AWS::SNS.new
+		sns.topics[topic_name].delete
+	end
 
   def ensure_owner_has_this_dwelling
     self.owner.dwelling = self
