@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419184437) do
+ActiveRecord::Schema.define(:version => 20130420033659) do
 
   create_table "bill_payments", :force => true do |t|
     t.integer  "user_id"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(:version => 20130419184437) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "dwelling_id"
+    t.string   "cellphone"
   end
 
   add_index "users", ["dwelling_id"], :name => "index_users_on_dwelling_id"

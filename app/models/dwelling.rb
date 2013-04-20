@@ -49,6 +49,7 @@ class Dwelling < ActiveRecord::Base
 	def create_sns_topic
 		sns = AWS::SNS.new
 		@topic = sns.topics.create(name.gsub(/ /, '_'))
+		@topic.display_name = name
 		self.topic_arn = topic.arn
 	end
 

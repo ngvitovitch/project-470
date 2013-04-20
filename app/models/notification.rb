@@ -10,11 +10,14 @@ class Notification < Message
 	private
 
 	def publish_to_sns
-		dwelling.topic.publish(
-			"""
-			Roomie Notification:
-			#{owner.name} #{body} #{dwelling_item.class}.
-			""" 
+		dwelling.topic.publish( "#{owner.name} #{body} #{dwelling_item.class}.",
+													 :subject => "Roomie Notification"
+													 :email => 
+													 """
+													 Roomie Notification:
+													 #{owner.name} #{body} #{dwelling_item.class}
+
+													 """
 		)
 	end
 end
