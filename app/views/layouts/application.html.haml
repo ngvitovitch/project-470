@@ -44,12 +44,19 @@
                     Sign In
     .container
       .row
-        = bootstrap_flash
         - unless current_user
           #myModal.modal.hide.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
             .modal-body
               = render :partial => "sessions/login"
-        = yield
+        = bootstrap_flash
+        - if current_dwelling
+          .span4
+            = render 'application/sidebar'
+          .span8
+            = yield
+        - else
+          .span12
+            = yield
       /%footer
       /  %p &copy; Company 2013
     /
