@@ -26,8 +26,25 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true
   has_secure_password
 
+	# Callbacks
+	before_save :update_subscriptions
+
   def name
     return "#{first_name} #{last_name}"
   end
+
+	private
+
+	# Subscripe user to dwellings topic when they join the dwelling
+	#
+	# This doesn't delete old subscriptions because at this time users can't
+	# switch dwellings.
+	def update_subscriptions
+		if dwelling_id_changed?
+
+			# Create new subscription
+			dwelling.topic.subscribe(email)
+		end
+	end
 
 end

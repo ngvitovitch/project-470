@@ -32,6 +32,7 @@ class Dwelling < ActiveRecord::Base
 		return @topic ||= get_topic
 	end
 
+	private
 	def get_topic
 		sns = AWS::SNS.new
 		if topic_arn
@@ -44,8 +45,6 @@ class Dwelling < ActiveRecord::Base
 			@topic = nil
 		end
 	end
-
-	private
 
 	def create_sns_topic
 		sns = AWS::SNS.new
