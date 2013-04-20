@@ -1,5 +1,6 @@
 class Dwelling < ActiveRecord::Base
 	# Accessible Attributes
+	attr_accessor :topic
   attr_accessible :name, :owner, :time_zone
 
 	# Relations
@@ -23,6 +24,38 @@ class Dwelling < ActiveRecord::Base
 
 	# Callbacks
   after_save :ensure_owner_has_this_dwelling
+
+	before_create :create_sns_topic, :if => :valid?
+	after_destroy :delete_sns_topic
+
+	def topic
+		return @topic ||= get_topic
+	end
+
+	private
+	def get_topic
+		sns = AWS::SNS.new
+		if topic_arn
+			begin
+				@topic = sns.topics[topic_arn]
+			rescue AWS::SNS::Errors::Base => error
+				@topic = nil
+			end
+		else
+			@topic = nil
+		end
+	end
+
+	def create_sns_topic
+		sns = AWS::SNS.new
+		@topic = sns.topics.create(name.gsub(/ /, '_'))
+		@topic.display_name = name
+		self.topic_arn = topic.arn
+	end
+
+	def delete_sns_topic
+		topic.delete if topic
+	end
 
   def ensure_owner_has_this_dwelling
     self.owner.dwelling = self
