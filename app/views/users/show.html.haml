@@ -1,5 +1,8 @@
 %p#notice= notice
 
+- if current_user == @user
+  = link_to 'Settings', account_settings_user_path, class: 'btn'
+
 %p
   %b First name:
   = @user.first_name
@@ -10,4 +13,3 @@
   %b Email:
   = @user.email
 
-= link_to 'Edit', edit_user_path(@user)

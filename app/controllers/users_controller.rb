@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
+	layout Proc.new { |controller| current_dwelling ? 'dwelling_layout' : 'application' }
+	before_filter :load_upcoming_items, if: :current_dwelling
+
   # Only a user can see their stuff
-  before_filter :is_self?, except: [:new, :create]
+  before_filter :is_self?, only: :destroy
 
   # GET /users/:id
   def show

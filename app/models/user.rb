@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
+	attr_accessor :old_password
 	# Accessible Attributes
-  attr_accessible :email, :first_name, :cellphone, :last_name, :password, :password_confirmation, :dwelling_id
+  attr_accessible :email, :first_name, :cellphone, :last_name, :password, :old_password, :password_confirmation, :dwelling_id
 
 	# Relations
   has_one :owned_dwelling, :class_name => 'Dwelling', :foreign_key => 'owner_id'
