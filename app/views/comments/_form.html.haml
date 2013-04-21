@@ -5,6 +5,6 @@
       %ul
         - comment.errors.full_messages.each do |msg|
           %li= msg
-  .speech-box
+  .comment-speech-box
     = f.text_area :body, rows: 1, :id => 'comment-input';
-    = f.submit "Reply", :class => "submit-comment-button btn btn-large btn-inverse"
+    = f.submit "Reply", :class => "submit-comment-button btn btn-inverse"
