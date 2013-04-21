@@ -49,11 +49,11 @@
             .modal-body
               = render :partial => "sessions/login"
         = bootstrap_flash
-        - if current_dwelling
+        - if content_for?(:sidebar)
           .span4
-            = render 'application/sidebar'
+            = yield(:sidebar)
           .span8
-            = yield
+            = yield(:content)
         - else
           .span12
             = yield

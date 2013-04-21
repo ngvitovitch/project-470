@@ -4,18 +4,9 @@ class ApplicationController < ActionController::Base
 
   # convert times from utc to the odwelling's timezone
   before_filter :get_dwelling_time_zone 
-	before_filter :load_upcoming, :if => :current_dwelling
 
   private
 
-	def load_upcoming
-		@roommates = current_dwelling.users
-		@shopping_lists = current_dwelling.shopping_lists
-
-		@upcoming_bills = current_dwelling.bills.upcoming
-		@upcoming_events = current_dwelling.events.upcoming
-		@upcoming_chores = current_dwelling.chores
-	end
 
   def get_dwelling_time_zone
     Time.zone = current_dwelling.time_zone if current_dwelling
@@ -82,6 +73,15 @@ class ApplicationController < ActionController::Base
       permission_denied
     end
   end
+
+	def load_upcoming_items
+		@roommates = current_dwelling.users
+		@shopping_lists = current_dwelling.shopping_lists
+
+		@upcoming_bills = current_dwelling.bills.upcoming
+		@upcoming_events = current_dwelling.events.upcoming
+		@upcoming_chores = current_dwelling.chores
+	end
 
   # Helper methods are accessable to views
   helper_method :current_user

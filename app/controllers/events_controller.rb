@@ -1,4 +1,4 @@
-  class EventsController < ApplicationController
+  class EventsController < DwellingItemsController
   before_filter :get_dwelling_and_event
 	before_filter :ensure_event_belongs_to_current_user, only: [:edit, :update, :destroy]
 

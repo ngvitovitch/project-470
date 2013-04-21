@@ -1,4 +1,4 @@
-class BillsController < ApplicationController
+class BillsController < DwellingItemsController
   before_filter :get_dwelling_and_bill
 	before_filter :ensure_bill_belongs_to_current_user, only: [:edit, :update, :destroy]
 

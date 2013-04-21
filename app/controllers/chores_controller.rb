@@ -1,4 +1,4 @@
-class ChoresController < ApplicationController
+class ChoresController < DwellingItemsController
   before_filter :get_dwelling_and_chore
 	before_filter :ensure_chore_belongs_to_current_user, only: [:edit, :update, :destroy]
 

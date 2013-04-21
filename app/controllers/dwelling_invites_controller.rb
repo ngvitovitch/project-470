@@ -1,6 +1,6 @@
 # Administrative controller for inviting roomates to 
 # a delling.
-class DwellingInvitesController < ApplicationController
+class DwellingInvitesController < DwellingItemsController
   before_filter do |c|
     # Only dwelling owner has access.
     c.dwelling_owner?(params[:dwelling_id].to_i) 

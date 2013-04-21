@@ -1,4 +1,4 @@
-class ShoppingListsController < ApplicationController
+class ShoppingListsController < DwellingItemsController
   before_filter :get_dwelling_shopping_list
 	before_filter :ensure_shopping_list_belongs_to_current_user, only: [:edit, :update, :destroy]
 
