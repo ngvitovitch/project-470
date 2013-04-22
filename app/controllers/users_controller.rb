@@ -9,6 +9,12 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
+		@bills = @user.bills
+		@chores = @user.chores
+		@shopping_lists = @user.shopping_lists
+		@events = @user.events
+		@posts = @user.posts
+
     respond_to do |format|
       format.html # show.html.erb
     end
