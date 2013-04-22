@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class PostsController < DwellingItemsController
 	before_filter :get_dwelling_and_post
 	before_filter :ensure_post_belongs_to_current_user, only: [:edit, :update, :destroy]
 

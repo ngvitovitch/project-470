@@ -1,4 +1,4 @@
-= form_for @user do |f|
+= form_for @user, url: profile_settings_user_path(@user) do |f|
   - if @user.errors.any?
     #error_explanation
       %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
@@ -11,12 +11,6 @@
     = f.label 'email*'
     = f.text_field :email
   .field
-    = f.label 'password*'
-    = f.password_field :password
-  .field
-    = f.label 'password confirmation*'
-    = f.password_field :password_confirmation
-  .field
     = f.label :cellphone
     = f.label 'Must be in the format: X-XXX-XXXX'
     = f.text_field :cellphone
@@ -28,3 +22,4 @@
     = f.text_field :last_name
   .actions
     = f.submit 'Save'
+

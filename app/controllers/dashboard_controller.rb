@@ -1,6 +1,8 @@
 # This controller might not stay around. For now it serves as a homepage 
 # for users/dwellings
 class DashboardController < ApplicationController
+	layout Proc.new { |controller| current_dwelling ? 'dwelling_layout' : 'application' }
+	before_filter :load_upcoming_items, if: :current_dwelling
 
   # This is the root path in the application
   # Logged in users will see their dashboard, 

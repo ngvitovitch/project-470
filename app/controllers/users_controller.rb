@@ -1,10 +1,19 @@
 class UsersController < ApplicationController
+	layout Proc.new { |controller| current_dwelling ? 'dwelling_layout' : 'application' }
+	before_filter :load_upcoming_items, if: :current_dwelling
+
   # Only a user can see their stuff
-  before_filter :is_self?, except: [:new, :create]
+  before_filter :is_self?, only: :destroy
 
   # GET /users/:id
   def show
     @user = User.find(params[:id])
+
+		@bills = @user.bills
+		@chores = @user.chores
+		@shopping_lists = @user.shopping_lists
+		@events = @user.events
+		@posts = @user.posts
 
     respond_to do |format|
       format.html # show.html.erb

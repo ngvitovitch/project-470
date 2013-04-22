@@ -1,5 +1,9 @@
 # Administration controller for dwelling owner
 class DwellingsController < ApplicationController
+
+	layout Proc.new { |controller| current_dwelling ? 'dwelling_layout' : 'application' }
+	before_filter :load_upcoming_items, if: :current_dwelling
+
   before_filter :logged_in?
   before_filter :except => [:new, :create] do |c|
     c.dwelling_member?(params[:id].to_i)

@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class CommentsController < DwellingItemsController
 	before_filter :get_dwelling_item_and_comment
 
 	def show

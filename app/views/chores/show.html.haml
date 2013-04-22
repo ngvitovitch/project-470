@@ -1,17 +1,7 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @chore.name
-%p
-  %b Description:
-  = @chore.description
-%p
-  %b Owner:
-  = @chore.owner.name
-%p
-  %b Assigned user:
-  = @chore.assigned_user.name
+%ul.chores
+  = render 'chores/details', chore: @chore
 
 .body-container
   .feed-container
