@@ -81,6 +81,7 @@ class ChoresController < DwellingItemsController
 
 	private
 
+	# Assign @dwelling and @chore if applicable
   def get_dwelling_and_chore
     @dwelling = current_dwelling
     if params[:id]

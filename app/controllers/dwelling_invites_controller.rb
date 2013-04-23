@@ -1,4 +1,4 @@
-# Administrative controller for inviting roomates to 
+# Dwelling Owner controller for inviting roomates to 
 # a delling.
 class DwellingInvitesController < DwellingItemsController
   before_filter do |c|

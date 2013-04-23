@@ -44,11 +44,12 @@
                     Sign In
     .container
       .row
+        .span12
+          = bootstrap_flash
         - unless current_user
           #myModal.modal.hide.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
             .modal-body
               = render :partial => "sessions/login"
-        = bootstrap_flash
         - if content_for?(:sidebar)
           .span4
             = yield(:sidebar)

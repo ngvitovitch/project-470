@@ -11,34 +11,29 @@
       = render 'dashboard/rail_container',
         header: "Roomies",
         header_link: current_dwelling,
-        collection: @roommates,
-        row_title: :name
+        collection: @roommates
 
       = render 'dashboard/rail_container',
         header: "Bills",
         header_link: bills_path,
         collection: @upcoming_bills,
-        row_title: :name,
         date_method: :date_due
 
       = render 'dashboard/rail_container',
         header: "Events",
         header_link: events_path,
         collection: @upcoming_events,
-        row_title: :name,
         date_method: :date
 
       = render 'dashboard/rail_container',
         header: "Lists",
         header_link: shopping_lists_path,
-        collection: @shopping_lists,
-        row_title: :name
+        collection: @shopping_lists
 
       = render 'dashboard/rail_container',
         header: "Chores",
         header_link: chores_path,
-        collection: @upcoming_chores,
-        row_title: :name
+        collection: @upcoming_chores
 
 - content_for :content do
   = yield
