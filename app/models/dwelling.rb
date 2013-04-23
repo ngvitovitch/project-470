@@ -1,6 +1,6 @@
 class Dwelling < ActiveRecord::Base
 	# Accessible Attributes
-	attr_accessor :topic
+	attr_accessor :topic # dwellings sns topic
   attr_accessible :name, :owner, :time_zone
 
 	# Relations
@@ -28,11 +28,13 @@ class Dwelling < ActiveRecord::Base
 	before_create :create_sns_topic, :if => :valid?
 	after_destroy :delete_sns_topic
 
+	# Amazon SNS topic for this dwelling
 	def topic
 		return @topic ||= get_topic
 	end
 
 	private
+
 	def get_topic
 		sns = AWS::SNS.new
 		if topic_arn
@@ -46,6 +48,8 @@ class Dwelling < ActiveRecord::Base
 		end
 	end
 
+	# Create an sns topic with the dwellings name as it's name
+	# and display name
 	def create_sns_topic
 		sns = AWS::SNS.new
 		@topic = sns.topics.create(name.gsub(/ /, '_'))

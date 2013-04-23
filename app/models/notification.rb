@@ -2,6 +2,7 @@ class Notification < Message
 	# Relations
 	belongs_to :dwelling_item, :polymorphic => true
 
+	# Callbacks
 	after_create :publish_to_sns
 
 	# Validations
@@ -9,6 +10,7 @@ class Notification < Message
 
 	private
 
+	# Push a notification to SNS
 	def publish_to_sns
 		dwelling.topic.publish( "#{owner.name} #{body} #{dwelling_item.class}.",
 													 :subject => "Roomie Notification",
