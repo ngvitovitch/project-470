@@ -30,7 +30,7 @@
         = render 'bills/details', bill: bill
     .tab-pane#user-chores-tab
       - @chores.each do |chore|
-        %ul.chores  
+        %ul.chores
           = render 'chores/details', chore: chore
     .tab-pane#user-events-tab
       - @events.each do |event|

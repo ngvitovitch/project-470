@@ -46,7 +46,7 @@ class ShoppingListItemsController < ApplicationController
         format.html { redirect_to shopping_list_path(@shopping_list_item.shopping_list_id), notice: 'Shopping list item was successfully created.' }
         format.json { render json: @shopping_list_item, status: :created, location: @shopping_list_item }
       else
-        format.html { render action: "new" }
+        format.html { render :new }
         format.json { render json: @shopping_list_item.errors, status: :unprocessable_entity }
       end
     end
@@ -61,7 +61,7 @@ class ShoppingListItemsController < ApplicationController
         format.html { redirect_to shopping_list_path(@shopping_list_item.shopping_list_id), notice: 'Shopping list item was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render :edit }
         format.json { render json: @shopping_list_item.errors, status: :unprocessable_entity }
       end
     end
@@ -79,9 +79,10 @@ class ShoppingListItemsController < ApplicationController
     end
   end
 
-  private 
+  private
+
   def get_shopping_list_of_item
     @shopping_list = ShoppingList.find(params[:shopping_list_id])
-    
+
   end
 end

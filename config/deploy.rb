@@ -54,7 +54,7 @@ namespace :deploy do
   task :start do
 		run("#{startcmd}")
 	end
-  task :stop do 
+  task :stop do
 		run("#{stopcmd}")
  	end
   task :restart, :roles => :app, :except => { :no_release => true } do

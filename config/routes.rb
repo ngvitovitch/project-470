@@ -8,8 +8,8 @@ Roomie::Application.routes.draw do
   match 'invites/:token' => 'invites#show', :as => 'invites'
 
 	# Dwellings
-  resources :dwellings do
-    resources :invites, :controller => 'dwelling_invites', :except => [:show]
+  resources :dwellings, except: :index do
+    resources :invites, :controller => 'dwelling_invites', :except => [:show, :edit, :update]
   end
 
 	# Bills
@@ -48,7 +48,7 @@ Roomie::Application.routes.draw do
 	# Users and signup
   get 'signup' => 'users#new', :as => 'signup'
   resources :users, :except => [:index, :edit, :update] do
-		member do 
+		member do
 			get 'settings/account' => 'user_settings#edit_account', as: :account_settings
 			put 'settings/account' => 'user_settings#update_account'
 
@@ -61,6 +61,6 @@ Roomie::Application.routes.draw do
 	# Login / Logout
   get 'logout' => 'sessions#destroy', :as => 'logout'
   get 'login' => 'sessions#new', :as => 'login'
-  resources :sessions, :except => [:index, :edit]
+  resources :sessions, :only => [:new, :create, :destroy]
 
 end

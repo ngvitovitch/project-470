@@ -23,7 +23,7 @@ class Dwelling < ActiveRecord::Base
   validates_presence_of :name, :owner
 
 	# Callbacks
-  after_save :ensure_owner_has_this_dwelling
+  before_save :ensure_owner_has_this_dwelling
 
 	before_create :create_sns_topic, :if => :valid?
 	after_destroy :delete_sns_topic
@@ -63,6 +63,5 @@ class Dwelling < ActiveRecord::Base
 
   def ensure_owner_has_this_dwelling
     self.owner.dwelling = self
-    self.owner.save
   end
 end

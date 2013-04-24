@@ -10,7 +10,7 @@
           = link_to(shopping_list, method: :delete) do
             %i.icon-remove
       %h3= pluralize(shopping_list.shopping_list_items.count, 'item') + ''
-  
+
 %br
 %td= link_to 'Destroy', shopping_list, :method => :delete, :data => { :confirm => 'Are you sure?' }
 %br

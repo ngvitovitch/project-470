@@ -13,7 +13,7 @@ class CommentsController < DwellingItemsController
       if @comment.save
         format.html { redirect_to [@dwelling_item], notice: 'Comment was successfully created.' }
       else
-        format.html { render action: "new" }
+        format.html { render :new }
       end
 		end
 	end

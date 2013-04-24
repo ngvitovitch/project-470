@@ -1,0 +1,87 @@
+./app/controllers/users_controller.rb:6 - move model logic into model (@user use_count > 4)
+./app/controllers/dwelling_invites_controller.rb:30 - move model logic into model (@invite use_count > 4)
+./app/controllers/bill_payments_controller.rb:48 - move model logic into model (@bill_payment use_count > 4)
+./app/controllers/comments_controller.rb:26 - move model logic into model (@dwelling use_count > 4)
+./app/controllers/comments_controller.rb:26 - move model logic into model (@dwelling_item use_count > 4)
+./app/controllers/application_controller.rb:75 - move model logic into model (current_dwelling use_count > 4)
+./app/views/shopping_lists/show.html.haml:8 - not use time_ago_in_words
+./app/models/bill.rb:33 - remove unused methods (Bill#payment_percentage)
+./app/views/dwelling_invites/_form.html.haml:1 - replace instance variable with local variable
+./app/views/dwelling_invites/_form.html.haml:1 - replace instance variable with local variable
+./app/views/dwelling_invites/_form.html.haml:2 - replace instance variable with local variable
+./app/views/dwelling_invites/_form.html.haml:4 - replace instance variable with local variable
+./app/views/dwelling_invites/_form.html.haml:6 - replace instance variable with local variable
+./app/views/dwelling_invites/_table.html.haml:6 - replace instance variable with local variable
+./app/views/chores/_form.html.haml:1 - replace instance variable with local variable
+./app/views/chores/_form.html.haml:2 - replace instance variable with local variable
+./app/views/chores/_form.html.haml:4 - replace instance variable with local variable
+./app/views/chores/_form.html.haml:6 - replace instance variable with local variable
+./app/views/chores/_form.html.haml:17 - replace instance variable with local variable
+./app/views/dwellings/_form.html.haml:1 - replace instance variable with local variable
+./app/views/dwellings/_form.html.haml:2 - replace instance variable with local variable
+./app/views/dwellings/_form.html.haml:4 - replace instance variable with local variable
+./app/views/dwellings/_form.html.haml:6 - replace instance variable with local variable
+./app/views/shopping_list_items/_form.html.haml:1 - replace instance variable with local variable
+./app/views/shopping_list_items/_form.html.haml:1 - replace instance variable with local variable
+./app/views/shopping_list_items/_form.html.haml:2 - replace instance variable with local variable
+./app/views/shopping_list_items/_form.html.haml:4 - replace instance variable with local variable
+./app/views/shopping_list_items/_form.html.haml:6 - replace instance variable with local variable
+./app/views/posts/_form.html.haml:1 - replace instance variable with local variable
+./app/views/posts/_form.html.haml:2 - replace instance variable with local variable
+./app/views/posts/_form.html.haml:4 - replace instance variable with local variable
+./app/views/posts/_form.html.haml:6 - replace instance variable with local variable
+./app/views/posts/messages/_form.html.haml:1 - replace instance variable with local variable
+./app/views/posts/messages/_form.html.haml:2 - replace instance variable with local variable
+./app/views/posts/messages/_form.html.haml:4 - replace instance variable with local variable
+./app/views/posts/messages/_form.html.haml:6 - replace instance variable with local variable
+./app/views/bills/_form.html.haml:1 - replace instance variable with local variable
+./app/views/bills/_form.html.haml:2 - replace instance variable with local variable
+./app/views/bills/_form.html.haml:4 - replace instance variable with local variable
+./app/views/bills/_form.html.haml:6 - replace instance variable with local variable
+./app/views/bill_payments/_form.html.haml:1 - replace instance variable with local variable
+./app/views/bill_payments/_form.html.haml:1 - replace instance variable with local variable
+./app/views/bill_payments/_form.html.haml:2 - replace instance variable with local variable
+./app/views/bill_payments/_form.html.haml:4 - replace instance variable with local variable
+./app/views/bill_payments/_form.html.haml:6 - replace instance variable with local variable
+./app/views/shopping_lists/_form.html.haml:1 - replace instance variable with local variable
+./app/views/shopping_lists/_form.html.haml:2 - replace instance variable with local variable
+./app/views/shopping_lists/_form.html.haml:4 - replace instance variable with local variable
+./app/views/shopping_lists/_form.html.haml:6 - replace instance variable with local variable
+./app/views/users/_lite_form.html.haml:1 - replace instance variable with local variable
+./app/views/users/_lite_form.html.haml:2 - replace instance variable with local variable
+./app/views/users/_lite_form.html.haml:4 - replace instance variable with local variable
+./app/views/users/_lite_form.html.haml:6 - replace instance variable with local variable
+./app/views/users/_form.html.haml:1 - replace instance variable with local variable
+./app/views/users/_form.html.haml:2 - replace instance variable with local variable
+./app/views/users/_form.html.haml:4 - replace instance variable with local variable
+./app/views/users/_form.html.haml:6 - replace instance variable with local variable
+./app/views/events/_form.html.haml:1 - replace instance variable with local variable
+./app/views/events/_form.html.haml:2 - replace instance variable with local variable
+./app/views/events/_form.html.haml:4 - replace instance variable with local variable
+./app/views/events/_form.html.haml:6 - replace instance variable with local variable
+./config/routes.rb:18 - restrict auto-generated routes bills/comments (only: [:show, :create])
+./config/routes.rb:24 - restrict auto-generated routes shopping_lists/comments (only: [:show, :create])
+./config/routes.rb:30 - restrict auto-generated routes chores/comments (only: [:show, :create])
+./config/routes.rb:35 - restrict auto-generated routes events/comments (only: [:show, :create])
+./config/routes.rb:39 - restrict auto-generated routes comments (only: [:show, :create])
+./config/routes.rb:40 - restrict auto-generated routes comments (only: [:show, :create])
+./config/routes.rb:45 - restrict auto-generated routes posts/comments (only: [:show, :create])
+./config/routes.rb:64 - restrict auto-generated routes sessions (only: [:create, :destroy])
+./app/controllers/events_controller.rb:98 - use scope access
+./app/controllers/user_settings_controller.rb:34 - use scope access
+./app/controllers/posts_controller.rb:93 - use scope access
+./app/controllers/shopping_lists_controller.rb:93 - use scope access
+./app/controllers/bills_controller.rb:99 - use scope access
+./app/controllers/chores_controller.rb:93 - use scope access
+./Capfile:2 - speed up assets precompile with turbo-sprockets-rails3
+./app/controllers/dashboard_controller.rb:19 - remove trailing whitespace
+./app/controllers/dwelling_invites_controller.rb:17 - remove trailing whitespace
+./app/controllers/application_controller.rb:65 - remove trailing whitespace
+./db/seeds.rb:125 - remove trailing whitespace
+./app/views/comments/show.html.haml:12 - remove trailing whitespace
+./app/views/shopping_lists/show.html.haml:14 - remove trailing whitespace
+./app/views/events/show.html.haml:9 - remove trailing whitespace
+
+Please go to http://rails-bestpractices.com to see more useful Rails Best Practices.
+
+Found 83 warnings.

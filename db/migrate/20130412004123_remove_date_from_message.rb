@@ -8,7 +8,7 @@ class RemoveDateFromMessage < ActiveRecord::Migration
 			t.date :date
 		end
 		Message.all do |message|
-			message.update_attributes(date: message.created_at)
+			message.update_attributes!(date: message.created_at)
 		end
   end
 end

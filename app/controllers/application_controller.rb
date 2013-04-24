@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
 
   # convert times from utc to the odwelling's timezone
-  before_filter :get_dwelling_time_zone 
+  before_filter :get_dwelling_time_zone
 
   private
 
@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Redirect a user to permission denied if they are not a member of the dwelling they 
+  # Redirect a user to permission denied if they are not a member of the dwelling they
   # are accessing
   def dwelling_member?(dwelling_id)
     unless current_user.dwelling_id == dwelling_id.to_i
@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Redirect a user to permission denied if they are not the owner of the dwelling they 
+  # Redirect a user to permission denied if they are not the owner of the dwelling they
   # are accessing
   def dwelling_owner?(dwelling_id)
     unless ( current_user.owned_dwelling &&
