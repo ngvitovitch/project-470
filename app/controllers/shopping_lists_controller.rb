@@ -49,7 +49,7 @@ class ShoppingListsController < DwellingItemsController
         format.html { redirect_to @shopping_list, notice: 'Shopping list was successfully created.' }
         format.json { render json: @shopping_list, status: :created, location: @shopping_list }
       else
-        format.html { render action: "new" }
+        format.html { render :new }
         format.json { render json: @shopping_list.errors, status: :unprocessable_entity }
       end
     end
@@ -63,7 +63,7 @@ class ShoppingListsController < DwellingItemsController
         format.html { redirect_to @shopping_list, notice: 'Shopping list was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render :edit }
         format.json { render json: @shopping_list.errors, status: :unprocessable_entity }
       end
     end

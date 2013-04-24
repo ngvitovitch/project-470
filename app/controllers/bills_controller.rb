@@ -49,13 +49,13 @@ class BillsController < DwellingItemsController
   def create
     @bill = @dwelling.bills.build(params[:bill])
     @bill.owner = current_user
-    
+
     respond_to do |format|
       if @bill.save
         format.html { redirect_to bill_path(@bill), notice: 'Bill was successfully created.' }
         format.json { render json: @bill, status: :created, location: @bill }
       else
-				format.html { render action: "new" }
+				format.html { render :new }
         format.json { render json: @bill.errors, status: :unprocessable_entity }
       end
     end
@@ -69,7 +69,7 @@ class BillsController < DwellingItemsController
         format.html { redirect_to bill_path(@bill), notice: 'Bill was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render :edit }
         format.json { render json: @bill.errors, status: :unprocessable_entity }
       end
     end

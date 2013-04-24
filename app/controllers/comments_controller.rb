@@ -13,13 +13,16 @@ class CommentsController < DwellingItemsController
       if @comment.save
         format.html { redirect_to [@dwelling_item], notice: 'Comment was successfully created.' }
       else
-        format.html { render action: "new" }
+        format.html { render :new }
       end
 		end
 	end
 
 	private
 
+	# Assign @dwelling, @dwelling_item and @comments if applicable
+	# dwelling_item can be any type of dwelling item
+	# comments are then loaded from the dwelling_item
 	def get_dwelling_item_and_comment
 		@dwelling = current_dwelling
 		# Bills

@@ -24,7 +24,7 @@
         - else
           %small= "("+date_rem.to_s + " days)"
     %span.status
-      %p 
+      %p
         Status
       - payment_sum = bill.payment_sum
       %h3{:class => (payment_sum < bill.amount ? 'unpaid' : 'paid')}

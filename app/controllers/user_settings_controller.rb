@@ -8,27 +8,23 @@ class UserSettingsController < ApplicationController
 
 	def update_profile
 		@user = User.find(params[:id])
-		@user.update_attributes(params[:user])
-		if @user.save
+		if @user.update_attributes(params[:user])
 			redirect_to profile_settings_user_path, notice: 'User profile was successfully updated.'
 		else
-			render action: "edit_profile"
+			render :edit_profile
 		end
 	end
 
 	def edit_account
-		user = User.find(params[:id])
-		user.update_attributes(params[:user])
 		@user = User.find(params[:id])
 	end
 
 	def update_account
 		@user = User.find(params[:id])
-		@user.update_attributes(params[:user])
-		if @user.save
+		if @user.update_attributes(params[:user])
 			redirect_to account_settings_user_path, notice: 'User account was successfully updated.'
 		else
-			render action: "edit_account"
+			render :edit_account
 		end
 	end
 
