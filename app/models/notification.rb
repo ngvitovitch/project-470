@@ -12,9 +12,11 @@ class Notification < Message
 
 	# Push a notification to SNS
 	def publish_to_sns
+		if dwelling && dwelling.topic
 		dwelling.topic.publish( "#{owner.name} #{body} #{dwelling_item.class}.",
 													 :subject => "Roomie Notification",
 													 :email => " Roomie Notification:\n #{owner.name} #{body} #{dwelling_item.class} "
 													)
+		end
 	end
 end

@@ -52,22 +52,15 @@ class User < ActiveRecord::Base
 	# This doesn't delete old subscriptions because at this time users can't
 	# switch dwellings.
 	def update_subscriptions
-		if dwelling_id_changed?
-
-			# Create new subscription
-			dwelling.topic.subscribe(email)
-			if cellphone
-				dwelling.topic.subscribe(cellphone)
+		if dwelling_id && dwelling.topic
+			if dwelling_id_changed?
+				# Create new subscription
+				dwelling.topic.subscribe(email)
+				dwelling.topic.subscribe(cellphone) if cellphone
 			end
-		end
 
-		if email_changed? && dwelling_id
-			dwelling.topic.subscribe(email)
-		end
-
-		if cellphone_changed? && dwelling_id
-			dwelling.topic.subscribe(cellphone)
+			dwelling.topic.subscribe(email) if email_changed? && dwelling_id
+			dwelling.topic.subscribe(cellphone) if cellphone_changed? && dwelling_id
 		end
 	end
-
 end

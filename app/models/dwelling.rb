@@ -36,8 +36,8 @@ class Dwelling < ActiveRecord::Base
 	private
 
 	def get_topic
-		sns = AWS::SNS.new
-		if topic_arn
+		if topic_arn && !AWS.config.stub_requests
+			sns = AWS::SNS.new
 			begin
 				@topic = sns.topics[topic_arn]
 			rescue AWS::SNS::Errors::Base => error
@@ -51,14 +51,18 @@ class Dwelling < ActiveRecord::Base
 	# Create an sns topic with the dwellings name as it's name
 	# and display name
 	def create_sns_topic
-		sns = AWS::SNS.new
-		@topic = sns.topics.create(name.gsub(/ /, '_'))
-		@topic.display_name = name
-		self.topic_arn = topic.arn
+		unless AWS.config.stub_requests
+			sns = AWS::SNS.new
+			@topic = sns.topics.create(name.gsub(/ /, '_'))
+			@topic.display_name = name
+			self.topic_arn = topic.arn
+		end
 	end
 
 	def delete_sns_topic
-		topic.delete if topic
+		unless AWS.config.stub_requests
+			topic.delete if topic
+		end
 	end
 
   def ensure_owner_has_this_dwelling
