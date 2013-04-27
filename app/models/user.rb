@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   has_many :posts, :foreign_key => 'owner_id'
   has_many :notifications, :foreign_key => 'owner_id'
 
+	has_many :subscriptions
+
 	# Validations
   validates :email, :presence => true
   validates :email, :uniqueness => true
@@ -34,7 +36,9 @@ class User < ActiveRecord::Base
   has_secure_password
 
 	# Callbacks
-	before_save :update_subscriptions
+	after_save :update_subscriptions
+
+	# Methods
 
 	# return the first and last name, of the email if neither exists
   def name
@@ -45,6 +49,7 @@ class User < ActiveRecord::Base
 		end
   end
 
+
 	private
 
 	# Subscripe user to dwellings topic when they join the dwelling
@@ -52,15 +57,16 @@ class User < ActiveRecord::Base
 	# This doesn't delete old subscriptions because at this time users can't
 	# switch dwellings.
 	def update_subscriptions
-		if dwelling_id && dwelling.topic
+		# If this user has a dwelling and that dwelling has a topic
+		if dwelling_id && dwelling.topic && !AWS.config.stub_requests
 			if dwelling_id_changed?
-				# Create new subscription
+				# Create ew subscription
 				dwelling.topic.subscribe(email)
 				dwelling.topic.subscribe(cellphone) if cellphone
+			else
+				dwelling.topic.subscribe(email) if email_changed? && dwelling_id
+				dwelling.topic.subscribe(cellphone) if cellphone_changed? && dwelling_id
 			end
-
-			dwelling.topic.subscribe(email) if email_changed? && dwelling_id
-			dwelling.topic.subscribe(cellphone) if cellphone_changed? && dwelling_id
 		end
 	end
 end

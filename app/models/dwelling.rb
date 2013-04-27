@@ -36,22 +36,29 @@ class Dwelling < ActiveRecord::Base
 	private
 
 	def get_topic
-		if topic_arn && !AWS.config.stub_requests
-			sns = AWS::SNS.new
-			begin
+		if !topic_arn
+			@topic = nil
+		elsif AWS.config.stub_requests
+			# Fake it
+			@topic = AWS::SNS::Topic.new(topic_arn)
+		else
+			begin 
+				sns = AWS::SNS.new
 				@topic = sns.topics[topic_arn]
-			rescue AWS::SNS::Errors::Base => error
+			rescue
+				# Something Broke
 				@topic = nil
 			end
-		else
-			@topic = nil
 		end
 	end
 
 	# Create an sns topic with the dwellings name as it's name
 	# and display name
 	def create_sns_topic
-		unless AWS.config.stub_requests
+		if AWS.config.stub_requests
+			# faking aws requests, fake topics
+			self.topic_arn = 'arn'
+		else
 			sns = AWS::SNS.new
 			@topic = sns.topics.create(name.gsub(/ /, '_'))
 			@topic.display_name = name
