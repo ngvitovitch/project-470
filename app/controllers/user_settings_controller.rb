@@ -28,6 +28,28 @@ class UserSettingsController < ApplicationController
 		end
 	end
 
+	def edit_notifications
+		@user = User.find(params[:id])
+		@subscriptions = @user.subscriptions
+	end
+
+	def update_notifications
+		@user = User.find(params[:id])
+		begin
+			if params[:unsubscribe]
+				@user.dwelling.topic.subscriptions[params[:arn]].unsubscribe()
+				redirect_to notifications_settings_user_path, notice: "Successfuly unsubscribed from #{params[:endpoint]}"
+			else
+				@user.dwelling.topic.subscribe(params[:endpoint])
+				redirect_to notifications_settings_user_path, notice: "Confirmations sent to #{params[:endpoint]}"
+			end
+		rescue ArgumentError => error
+			@subscriptions = @user.subscriptions
+			flash[:alert] = error.message
+			render :edit_notifications
+		end
+	end
+
   private
 
     def is_self?

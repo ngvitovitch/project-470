@@ -1,4 +1,4 @@
-= form_for @user, url: account_settings_user_path(@user) do |f|
+= form_for @user, url: settings_account_user_path(@user) do |f|
   - if @user.errors.any?
     #error_explanation
       %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"

@@ -49,11 +49,11 @@ Roomie::Application.routes.draw do
   get 'signup' => 'users#new', :as => 'signup'
   resources :users, :except => [:index, :edit, :update] do
 		member do
-			get 'settings/account' => 'user_settings#edit_account', as: :account_settings
-			put 'settings/account' => 'user_settings#update_account'
 
-			get 'settings/profile' => 'user_settings#edit_profile', as: :profile_settings
-			put 'settings/profile' => 'user_settings#update_profile'
+			[:account, :profile, :notifications].each do |type|
+				get "settings/#{type}" => "user_settings#edit_#{type}", as: "#{type}_settings"
+				put "settings/#{type}" => "user_settings#update_#{type}"
+			end
 		end
 	end
 

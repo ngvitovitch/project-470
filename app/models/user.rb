@@ -35,9 +35,6 @@ class User < ActiveRecord::Base
 	# Users have a password, it is checked for blank?, and confrimation
   has_secure_password
 
-	# Callbacks
-	after_save :update_subscriptions
-
 	# Methods
 
 	# return the first and last name, of the email if neither exists
@@ -49,24 +46,17 @@ class User < ActiveRecord::Base
 		end
   end
 
-
-	private
-
-	# Subscripe user to dwellings topic when they join the dwelling
-	#
-	# This doesn't delete old subscriptions because at this time users can't
-	# switch dwellings.
-	def update_subscriptions
-		# If this user has a dwelling and that dwelling has a topic
-		if dwelling_id && dwelling.topic && !AWS.config.stub_requests
-			if dwelling_id_changed?
-				# Create ew subscription
-				dwelling.topic.subscribe(email)
-				dwelling.topic.subscribe(cellphone) if cellphone
-			else
-				dwelling.topic.subscribe(email) if email_changed? && dwelling_id
-				dwelling.topic.subscribe(cellphone) if cellphone_changed? && dwelling_id
+	def subscriptions
+		subscriptions = {email => nil}
+		subscriptions[cellphone] = nil unless cellphone.blank?
+		dwelling.topic.subscriptions.each do |subscription|
+			subscriptions.each_key do |endpoint|
+				# aws strips `-`'s from sms endpoints, check for that
+				if subscription.endpoint == (subscription.protocol == :sms ? endpoint.gsub(/-/, '') : endpoint)
+					subscriptions[endpoint] = subscription
+				end
 			end
 		end
+		return subscriptions
 	end
 end
