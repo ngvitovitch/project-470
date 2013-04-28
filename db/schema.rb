@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130424014004) do
+ActiveRecord::Schema.define(:version => 20130428172952) do
 
   create_table "bill_payments", :force => true do |t|
     t.integer  "user_id"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(:version => 20130424014004) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "owner_id"
+    t.boolean  "active"
+    t.string   "cron_str"
   end
 
   add_index "chores", ["assigned_user_id"], :name => "index_chores_on_assigned_user_id"
