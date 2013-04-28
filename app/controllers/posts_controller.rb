@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class PostsController < DwellingItemsController
 	before_filter :get_dwelling_and_post
 	before_filter :ensure_post_belongs_to_current_user, only: [:edit, :update, :destroy]
 
@@ -49,7 +49,7 @@ class PostsController < ApplicationController
         format.html { redirect_to root_path, notice: 'post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
-        format.html { render action: "new" }
+        format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -63,7 +63,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'post was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

@@ -1,4 +1,4 @@
-  class EventsController < ApplicationController
+  class EventsController < DwellingItemsController
   before_filter :get_dwelling_and_event
 	before_filter :ensure_event_belongs_to_current_user, only: [:edit, :update, :destroy]
 
@@ -54,7 +54,7 @@
         format.html { redirect_to event_path(@event), notice: 'Event was successfully created.' }
         format.json { render json: @event, status: :created, location: @event }
       else
-        format.html { render action: "new" }
+        format.html { render :new}
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -68,7 +68,7 @@
         format.html { redirect_to event_path(@event), notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render :edit }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end

@@ -21,6 +21,6 @@ class DwellingItem < ActiveRecord::Base
 		)
 		notification.dwelling_item = self
 		notification.owner = self.owner
-		notification.save
+		notification.save!
 	end
 end

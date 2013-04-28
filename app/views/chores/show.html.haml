@@ -1,24 +1,14 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @chore.name
-%p
-  %b Description:
-  = @chore.description
-%p
-  %b Owner:
-  = @chore.owner.name
-%p
-  %b Assigned user:
-  = @chore.assigned_user.name
+%ul.chores
+  = render 'chores/details', chore: @chore
 
 .body-container
   .feed-container
     .inner-body
-      .feed-info-container  
+      .feed-info-container
         %br
-        = render 'comments/all', dwelling_item: @chore 
+        = render 'comments/all', dwelling_item: @chore
 
   = link_to 'Edit', edit_chore_path(@chore)
   \|

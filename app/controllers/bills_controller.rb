@@ -1,4 +1,4 @@
-class BillsController < ApplicationController
+class BillsController < DwellingItemsController
   before_filter :get_dwelling_and_bill
 	before_filter :ensure_bill_belongs_to_current_user, only: [:edit, :update, :destroy]
 
@@ -49,13 +49,13 @@ class BillsController < ApplicationController
   def create
     @bill = @dwelling.bills.build(params[:bill])
     @bill.owner = current_user
-    
+
     respond_to do |format|
       if @bill.save
         format.html { redirect_to bill_path(@bill), notice: 'Bill was successfully created.' }
         format.json { render json: @bill, status: :created, location: @bill }
       else
-				format.html { render action: "new" }
+				format.html { render :new }
         format.json { render json: @bill.errors, status: :unprocessable_entity }
       end
     end
@@ -69,7 +69,7 @@ class BillsController < ApplicationController
         format.html { redirect_to bill_path(@bill), notice: 'Bill was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render :edit }
         format.json { render json: @bill.errors, status: :unprocessable_entity }
       end
     end

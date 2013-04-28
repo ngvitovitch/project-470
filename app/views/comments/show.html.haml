@@ -3,13 +3,13 @@
     .inner-body
       = link_to 'View Parent', @comment.dwelling_item
 
-      / link back to resource index. 
+      / link back to resource index.
       /= link_to 'Back to [dwelling item]', @comment.dwelling_item.class
-      .feed-info-container  
+      .feed-info-container
         %br
         = render 'comments/details', comment: @comment
 
-      .feed-info-container  
+      .feed-info-container
         %br
         = render 'comments/all', dwelling_item: @comment
 

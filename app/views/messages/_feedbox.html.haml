@@ -3,8 +3,8 @@
     .speech-box
       = form_for Post.new do |f|
         = f.text_area :body, :class => 'text-bubble', :placeholder => "What do you wanna tell your roomies?", rows: 1, :id => 'comment-input';
-        = f.submit "Post", :class => "submit-comment-button btn btn-large btn-inverse"
-    .feed-info-container  
+        = f.submit "Post", :class => "submit-comment-button btn btn-inverse"
+    .feed-info-container
       %h3
         Dwelling Feed
       - messages.each do |message|

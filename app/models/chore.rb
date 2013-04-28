@@ -1,5 +1,5 @@
 class Chore < DwellingItem
-	# Accessible Attribuets
+	# Accessible Attributes
   attr_accessible :assigned_user_id, :description, :dwelling_id, :name
 
 	# Relations

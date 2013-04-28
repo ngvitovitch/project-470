@@ -7,7 +7,7 @@ class Bill < DwellingItem
 
 	# Relations
   has_many :bill_payments
-  has_many :users, :through => :dwelling 
+  has_many :users, :through => :dwelling
 
 	# Validations
   validates :amount, :numericality => {:greater_than_or_equal_to => 0}

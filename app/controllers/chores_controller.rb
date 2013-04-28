@@ -1,4 +1,4 @@
-class ChoresController < ApplicationController
+class ChoresController < DwellingItemsController
   before_filter :get_dwelling_and_chore
 	before_filter :ensure_chore_belongs_to_current_user, only: [:edit, :update, :destroy]
 
@@ -48,7 +48,7 @@ class ChoresController < ApplicationController
         format.html { redirect_to @chore, notice: 'Chore was successfully created.' }
         format.json { render json: @chore, status: :created, location: @chore }
       else
-        format.html { render action: "new" }
+        format.html { render :new }
         format.json { render json: @chore.errors, status: :unprocessable_entity }
       end
     end
@@ -62,7 +62,7 @@ class ChoresController < ApplicationController
         format.html { redirect_to @chore, notice: 'Chore was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render :edit }
         format.json { render json: @chore.errors, status: :unprocessable_entity }
       end
     end
@@ -81,6 +81,7 @@ class ChoresController < ApplicationController
 
 	private
 
+	# Assign @dwelling and @chore if applicable
   def get_dwelling_and_chore
     @dwelling = current_dwelling
     if params[:id]

@@ -9,5 +9,7 @@ class Event < DwellingItem
   validates :date, :presence => true
 
 	# Scopes
+
+	# get the four next events
 	scope :upcoming, order(:date).where(['date >= ?', Date.today]).limit(4)
 end

@@ -4,4 +4,44 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+
+# AWS Tasks
+namespace :aws do
+	namespace :sns do
+
+		# Used for SNS housekeeping if something goes wrong
+		# Under normal circumstances, dont do this
+		desc "Delete All SNS Topics (all of them, not just ones associated with this project)"
+		task :delete => :environment do
+			puts "This will delete all SNS topics associated with your AWS Account."
+			print " Is this really what you want to do? [Y/n] "
+			if STDIN.gets.chomp.downcase == 'n'
+				puts 'Aborting'
+			else
+				print "Deleting all sns topics:"
+				sns = AWS::SNS.new
+				sns.topics.each { |topic| topic.delete }
+				puts " Done."
+			end
+		end
+	end
+end
+
+namespace :db do
+	desc "Delete SNS Topics"
+	task :delete_topics => :environment do
+		print 'Deleting Dwelling SNS Topics:'
+		Dwelling.all.each do |dwelling|
+			dwelling.destroy
+		end
+		puts ' Done.'
+	end
+
+	desc "Delete SNS Topics"
+	task :reset => :delete_topics
+	desc "Delete SNS Topics"
+	task :drop => :delete_topics
+end
 Roomie::Application.load_tasks
+
+
