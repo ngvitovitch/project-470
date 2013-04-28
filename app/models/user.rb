@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 	# This is the format amazon SNS wants
 	validates :cellphone,
 	 	:format => {:with => /^\d-\d{3}-\d{3}-\d{4}$/, :message => 'must match the format X-XXX-XXX-XXXX' },
-		:allow_blank => true
+		:allow_nil => true
 
 	# Users have a password, it is checked for blank?, and confrimation
   has_secure_password
