@@ -14,4 +14,4 @@
       = link_to [:edit, chore] do
         %i.icon-edit
   .chore-owner
-    = "-" + chore.owner.first_name
+    = chore.owner.first_name ? "-" + chore.owner.first_name : ""
