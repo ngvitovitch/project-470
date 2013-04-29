@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   has_many :posts, :foreign_key => 'owner_id'
   has_many :notifications, :foreign_key => 'owner_id'
 
+	has_many :subscriptions
+
 	# Validations
   validates :email, :presence => true
   validates :email, :uniqueness => true
@@ -33,8 +35,7 @@ class User < ActiveRecord::Base
 	# Users have a password, it is checked for blank?, and confrimation
   has_secure_password
 
-	# Callbacks
-	before_save :update_subscriptions
+	# Methods
 
 	# return the first and last name, of the email if neither exists
   def name
@@ -45,29 +46,17 @@ class User < ActiveRecord::Base
 		end
   end
 
-	private
-
-	# Subscripe user to dwellings topic when they join the dwelling
-	#
-	# This doesn't delete old subscriptions because at this time users can't
-	# switch dwellings.
-	def update_subscriptions
-		if dwelling_id_changed?
-
-			# Create new subscription
-			dwelling.topic.subscribe(email)
-			if cellphone
-				dwelling.topic.subscribe(cellphone)
+	def subscriptions
+		subscriptions = {email => nil}
+		subscriptions[cellphone] = nil unless cellphone.blank?
+		dwelling.topic.subscriptions.each do |subscription|
+			subscriptions.each_key do |endpoint|
+				# aws strips `-`'s from sms endpoints, check for that
+				if subscription.endpoint == (subscription.protocol == :sms ? endpoint.gsub(/-/, '') : endpoint)
+					subscriptions[endpoint] = subscription
+				end
 			end
 		end
-
-		if email_changed? && dwelling_id
-			dwelling.topic.subscribe(email)
-		end
-
-		if cellphone_changed? && dwelling_id
-			dwelling.topic.subscribe(cellphone)
-		end
+		return subscriptions
 	end
-
 end
