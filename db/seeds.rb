@@ -61,6 +61,7 @@ def create_chore(name, dwelling)
 	)
 	chore.owner = dwelling.users.all[Random.rand(dwelling.users.size)]
 	chore.assigned_user = dwelling.users.all[Random.rand(dwelling.users.size)]
+	chore.active = true
 	chore.save!
 
 	return chore

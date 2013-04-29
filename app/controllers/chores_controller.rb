@@ -42,6 +42,7 @@ class ChoresController < DwellingItemsController
   def create
     @chore = @dwelling.chores.build(params[:chore])
     @chore.owner = current_user
+    @chore.active = true
 
     respond_to do |format|
       if @chore.save
