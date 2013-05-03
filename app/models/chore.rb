@@ -7,4 +7,7 @@ class Chore < DwellingItem
 
 	# Validations
   validates :name, :length => {:minimum => 1}
+
+  # Scope
+  scope :active, where(:active => true)
 end
