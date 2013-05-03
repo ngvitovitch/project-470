@@ -5,7 +5,11 @@ class ChoresController < DwellingItemsController
   # GET /chores
   # GET /chores.json
   def index
-    @chores = @dwelling.chores
+    if params[:inactive]
+      @chores = @dwelling.chores.inactive
+    else
+      @chores = @dwelling.chores.active
+    end
 
     respond_to do |format|
       format.html # index.html.erb

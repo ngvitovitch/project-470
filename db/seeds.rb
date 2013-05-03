@@ -129,7 +129,7 @@ end
 
 	# Create 3 chores
 	# ['Take out the Trash', 'Do the Dishes', 'Clean the Bathroom'].each do |chore_name|
-	4.times.map { Faker::Lorem.words(2).join }.each_with_index do |chore_name, i|
+	4.times.map { Faker::Lorem.words(2).join(' ') }.each_with_index do |chore_name, i|
 		create_chore(chore_name, dwelling, i < 3)
 	end
 end
