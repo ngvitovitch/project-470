@@ -15,13 +15,21 @@ namespace :aws do
 		task :delete => :environment do
 			puts "This will delete all SNS topics associated with your AWS Account."
 			print " Is this really what you want to do? [Y/n] "
+
 			if STDIN.gets.chomp.downcase == 'n'
 				puts 'Aborting'
 			else
+				# If we dont delete these topics we'll have problems
+				stub_requests = AWS.config.stub_requests
+				AWS.config(:stub_requests => false)
+
 				print "Deleting all sns topics:"
 				sns = AWS::SNS.new
 				sns.topics.each { |topic| topic.delete }
 				puts " Done."
+
+				# Reset stub settings
+				AWS.config(:stub_requests => stub_requests)
 			end
 		end
 	end
@@ -30,11 +38,19 @@ end
 namespace :db do
 	desc "Delete SNS Topics"
 	task :delete_topics => :environment do
+
+		# If we dont delete these topics we'll have problems
+		stub_requests = AWS.config.stub_requests
+		AWS.config(:stub_requests => false)
+
 		print 'Deleting Dwelling SNS Topics:'
 		Dwelling.all.each do |dwelling|
 			dwelling.destroy
 		end
 		puts ' Done.'
+
+		# Reset stub settings
+		AWS.config(:stub_requests => stub_requests)
 	end
 
 	desc "Delete SNS Topics"
