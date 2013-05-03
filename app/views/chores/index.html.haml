@@ -21,7 +21,7 @@
 				%li{class: !params[:inactive] ? :active : nil}
 					= link_to :active, chores_path
 				%li{class: params[:inactive] ? :active : nil}
-					= link_to :inactive, chores_path(inactive: false)
+					= link_to :inactive, chores_path(inactive: true)
 			/ - @chores.each do |chore|
 			/ 	= render 'chores/details', chore: chore
 			%ul.chores
