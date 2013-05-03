@@ -4,7 +4,7 @@
 %br
 
 %ul.chores
-  - @chores.each do |chore|
+  - @chores.active.each do |chore|
     = render 'chores/details', chore: chore
 
 
