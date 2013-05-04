@@ -48,6 +48,19 @@ class ChoresController < DwellingItemsController
     @chore.owner = current_user
     @chore.active = true
 
+    case @chore.cron_str
+    when "Every M/W/F"
+      @chore.cron_str = "0 0 12 ? * MON,WED,FRI *"
+    when "Every T/Th"
+      @chore.cron_str = "0 0 12 ? * TUE,THU *"
+    when "Every Sunday"
+      @chore.cron_str = "0 0 12 ? * SUN *"
+    else
+      @chore.cron_str = nil
+    end
+
+    puts "CRON STRING: #{@chore.cron_str}"
+
     respond_to do |format|
       if @chore.save
         format.html { redirect_to @chore, notice: 'Chore was successfully created.' }
