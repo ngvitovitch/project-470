@@ -60,7 +60,7 @@ namespace :db do
 end
 
 namespace :chores do
-	desc "Reactivates a chore"
+	desc "Reactivates a chore, given a CHORE_ID"
 	task :activate_chore => :environment do
 		chore = Chore.find_by_id(ENV['CHORE_ID'])
 		unless chore.active
@@ -69,11 +69,4 @@ namespace :chores do
 	end
 end
 
-desc "Temporary rake task to test cron with"
-task :cron_test do
-	File.open("crontest.txt", "a") { |file| file.write("Hello cron!\n") }
-end
-
 Roomie::Application.load_tasks
-
-
