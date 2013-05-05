@@ -48,6 +48,7 @@ class ChoresController < DwellingItemsController
     @chore.owner = current_user
     @chore.active = true
 
+    # Make the actual cron-format string
     case @chore.cron_str
     when "Every M/W/F"
       @chore.cron_str = "0 0 12 ? * MON,WED,FRI *"
@@ -58,8 +59,6 @@ class ChoresController < DwellingItemsController
     else
       @chore.cron_str = nil
     end
-
-    puts "CRON STRING: #{@chore.cron_str}"
 
     respond_to do |format|
       if @chore.save
@@ -97,9 +96,17 @@ class ChoresController < DwellingItemsController
     end
   end
 
-	private
+  # PUT /chores/1/deactivate
+  # PUT /chores/1/deactivate.json
+  def deactivate
+    permission_denied unless @chore.active
+    @chore.update_attribute(:active, false)
+    redirect_to chores_url, notice: "Chore was successfully deactivated"
+  end
 
-	# Assign @dwelling and @chore if applicable
+  private
+
+  # Assign @dwelling and @chore if applicable
   def get_dwelling_and_chore
     @dwelling = current_dwelling
     if params[:id]
@@ -107,7 +114,8 @@ class ChoresController < DwellingItemsController
     end
   end
 
-	def ensure_chore_belongs_to_current_user
-		permission_denied unless current_user == @chore.owner
-	end
+  def ensure_chore_belongs_to_current_user
+    permission_denied unless current_user == @chore.owner
+  end
+
 end
