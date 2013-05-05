@@ -69,6 +69,11 @@ namespace :chores do
 	end
 end
 
+desc "Temporary rake task to test cron with"
+task :cron_test do
+	File.open("crontest.txt", "a") { |file| file.write("Hello cron!\n") }
+end
+
 Roomie::Application.load_tasks
 
 
