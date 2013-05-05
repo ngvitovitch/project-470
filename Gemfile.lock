@@ -60,6 +60,7 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     commonjs (0.2.6)
+    cronedit (0.3.0)
     daemon_controller (1.1.2)
     daemons (1.1.9)
     erubis (2.7.0)
@@ -178,6 +179,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   capistrano
   coffee-rails (~> 3.2.1)
+  cronedit
   faker
   haml
   haml-rails (>= 0.3.4)
