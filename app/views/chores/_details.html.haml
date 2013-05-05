@@ -1,10 +1,6 @@
 %li
   / %a#view-chore{:href => chore_url(chore)}
   .chore-obligate
-    / - if chore.active && chore.assigned_user == current_user
-    /   .update-chore
-    /     = link_to [:deactivate, chore], :method => :put do
-    /       A
     - if current_user == chore.owner
       .delete-chore
         %a=link_to 'X', chore, :method => :delete, :data => { :confirm => 'Are you sure?'}
