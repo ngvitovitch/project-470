@@ -119,11 +119,6 @@ end
 		create_event(name, i < 2, dwelling)
   end
 
-  #Create 2 messages by random users
-  2.times do |i|
-		create_message(dwelling)
-  end
-
 	# Create a shopping list 
 	create_shopping_list('Groceries', ['Eggs', 'Bread', 'Milk'], dwelling)
 
@@ -132,6 +127,11 @@ end
 	4.times.map { Faker::Lorem.words(2).join(' ') }.each_with_index do |chore_name, i|
 		create_chore(chore_name, dwelling, i < 3)
 	end
+
+  #Create 2 messages by random users
+  2.times do |i|
+		create_message(dwelling)
+  end
 end
 
 puts "Created #{User.count} Users"
