@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(:version => 20130505203008) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "owner_id"
+    t.boolean  "active"
+    t.string   "cron_str"
   end
 
   add_index "chores", ["assigned_user_id"], :name => "index_chores_on_assigned_user_id"

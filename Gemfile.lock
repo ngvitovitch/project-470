@@ -1,8 +1,8 @@
 GIT
   remote: git@github.com:FooBarWidget/passenger.git
-  revision: f59e2bbfcfb08a6182bf2eb011131a4ac9d6b842
+  revision: 104355b0d2d267bebacd8a72c66a126bfc53fb46
   specs:
-    passenger (4.0.0.rc7)
+    passenger (4.0.1)
       daemon_controller (>= 1.1.0)
       rack
       rake (>= 0.8.1)
@@ -60,6 +60,7 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     commonjs (0.2.6)
+    cronedit (0.3.0)
     daemon_controller (1.1.4)
     daemons (1.1.9)
     erubis (2.7.0)
@@ -94,7 +95,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.23)
-    multi_json (1.7.2)
+    multi_json (1.7.3)
     mysql2 (0.3.11)
     net-scp (1.1.0)
       net-ssh (>= 2.6.5)
@@ -178,6 +179,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   capistrano
   coffee-rails (~> 3.2.1)
+  cronedit
   faker
   haml
   haml-rails (>= 0.3.4)

@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
 
 		@upcoming_bills = current_dwelling.bills.upcoming
 		@upcoming_events = current_dwelling.events.upcoming
-		@upcoming_chores = current_dwelling.chores
+		@upcoming_chores = current_dwelling.chores.active
 	end
 
   # Helper methods are accessable to views
