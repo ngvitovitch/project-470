@@ -50,7 +50,7 @@ Roomie::Application.routes.draw do
   resources :users, :except => [:index, :edit, :update] do
 		member do
 
-			[:account, :profile, :notifications].each do |type|
+			[:account, :profile, :picture, :notifications].each do |type|
 				get "settings/#{type}" => "user_settings#edit_#{type}", as: "#{type}_settings"
 				put "settings/#{type}" => "user_settings#update_#{type}"
 			end

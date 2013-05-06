@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425004807) do
+ActiveRecord::Schema.define(:version => 20130505203008) do
 
   create_table "bill_payments", :force => true do |t|
     t.integer  "user_id"
@@ -133,10 +133,11 @@ ActiveRecord::Schema.define(:version => 20130425004807) do
     t.string   "last_name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "dwelling_id"
     t.string   "cellphone"
+    t.string   "picture_filename"
   end
 
   add_index "users", ["dwelling_id"], :name => "index_users_on_dwelling_id"
