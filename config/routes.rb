@@ -49,13 +49,14 @@ Roomie::Application.routes.draw do
   get 'signup' => 'users#new', :as => 'signup'
   resources :users, :except => [:index, :edit, :update] do
     member do
-      [:account, :profile, :notifications].each do |type|
-          get "settings/#{type}" => "user_settings#edit_#{type}", as: "#{type}_settings"
-          put "settings/#{type}" => "user_settings#update_#{type}"
+      
+      [:account, :profile, :picture, :notifications].each do |type|
+        get "settings/#{type}" => "user_settings#edit_#{type}", as: "#{type}_settings"
+        put "settings/#{type}" => "user_settings#update_#{type}"
       end
     end
   end
-
+  
   # Login / Logout
   get 'logout' => 'sessions#destroy', :as => 'logout'
   get 'login' => 'sessions#new', :as => 'login'
